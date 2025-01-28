@@ -1,0 +1,28 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Teprve v jednání</h1>  
+  
+    <div class="container">
+    <a href="stranka1.html" class="button left">Easy</a>
+    <a href="stranka2.html" class="button center">Medium</a>
+    <a href="stranka3.html" class="button right">Dark souls</a>
+  </div>
+
+  <audio id="DS3" src="DS3.mp3" preload="auto"></audio>
+
+  <script> //nefunkční java podělaná PS: POMOOOCC kamo nevim jak aby to dělalo zvuky D:
+    function playSound() {
+      const sound = document.getElementById('DS3');
+      sound.currentTime = 0; 
+      sound.play();
+    }
+  </script>
+  
+</body>
+</html>

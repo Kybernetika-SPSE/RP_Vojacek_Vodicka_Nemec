@@ -1,0 +1,20 @@
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pravidla</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1><u>Pravidla</u></h1>
+    <div class="text-block"><p>Rollujte stisknutím tlačítka "next"</p><br>
+                            <p>Každý roll má svou bodovou hodnotu, některé dávají, některé berou</p><br>
+                            <p>Čím více bodů tím je výhra snažší</p><br>
+                            <p>Výhra jsou čtyři A v jednom rollu</p><br>
+                            <p>Při každém ukončení hry tlačítkem "back" se dosažené body uloží pod vámi zvoleným jménem to tabulky</p><br>
+                            <p>Vyhrajte pro místo v žebříčku výtězů!</p><br>
+                            <p>(hráč s nejmenším počtem rollů na výhru bude mít po uplynutí lhůty nárok na cenu)</p><br>
+                        </div>
+    <button class="button" onclick="location.href='/game1/running'">Play</button>
+</body>
+</html> 

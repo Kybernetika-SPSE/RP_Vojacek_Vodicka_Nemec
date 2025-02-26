@@ -455,10 +455,10 @@ def gameresults1():
                 kapr.pop(-1)
 
 
-    karta11=str(Jackpot[0])
-    karta22=str(Jackpot[1])
-    karta33=str(Jackpot[2])
-    karta44=str(Jackpot[3])
+    karta11=str(Jackpot[0]) + ".png"
+    karta22=str(Jackpot[1]) + ".png"
+    karta33=str(Jackpot[2]) + ".png"
+    karta44=str(Jackpot[3]) + ".png"
 
     karta11 = karta11.replace("'","")
     karta22 = karta22.replace("'","")

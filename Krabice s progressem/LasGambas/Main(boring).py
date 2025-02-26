@@ -454,10 +454,16 @@ def gameresults1():
             for sos in range(100):
                 kapr.pop(-1)
 
+
     karta11=str(Jackpot[0])
     karta22=str(Jackpot[1])
     karta33=str(Jackpot[2])
     karta44=str(Jackpot[3])
+
+    karta11 = karta11.replace("'","")
+    karta22 = karta22.replace("'","")
+    karta33 = karta33.replace("'","")
+    karta44 = karta44.replace("'","")
     #print(final)
     #print(len(kapr))
     if final == "nothing":
@@ -502,7 +508,7 @@ def gameresults1():
     fuckos = len(kapr)-len(fuckingreverse)
     fuckov = len(kapr)/2
 
-    return render_template("game1results.html",finalni = final,fidlovacka = len(kapr),fuckovnice =fuckov ,carka="/",kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmenafucku = fuckos)
+    return render_template("game1results.html",finalni = final,fidlovacka = len(kapr),fuckovnice =fuckov,kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmenafucku = fuckos)
 #_______________________________________________________________________________________________
 #_______________________________________________________________________________________________
 @app.route("/game2/rules")
@@ -591,10 +597,10 @@ def gameresults2():
         final="bigX"
     check=[]
     
-    karta11=str(Jackpot[0])
-    karta22=str(Jackpot[1])
-    karta33=str(Jackpot[2])
-    karta44=str(Jackpot[3])
+    karta11=str(Jackpot[0])+".png"
+    karta22=str(Jackpot[1])+".png"
+    karta33=str(Jackpot[2])+".png"
+    karta44=str(Jackpot[3])+".png"
 
         
 

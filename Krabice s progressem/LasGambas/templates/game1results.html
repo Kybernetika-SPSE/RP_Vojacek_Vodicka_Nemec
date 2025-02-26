@@ -32,14 +32,14 @@
 <body>
     <h1>John nano mašina</h1>
     <div class="container">
-        <img src="jago33-slot-machine.gif" alt="Gif 1" class="gif">
-        <img src="jago33-slot-machine.gif" alt="Gif 2" class="gif">
-        <img src="hatsune-miku-miku-hatsune.gif" alt="Gif 3" class="gif">
-        <img src="jago33-slot-machine.gif" alt="Gif 4" class="gif">
+        <img src="{{ url_for('static', filename='{{karta11}}') }}" alt="Gif 1" class="gif">
+        <img src="{{ url_for('static', filename='{{karta22}}') }}" alt="Gif 2" class="gif">
+        <img src="{{ url_for('static', filename='{{karta33}}') }}" alt="Gif 3" class="gif">
+        <img src="{{ url_for('static', filename='{{karta44}}') }}" alt="Gif 4" class="gif">
     </div>
     <div class="button-container">
-        <button class="button">Sex</button>
-        <button class="button">Xes</button>
+        <button onclick="location.href ='/game1/running'" class="button">Next</button>
+        <button onclick="location.href ='/'" class="button">Back</button>
     </div>
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>

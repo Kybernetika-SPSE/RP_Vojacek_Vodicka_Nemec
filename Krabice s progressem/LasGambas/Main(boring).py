@@ -106,19 +106,19 @@ def main():
         muhaha.write(amorgor)
     amorgor=""
 
-    return render_template("Stránka.html")
+    return render_template("Welcome.html")
 
 
 #_______________________________________________________________________________________________
 @app.route("/game1/rules")
 def gamerules1():
     ano = "spust"
-    return render_template("game1rules.html", buton = ano)
+    return render_template("game1rules.html")
 #_______________________________________________________________________________________________
 @app.route("/game1/running")
 def gamerunning1():
     x = random.randrange(1,10)
-    return render_template("gameruning.html",tohlechcu = x)
+    return render_template("game1running.html")
 #_______________________________________________________________________________________________
 @app.route("/game1/results")
 def gameresults1():
@@ -502,7 +502,7 @@ def gameresults1():
     fuckos = len(kapr)-len(fuckingreverse)
     fuckov = len(kapr)/2
 
-    return render_template("gameresults.html",finalni = final,fidlovacka = len(kapr),fuckovnice =fuckov ,carka="/",kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmenafucku = fuckos)
+    return render_template("game1results.html",finalni = final,fidlovacka = len(kapr),fuckovnice =fuckov ,carka="/",kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmenafucku = fuckos)
 #_______________________________________________________________________________________________
 #_______________________________________________________________________________________________
 @app.route("/game2/rules")
@@ -513,7 +513,7 @@ def gamerules2():
 @app.route("/game2/running")
 def gamerunning2():
     x = random.randrange(1,10)
-    return render_template("gameruning2.html",tohlechcu = x)
+    return render_template("game2running.html",tohlechcu = x)
 #_______________________________________________________________________________________________
 @app.route("/game2/results")
 def gameresults2():
@@ -612,7 +612,7 @@ def gameresults2():
         muhaha.write(amorgor)
     amorgor=""
     
-    return render_template("gameresults2.html",finalni = final,carka="/",kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44)
+    return render_template("game2results.html",finalni = final,carka="/",kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44)
 #_______________________________________________________________________________________________
 #_______________________________________________________________________________________________
 @app.route("/game3/rules")

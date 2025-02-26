@@ -1,78 +1,86 @@
 body {
-    font-family: georgia, Georgia;
-    text-align: center;
-    font-size: large;
-    line-height: 0.7;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #2b0000;
-    color: #f5d506;
-  }
-  h1 {
-    margin-bottom: 20px;
-    font-size: 40px;
-    font-weight: bold;
-    text-align: center;
-    color: #FFD700;
-    animation: fadeInSlide 1.5s ease-in-out;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
-    margin-top: 30px;
-    line-height: 1.2;
-  }
-  .container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 70px;
-    padding: 0 20px;
-  }
-  .button {
-    padding: 15px 30px;
-    text-decoration: none;
-    color: #FFD700;
-    background-color: #880808;
-    border: none;
-    border-radius: 30px;
-    text-align: center;
-    font-size: 18px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
-    background-color: #a30000;
-    transform: scale(1.1);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-    color: #ffffff;
-  }
-/*------------------progress bar-----------------*/
-.progress-container {
-    width: 250%;
-    background-color: #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    max-width: 500px;
-    margin: 20px auto;
+  font-family: georgia, Georgia;
+  text-align: center;
+  font-size: large;
+  line-height: 0.7;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #2b0000;
+  color: #f5d506;
+}
+h1 {
+  margin-bottom: 20px;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: #FFD700;
+  animation: fadeInSlide 1.5s ease-in-out;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+  margin-top: 30px;
+  line-height: 1.2;
+}
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 70px;
+  padding: 0 20px;
+}
+.button {
+  padding: 15px 30px;
+  text-decoration: none;
+  color: #FFD700;
+  background-color: #880808;
+  border: none;
+  border-radius: 30px;
+  text-align: center;
+  font-size: 18px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
 }
 
+.button:hover {
+  background-color: #a30000;
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+.gif {
+  border: 5px solid #c0a301;
+  border-radius: 10px;
+  padding: 5px;
+}
+/*------------------progress bar-----------------*/
+.progress-container {
+  width: 90%;
+  background-color: #440000;
+  border-radius: 15px;
+  overflow: hidden;
+  max-width: 600px;
+  margin: 30px auto;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 .progress-bar {
-    width: 0%;
-    height: 30px;
-    background-color: #4caf50;
-    text-align: center;
-    line-height: 30px;
-    color: white;
-    transition: width 0.4s ease-in-out;
+  width: 0%;
+  height: 30px;
+  background-color: #FFD700;
+  text-align: center;
+  line-height: 30px;
+  font-size: 18px;
+  color: black;
+  transition: width 0.4s ease-in-out;
+  margin-bottom: 5px;
 }
 
 button {
-    margin-top: 10px;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
 }

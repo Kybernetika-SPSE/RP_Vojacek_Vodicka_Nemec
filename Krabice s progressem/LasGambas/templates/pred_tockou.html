@@ -1,0 +1,40 @@
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hra</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        h1 {
+            margin-bottom: 120px;
+        }
+        .container {
+            margin-bottom: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .button {
+            padding: 20px 40px;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jvier</h1>
+    <div class="container">
+        <img src="Q_Heart_scaled_3x_pngcrushed.png" alt="Gif 1" class="gif">
+        <img src="Q_Heart_scaled_3x_pngcrushed.png" alt="Gif 2" class="gif">
+        <img src="Q_Heart_scaled_3x_pngcrushed.png" alt="Gif 3" class="gif">
+        <img src="Q_Heart_scaled_3x_pngcrushed.png" alt="Gif 4" class="gif">
+    </div>
+    <button class="button">Stop</button>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+  </div>
+</body>
+</html>
+

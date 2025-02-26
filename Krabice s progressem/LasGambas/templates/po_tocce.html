@@ -1,0 +1,48 @@
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hra</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        h1 {
+            margin-bottom: 120px;
+        }
+        .container {
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .button {
+            padding: 20px 40px;
+            font-size: 22px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>John nano mašina</h1>
+    <div class="container">
+        <img src="jago33-slot-machine.gif" alt="Gif 1" class="gif">
+        <img src="jago33-slot-machine.gif" alt="Gif 2" class="gif">
+        <img src="hatsune-miku-miku-hatsune.gif" alt="Gif 3" class="gif">
+        <img src="jago33-slot-machine.gif" alt="Gif 4" class="gif">
+    </div>
+    <div class="button-container">
+        <button class="button">Sex</button>
+        <button class="button">Xes</button>
+    </div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+</body>
+</html>

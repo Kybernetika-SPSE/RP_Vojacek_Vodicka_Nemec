@@ -1,0 +1,47 @@
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hra</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        h1 {
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+        .container {
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .button {
+            padding: 20px 40px;
+            font-size: 22px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{flavourtext}} tak prej ne:3</h1>
+    <div class="container">
+        <img src="{{ url_for('static', filename=karta1) }}" alt="Gif 1" class="gif">
+        <img src="{{ url_for('static', filename=karta2) }}" alt="Gif 2" class="gif">
+        <img src="{{ url_for('static', filename=karta3) }}" alt="Gif 3" class="gif">
+        <img src="{{ url_for('static', filename=karta4) }}" alt="Gif 4" class="gif">
+    </div>
+    <p>{{finalni}}</p>
+    <div class="button-container">
+        <button onclick="location.href ='/game3/running'" class="button">Next</button>
+        <button onclick="location.href ='/'" class="button">Back</button>
+    </div>
+</body>
+</html>

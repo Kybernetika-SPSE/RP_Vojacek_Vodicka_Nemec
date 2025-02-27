@@ -666,12 +666,12 @@ def gameresults2():
 @app.route("/game3/rules")
 def gamerules3():
     amorgor = "spust"
-    return render_template(".html", buton = amorgor)
+    return render_template("game3rules.html", buton = amorgor)
 #_______________________________________________________________________________________________
 @app.route("/game3/running")
 def gamerunning3():
     x = random.randrange(1,10)
-    return render_template(".html",tohlechcu = x)
+    return render_template("game3running.html",tohlechcu = x)
 #_______________________________________________________________________________________________
 @app.route("/game3/results")
 def gameresults3():
@@ -725,6 +725,10 @@ def gameresults3():
     Jackpot=[]
     karta=[]
     counterer=[]
+    jauznevim = kapr
+
+    symbol= ["piky", "kříže", "káry", "srdce"]
+    číslo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
     
     if 200> len(kapr)>100:
         číslo = [8, 9, 10, "J", "Q", "K", "A"]
@@ -1185,41 +1189,6 @@ def gameresults3():
     checkusimpus=[]
 
 
-    if final == "nothing":
-        final = "Nothing"
-    if final == "toopicky":
-        final = "Too Picky"
-    if final =="OOF":
-        final = "OOF"
-    if final =="death":
-        final = "Death"
-    if final =="fullflush":
-        final = "Straight"
-    if final =="full":
-        final = "Four of a Kind"
-    if final =="three":
-        final = "Three of a Kind"
-    if final =="two":
-        final = "Two of a Kind"
-    if final =="badluck":
-        final = "Bad Luck"
-    if final =="highcard":
-        final = "High Card"
-    if final =="sixqueens":
-        final = "The Six Queens"
-    if final =="WHAT":
-        final = "???"
-    if final =="impeyes":
-        final = "ImpEyes"
-    if final =="theWOLF":
-        final = "TheWOLF"
-    if final =="saviour":
-        final = "TheSAVIOR"
-    if final == "toopicky":
-        final = "TooPicky"
-
-
-
     amorgor=""
     for kula in counterer:
         amorgor += (str(kula)+";")
@@ -1266,13 +1235,58 @@ def gameresults3():
     with open(path.join(dir,"sources","victorthesaviour"),"w") as muhaha:
         muhaha.write(amorgor)
     amorgor=""
+
+#--------------aux------------------------------
+
+    karta11=str(Jackpot[0]) + ".png"
+    karta22=str(Jackpot[1]) + ".png"
+    karta33=str(Jackpot[2]) + ".png"
+    karta44=str(Jackpot[3]) + ".png"
+
+    karta11 = karta11.replace("'","")
+    karta22 = karta22.replace("'","")
+    karta33 = karta33.replace("'","")
+    karta44 = karta44.replace("'","")
+
+    if final == "nothing":
+        final = "Nothing"
+    if final == "toopicky":
+        final = "Too Picky"
+    if final =="OOF":
+        final = "OOF"
+    if final =="death":
+        final = "Death"
+    if final =="fullflush":
+        final = "Straight"
+    if final =="full":
+        final = "Four of a Kind"
+    if final =="three":
+        final = "Three of a Kind"
+    if final =="two":
+        final = "Two of a Kind"
+    if final =="badluck":
+        final = "Bad Luck"
+    if final =="highcard":
+        final = "High Card"
+    if final =="sixqueens":
+        final = "The Six Queens"
+    if final =="WHAT":
+        final = "???"
+    if final =="impeyes":
+        final = "ImpEyes"
+    if final =="theWOLF":
+        final = "TheWOLF"
+    if final =="saviour":
+        final = "TheSAVIOR"
+    if final == "toopicky":
+        final = "TooPicky"
+
+    opakuj = len(kapr)-len(jauznevim)
+    nerozumim = len(kapr)/2
+
+#--------------------------------------------------------------------
     
-    karta11=str(Jackpot[0])
-    karta22=str(Jackpot[1])
-    karta33=str(Jackpot[2])
-    karta44=str(Jackpot[3])
-    
-    return render_template(".html",finalni = final,fidlovacka = len(kapr),carka="/",kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44)
+    return render_template("game3results.html",finalni = final,fidlovacka = len(kapr),brokovnice =nerozumim,kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
 
 
 if __name__ == "__main__":

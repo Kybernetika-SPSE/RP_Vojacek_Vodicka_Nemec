@@ -139,7 +139,7 @@ def gameresults1():
     kapr=kapr[:-1]
     amorgor=""
     print(len(kapr))
-    fuckingreverse = kapr
+    jauznevim = kapr
 
     with open(path.join(dir,"sources","counter")) as rum:
         amorgor=rum.read()
@@ -436,7 +436,6 @@ def gameresults1():
             pass
 
         
-
     if final =="nothing":
         if 51>len(kapr)>24:
             for sos in range(10):
@@ -454,6 +453,7 @@ def gameresults1():
             for sos in range(100):
                 kapr.pop(-1)
 
+    #-----------------aux-----------------------------
 
     karta11=str(Jackpot[0]) + ".png"
     karta22=str(Jackpot[1]) + ".png"
@@ -491,6 +491,12 @@ def gameresults1():
     if final =="WHAT":
         final = "???"
 
+    opakuj = len(kapr)-len(jauznevim)
+    nerozumim = len(kapr)/2
+
+
+    #----------------------------------------------------------------
+
     amorgor=""
     for kula in counterer:
         amorgor += (str(kula)+";")
@@ -503,12 +509,11 @@ def gameresults1():
         amorgor += (str(kula)+";")
     with open(path.join(dir,"sources","progress"),"w") as muhaha:
         muhaha.write(amorgor)
-    print(Jackpot)
-    print(final)
-    fuckos = len(kapr)-len(fuckingreverse)
-    fuckov = len(kapr)/2
+    #print(Jackpot)
+    #print(final)
 
-    return render_template("game1results.html",finalni = final,fidlovacka = len(kapr),fuckovnice =fuckov,kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmenafucku = fuckos)
+
+    return render_template("game1results.html",finalni = final,fidlovacka = len(kapr),brokovnice =nerozumim,kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
 #_______________________________________________________________________________________________
 #_______________________________________________________________________________________________
 @app.route("/game2/rules")
@@ -597,12 +602,49 @@ def gameresults2():
         final="bigX"
     check=[]
     
-    karta11=str(Jackpot[0])+".png"
-    karta22=str(Jackpot[1])+".png"
-    karta33=str(Jackpot[2])+".png"
-    karta44=str(Jackpot[3])+".png"
+#-----------------aux-----------------------------
 
-        
+    karta11=str(Jackpot[0]) + ".png"
+    karta22=str(Jackpot[1]) + ".png"
+    karta33=str(Jackpot[2]) + ".png"
+    karta44=str(Jackpot[3]) + ".png"
+
+    karta11 = karta11.replace("'","")
+    karta22 = karta22.replace("'","")
+    karta33 = karta33.replace("'","")
+    karta44 = karta44.replace("'","")
+    #print(final)
+    #print(len(kapr))
+
+    if final == "nothing":
+        final = "Nuh Uh"
+    if final == "toopicky":
+        final = "Nuh Uh"
+    if final =="OOF":
+        final = "Nuh Uh"
+    if final =="death":
+        final = "Nuh Uh"
+    if final =="fullflush":
+        final = "Nuh Uh"
+    if final =="full":
+        final = "Nuh Uh"
+    if final =="three":
+        final = "Nuh Uh"
+    if final =="two":
+        final = "Nuh Uh"
+    if final =="badluck":
+        final = "Nuh Uh"
+    if final =="highcard":
+        final = "Nuh Uh"
+    if final =="sixqueens":
+        final = "Nuh Uh"
+    if final =="WHAT":
+        final = "???"
+    if final == "bigX":
+        final = "Nuh uh"
+
+#----------------------------------------------------------------
+      
 
     with open(path.join(dir,"sources","counter")) as rum:
         amorgor=rum.read()

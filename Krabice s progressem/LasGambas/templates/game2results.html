@@ -40,25 +40,8 @@
     </div>
     <p>{{finalni}}</p>
     <div class="button-container">
-        <button onclick="location.href ='/game1/running'" class="button">Next</button>
+        <button onclick="location.href ='/game2/running'" class="button">Next</button>
         <button onclick="location.href ='/'" class="button">Back</button>
     </div>
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-    </div>
-    <script>
-        let progress = 0;
-  
-        function increaseProgress(dock) {
-            progress = {{ brokovnice }}
-            if (progress < 250) {
-                const progressBar = document.getElementById("progressBar");
-                progressBar.style.width = progress + "%";
-              
-            }
-        }
-        increaseProgress({{ zmena }})
-    </script>
-  
 </body>
 </html>

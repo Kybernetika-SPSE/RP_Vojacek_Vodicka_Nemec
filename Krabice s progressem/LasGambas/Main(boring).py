@@ -128,7 +128,7 @@ def gamerunning1():
 def gameresults1():
     Jackpot=[]
     symbol= ["piky", "kříže", "káry", "srdce"]
-    číslo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
+    číslo = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
 
 
     Balík= []
@@ -242,6 +242,9 @@ def gameresults1():
                 else:
                     pass
                 print("ihavedoneitall")
+    final="nothing"
+    if Jackpot==[]:
+        final="OOOF"
 
     if len(Jackpot)==1:
         Jackpot.append("0")
@@ -261,9 +264,7 @@ def gameresults1():
     print(Jackpot)
 
     check=[]
-    final="nothing"
-    if Jackpot==[]:
-        final="OOOF"
+
 
     #----conditions-----------------------------------------
 
@@ -474,7 +475,7 @@ def gameresults1():
         final = "Nothing"
     if final == "toopicky":
         final = "Too Picky"
-    if final =="OOF":
+    if final =="OOOF":
         final = "OOF"
     if final =="death":
         final = "Death"
@@ -522,7 +523,7 @@ def gameresults1():
             fvtxt1 = "Hodláš tohle dělat často?" 
         else:
             fvtxt1 = "nedostatek sýra v sektoru 3"     
-    elif final == "OOF":
+    elif final =="OOF":
         if r2 == 1:
             fvtxt1 = "OOF"
         elif r2 == 2:
@@ -704,7 +705,7 @@ def gameresults2():
 
     As = ["káryA" , "pikyA" , "srdceA" , "křížeA"]
     symbol= ["piky", "kříže", "káry", "srdce"]
-    číslo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
+    číslo = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
 
     Balík= []
     Balík2 = []
@@ -900,7 +901,7 @@ def gameresults3():
     jauznevim = kapr
 
     symbol= ["piky", "kříže", "káry", "srdce"]
-    číslo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
+    číslo = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
     
     if 200> len(kapr)>100:
         číslo = [8, 9, 10, "J", "Q", "K", "A"]
@@ -1015,7 +1016,9 @@ def gameresults3():
                 else:
                     pass
                 print("ihavedoneitall")
-
+    final="nothing"
+    if Jackpot==[]:
+        final="OOOF"
     if len(Jackpot)==1:
         Jackpot.append("0")
         Jackpot.append("0")
@@ -1028,9 +1031,7 @@ def gameresults3():
     Jackpot=Jackpot[:4]
 
     check=[]
-    final="nothing"
-    if Jackpot==[]:
-        final="OOOF"
+
 
     #----conditions-----------------------------------------
 

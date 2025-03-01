@@ -31,14 +31,14 @@
     </style>
 </head>
 <body>
-    <h1>{{flavourtext}} tak prej ne:3</h1>
+    <h1>{{flavourtext1}}</h1>
     <div class="container">
         <img src="{{ url_for('static', filename=karta1) }}" alt="Gif 1" class="gif">
         <img src="{{ url_for('static', filename=karta2) }}" alt="Gif 2" class="gif">
         <img src="{{ url_for('static', filename=karta3) }}" alt="Gif 3" class="gif">
         <img src="{{ url_for('static', filename=karta4) }}" alt="Gif 4" class="gif">
     </div>
-    <p>{{finalni}}</p>
+    <p>{{finalni}}<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
     <div class="button-container">
         <button onclick="location.href ='/game1/running'" class="button">Next</button>
         <button onclick="location.href ='/'" class="button">Back</button>

@@ -5,6 +5,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def main():
     with open(path.join(dir,"sources","progress")) as rum:
@@ -117,8 +118,11 @@ def gamerules1():
 #_______________________________________________________________________________________________
 @app.route("/game1/running")
 def gamerunning1():
-    x = random.randrange(1,10)
-    return render_template("game1running.html")
+    #-----FVTXT2----------------------------------------------------
+
+    fvtxt2 = "Zkouška Zkouška"
+    #---------------------------------------------------------------
+    return render_template("game1running.html", flavourtext2 = fvtxt2)
 #_______________________________________________________________________________________________
 @app.route("/game1/results")
 def gameresults1():
@@ -420,7 +424,7 @@ def gameresults1():
             kapr.append("I")
 
     if final == "death":
-            for sos in range(len(final)):
+            for sos in range(len(kapr)):
                 kapr.pop(-1)
 
     if final == "OOOF":
@@ -495,6 +499,174 @@ def gameresults1():
     nerozumim = len(kapr)/2
 
 
+    #------------FVTXT1-----------------------------------------------
+    numero = random.randrange(1,30)
+    r1 = random.randrange(1,9)
+    r2 = random.randrange(1,5)
+    if final == "Nothing":
+        if r1 ==1:
+            fvtxt1 = "Nechceš něco rollnout??"
+        elif r1 ==2:
+            fvtxt1 = "Timhle tempem to nikdy nedohraješ"
+        elif r1 ==3:
+            fvtxt1 = "Nuuudaaa"
+        elif r1 ==4:
+            fvtxt1 = "Víš že od určitýho bodu ti to bere body že?"
+        elif r1 ==5:
+            fvtxt1 = "Nic..."
+        elif r1 ==6:
+            fvtxt1 = "Nope"
+        elif r1 ==7:
+            fvtxt1 = "Nuh Uh"
+        elif r1 ==8:
+            fvtxt1 = "Hodláš tohle dělat často?" 
+        else:
+            fvtxt1 = "nedostatek sýra v sektoru 3"     
+    elif final == "OOF":
+        if r2 == 1:
+            fvtxt1 = "OOF"
+        elif r2 == 2:
+            fvtxt1 = "AJAJAJJ"
+        elif r2 == 3:
+            fvtxt1 = "Tohle ovšem... je smůla"
+        elif r2 == 4:
+            fvtxt1 = "UUUF... Nádhera"
+        else:
+            fvtxt1 = "nedostatek sýra v sektoru 3"
+    elif final == "Death":
+        if r2 > 2:
+            fvtxt1 = "Víš vůbec jak MALOU šanci tohle má?"
+        else:
+            fvtxt1 = "Tohle je stejně vzácný jako výhra BTW"
+    elif final == "Straight":
+        fvtxt1 = "Tak tohle jsem snad v životě neviděl"
+    elif final =="Four of a Kind":
+        if r1 == 1:
+            fvtxt1 = "Slušný"
+        elif r1 == 2:
+            fvtxt1 = "Pěkný"
+        elif r1 == 3:
+            fvtxt1 = "Hele, možná to i někam dotáhneš"
+        elif r1 == 4:
+            fvtxt1 = "Možná..."
+        elif r1 == 5:
+            fvtxt1 = "No moment!"
+        elif r1 == 6:
+            fvtxt1 = "Žádná cesta ono to dostává body!"
+        elif r1 == 7:
+            fvtxt1 = "Jako jarní vánek... Co to znamená? Jak to mam vědět"
+        elif r1 == 8:
+            fvtxt1 = "No dobrá, vem si ty svoje Drobný"
+        else:
+            fvtxt1 = "nedostatek sýra v sektoru 3"
+    elif final =="Three of a Kind":
+        if r1 == 1:
+            fvtxt1 = "Slušný"
+        elif r1 == 2:
+            fvtxt1 = "Pěkný"
+        elif r1 == 3:
+            fvtxt1 = "Hele, možná to i někam dotáhneš"
+        elif r1 == 4:
+            fvtxt1 = "Možná..."
+        elif r1 == 5:
+            fvtxt1 = "No moment!"
+        elif r1 == 6:
+            fvtxt1 = "Žádná cesta ono to dostává body!"
+        elif r1 == 7:
+            fvtxt1 = "Jako jarní vánek... Co to znamená? Jak to mam vědět"
+        elif r1 == 8:
+            fvtxt1 = "No dobrá, vem si ty svoje Drobný"
+        else:
+            fvtxt1 = "nedostatek sýra v sektoru 3"
+    elif final =="Two of a Kind" :
+        if r1 == 1:
+            fvtxt1 = "Slušný"
+        elif r1 == 2:
+            fvtxt1 = "Pěkný"
+        elif r1 == 3:
+            fvtxt1 = "Hele, možná to i někam dotáhneš"
+        elif r1 == 4:
+            fvtxt1 = "Možná..."
+        elif r1 == 5:
+            fvtxt1 = "No moment!"
+        elif r1 == 6:
+            fvtxt1 = "Žádná cesta ono to dostává body!"
+        elif r1 == 7:
+            fvtxt1 = "Jako jarní vánek... Co to znamená? Jak to mam vědět"
+        elif r1 == 8:
+            fvtxt1 = "No dobrá, vem si ty svoje Drobný"
+        else:
+            fvtxt1 = "nedostatek sýra v sektoru 3"
+    elif final == "Bad Luck":
+        if r1 == 1 or 2:
+            fvtxt1 = "Zpátky dolů"
+        elif r1 == 3:
+            fvtxt1 = "*Zlověstný smích*"
+        elif r1 == 4 or 5:
+            fvtxt1 = "Jak se píše slovo: Loser?"
+        elif r1 == 6:
+            fvtxt1 = "Žer Jengla"
+        elif r1 == 7 or 8:
+            fvtxt1 = "The joke's on YOU"
+        else:
+            fvtxt1 = "nedostatek sýra v sektoru 3"
+    elif final =="High Card":
+        if len(kapr) < 220:
+            if r1 == 1:
+                fvtxt1 = "Alespoň ňeco"
+            elif r1 == 2:
+                fvtxt1 = "Snaž se trochu"
+            elif r1 == 3:
+                fvtxt1 = "Samozřejmě Skill Based"
+            elif r1 == 4:
+                fvtxt1 = "I to se počítá"
+            elif r1 == 5:
+                fvtxt1 = "Už zase?"
+            elif r1 == 6:
+                fvtxt1 = "Nebylo tu tohle před chvílí?"
+            elif r1 == 7:
+                fvtxt1 = "-sample text-"
+            elif r1 == 8:
+                fvtxt1 = "Už mi dochází nápady"
+            else:
+                fvtxt1 = "nedostatek sýra v sektoru 3"
+        else:
+            if r2 == 1:
+                fvtxt1 = "Takhle,    ,Blízko"
+            elif r2 == 2:
+                fvtxt1 = "Už to bude"
+            elif r2 == 3:
+                fvtxt1 = "Dont give up, skeleton!"
+            elif r2 == 4:
+                fvtxt1 = "Vždyť už jsou to JENOM Ačka"
+            else:
+                fvtxt1 = "nedostatek sýra v sektoru 3"
+    elif final == "The Six Queens":
+        fvtxt1 = "DAMN IT! SIX QUEENS"
+    elif final == "???":
+        fvtxt1 = "DING DING DING"
+    elif final =="Too Picky":
+        fvtxt1 = "Too Picky neexistuje"
+    elif random.randrange(1,81) == 42:
+        if r2 == 1:
+            fvtxt1 = "What are we? Some kind of... League of Legends?"
+        elif r2 == 2:
+            fvtxt1 = "Možná tou skutečnou výhrou jsou ti přátelé..."
+        elif r2 == 3:
+            fvtxt1 = "...které jsme si udělali cestou"
+        elif r2 == 4:
+            fvtxt1 = "Anime tiddies"
+        else:
+            fvtxt1 = "nedostatek sýra v sektoru 3"
+    else:
+        if r2 == 1:
+            fvtxt1 = "Napoleon Napoleon Napoleon"
+        elif r2 == 2:
+            fvtxt1 = "+++Press Reset+++"
+        elif r2 == 3:
+            fvtxt1 = "Koupili jsme rohožku "
+        elif r2 == 4:
+            fvtxt1 = "Myš"
     #----------------------------------------------------------------
 
     amorgor=""
@@ -513,7 +685,7 @@ def gameresults1():
     #print(final)
 
 
-    return render_template("game1results.html",finalni = final,fidlovacka = len(kapr),brokovnice =nerozumim,kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
+    return render_template("game1results.html",finalni = final,fidlovacka = len(kapr),brokovnice =nerozumim,kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj, flavourtext1 = fvtxt1)
 #_______________________________________________________________________________________________
 #_______________________________________________________________________________________________
 @app.route("/game2/rules")

@@ -32,7 +32,20 @@
         <img src="" alt="Gif 3" class="gif">
         <img src="" alt="Gif 4" class="gif">
     </div>
-    <button onclick="location.href ='/game2/results'" class="button">Stop</button>
+    <button onclick="location.href ='/game2/results'" class="button" id="rollbutton">Stop</button>
+    <script>
+        document.addEventListener("keydown", function(event) {
+            if (event.key === " ") {  // Spacebar key
+                event.preventDefault(); // Prevents adding space to the input
+                document.getElementById("rollbutton").click(); // Triggers button click
+            }
+        });
+    
+        document.getElementById("rollbutton").addEventListener("click", function() {
+            location.href ='/game2/results';
+            console.log("Sending:", text);
+        });
+    </script>
 </body>
 </html>
 

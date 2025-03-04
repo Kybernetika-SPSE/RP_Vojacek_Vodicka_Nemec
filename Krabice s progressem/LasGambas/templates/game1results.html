@@ -38,12 +38,27 @@
         <img src="{{ url_for('static', filename=karta3) }}" alt="Gif 3" class="gif">
         <img src="{{ url_for('static', filename=karta4) }}" alt="Gif 4" class="gif">
     </div>
-    <p>{{finalni}}<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
+    <p>{{finalni}}ULRASEKSO<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
     <p style="margin-top: -15px;">{{kount}}</p>
     <div class="button-container">
-        <button onclick="location.href ='/game1/running'" class="button">Next</button>
+        <button onclick="location.href ='/game1/running'" class="button" id="rollbutton">Next</button>
         <button onclick="location.href ='/'" class="button">Back</button>
     </div>
+    
+    <script>
+        document.addEventListener("keydown", function(event) {
+            if (event.key === " ") {  // Spacebar key
+                event.preventDefault(); // Prevents adding space to the input
+                document.getElementById("rollbutton").click(); // Triggers button click
+            }
+        });
+    
+        document.getElementById("rollbutton").addEventListener("click", function() {
+            location.href ='/game1/running';
+            console.log("Sending:", text);
+        });
+    </script>
+    
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>

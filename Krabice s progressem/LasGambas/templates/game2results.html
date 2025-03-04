@@ -40,8 +40,22 @@
     </div>
     <p>{{finalni}}<br>{{kount}}</p>
     <div class="button-container">
-        <button onclick="location.href ='/game2/running'" class="button">Next</button>
+        <button onclick="location.href ='/game2/running'" class="button" id="rollbutton">Next</button>
         <button onclick="location.href ='/'" class="button">Back</button>
     </div>
+    <script>
+        document.addEventListener("keydown", function(event) {
+            if (event.key === " ") {  // Spacebar key
+                event.preventDefault(); // Prevents adding space to the input
+                document.getElementById("rollbutton").click(); // Triggers button click
+            }
+        });
+    
+        document.getElementById("rollbutton").addEventListener("click", function() {
+            location.href ='/game2/running';
+            console.log("Sending:", text);
+        });
+    </script>
+  
 </body>
 </html>

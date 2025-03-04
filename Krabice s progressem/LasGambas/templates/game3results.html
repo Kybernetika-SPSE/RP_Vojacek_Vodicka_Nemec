@@ -6,27 +6,27 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
         h1 {
-            margin-bottom: 30px;
-            font-size: 30px;
+            margin-bottom: 7vh;
+            font-size: 5vh;
         }
         .container {
-            margin-bottom: 10px;
+            margin-bottom: 7vh;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 40px;
+            gap: 4vh;
             max-width: 100%;
             overflow: hidden;
         }
         .button {
-            padding: 20px 40px;
-            font-size: 22px;
+            padding: 2.5vh 7vh;
+            font-size: 3vh;
         }
         .button-container {
             display: flex;
             justify-content: center;
-            gap: 100px;
-            margin-bottom: 20px;
+            gap: 10vh;
+            margin-bottom: 20vh;
         }
     </style>
 </head>
@@ -38,10 +38,14 @@
         <img src="{{ url_for('static', filename=karta3) }}" alt="Gif 3" class="gif">
         <img src="{{ url_for('static', filename=karta4) }}" alt="Gif 4" class="gif">
     </div>
-    <p>{{finalni}}<br>{{kount}}</p>
+    <p style="font-size: 3vh;">{{finalni}}<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
+    <p style="margin-top: -15px;">{{kount}}</p>
     <div class="button-container">
         <button onclick="location.href ='/game3/running'" class="button" id="rollbutton">Next</button>
         <button onclick="location.href ='/'" class="button">Back</button>
+    </div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
     </div>
 </body>
 <script>

@@ -121,8 +121,14 @@ def gamerunning1():
     #-----FVTXT2----------------------------------------------------
 
     fvtxt2 = "Zkouška Zkouška"
+    gify = ["a","b","c","d"]
+    random.shuffle(gify)
+    gify[0]= "ezgif.com-animated-gif-maker.gif"
+    gify[1]= "ezgif.com-animated-gif-maker(1).gif"
+    gify[2]= "ezgif.com-animated-gif-maker(2).gif"
+    gify[3]= "ezgif.com-animated-gif-maker(3).gif"
     #---------------------------------------------------------------
-    return render_template("game1running.html", flavourtext2 = fvtxt2)
+    return render_template("game1running.html", flavourtext2 = fvtxt2, aa=0)
 #_______________________________________________________________________________________________
 @app.route("/game1/results")
 def gameresults1():
@@ -897,7 +903,6 @@ def gameresults3():
     Balík2 = []
     Jackpot=[]
     karta=[]
-    counterer=[]
     jauznevim = kapr
 
     symbol= ["piky", "kříže", "káry", "srdce"]
@@ -1028,6 +1033,11 @@ def gameresults3():
         Jackpot.append("0")
     elif len(Jackpot)==3:
         Jackpot.append("0")
+    elif len(Jackpot)==0:
+        Jackpot.append("0")
+        Jackpot.append("0")
+        Jackpot.append("0")
+        Jackpot.append("0")
     Jackpot=Jackpot[:4]
 
     check=[]
@@ -1157,6 +1167,15 @@ def gameresults3():
         muhaha=random.randrange(4)
         if muhaha==3:
             final="sixqueens"
+            Jackpot = Jackpot[:-3]
+            zymboli = ["piky", "kříže", "káry", "srdce"]
+            for i in range(3):
+                sss = random.randrange(len(zymboli))
+                krata = []
+                krata.append(zymboli[sss])
+                krata.append("Q")
+                Jackpot.append(krata)
+            random.shuffle(Jackpot)
         else:
             pass
 
@@ -1353,7 +1372,7 @@ def gameresults3():
                 kapr.pop(-1)
 
     if final=="theWOLF":
-            for kkl in range(len(kapr)/2):
+            for kkl in range(len(kapr)//2):
                 kapr.pop(-1) 
 
     if final=="saviour":
@@ -1453,9 +1472,11 @@ def gameresults3():
         final = "TheSAVIOR"
     if final == "toopicky":
         final = "TooPicky"
+    if final =="toorepetetive":
+        final = "Too Repetetive"
 
     opakuj = len(kapr)-len(jauznevim)
-    nerozumim = len(kapr)/2
+    nerozumim = len(kapr)/2.5
 
 #--------------------------------------------------------------------
     

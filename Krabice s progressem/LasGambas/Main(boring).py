@@ -780,8 +780,91 @@ def gamerules2():
 #_______________________________________________________________________________________________
 @app.route("/game2/running")
 def gamerunning2():
-    x = random.randrange(1,10)
-    return render_template("game2running.html",tohlechcu = x)
+    fvtxt2 = "Zkouška Zkouška"
+    symbol= ["piky", "kříže", "káry", "srdce"]
+    číslo = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
+
+
+    balík1= []
+    balík2 = []
+    balík3 = []
+    balík4 = []
+    karta=[]
+
+    #____________________________________________________
+    with open(path.join(dir,"sources","progress")) as rum:
+        amorgor=rum.read()
+    kapr=amorgor.split(";")
+    kapr=kapr[:-1]
+    amorgor=""
+    print(len(kapr))
+
+    with open(path.join(dir,"sources","counter")) as rum:
+        amorgor=rum.read()
+    counterer=amorgor.split(";")
+    counterer=counterer[:-1]
+    amorgor=""
+    counterer.append("I")
+    #_________________________________________________
+
+    if 200> len(kapr)>100:
+        číslo = [8, 9, 10, "J", "Q", "K", "A"]
+        symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
+    elif len(kapr)>200:
+        číslo = ["A"]
+        symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
+
+
+    for l in range(len(symbol)):
+        karta=[]   
+        karta.append(str(symbol[l]))
+        if karta==["srdce"]:
+            for z in range(len(číslo)):
+                karta = ["srdce"]
+                karta.append(str(číslo[z]))
+                karta = str(karta) + ".png"
+                karta = karta.replace("'","")      
+                balík1.append(karta)
+                balík2.append(karta)
+                balík3.append(karta)
+                balík4.append(karta)
+        if karta==["káry"]:
+            for z in range(len(číslo)):
+                karta = ["káry"]
+                karta.append(str(číslo[z]))
+                karta = str(karta) + ".png"
+                karta = karta.replace("'","")         
+                balík1.append(karta)
+                balík2.append(karta)
+                balík3.append(karta)
+                balík4.append(karta)
+        if karta==["kříže"]:
+            for z in range(len(číslo)):
+                karta = ["kříže"]
+                karta.append(str(číslo[z]))
+                karta = str(karta) + ".png"
+                karta = karta.replace("'","")        
+                balík1.append(karta)
+                balík2.append(karta)
+                balík3.append(karta)
+                balík4.append(karta)
+        if karta==["piky"]:
+            for z in range(len(číslo)):
+                karta = ["piky"]
+                karta.append(str(číslo[z]))
+                karta = str(karta) + ".png"
+                karta = karta.replace("'","")        
+                balík1.append(karta)
+                balík2.append(karta)
+                balík3.append(karta)
+                balík4.append(karta)
+
+    random.shuffle(balík1)
+    random.shuffle(balík2)
+    random.shuffle(balík3)
+    random.shuffle(balík4)
+    
+    return render_template("game2running.html",flavourtext2 = fvtxt2, balák1 = balík1, balák2 = balík2, balák3 = balík3, balák4 = balík4 )
 #_______________________________________________________________________________________________
 @app.route("/game2/results")
 def gameresults2():

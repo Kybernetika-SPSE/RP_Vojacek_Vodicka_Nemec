@@ -31,24 +31,24 @@
     </style>
 </head>
 <body>
-    <h1>{{flavourtext2}}</h1>
+    <h1></h1>
     <div class="container">
         <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff1">
         <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff2">
         <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff3">
         <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff4">
     </div>
-    <button onclick="location.href ='/game1/results'" class="button" id="rollbutton">Stop</button>
+    <button onclick="location.href ='/game2/results'" class="button" id="rollbutton2">Stop</button>
     <script>
         document.addEventListener("keydown", function(event) {
             if (event.key === " ") { 
                 event.preventDefault(); 
-                document.getElementById("rollbutton").click();
+                document.getElementById("rollbutton2").click();
             }
         });
     
-        document.getElementById("rollbutton").addEventListener("click", function() {
-            location.href ='/game1/results';
+        document.getElementById("rollbutton2").addEventListener("click", function() {
+            location.href ='/game2/results';
             console.log("Sending:", text);
         });
     </script>

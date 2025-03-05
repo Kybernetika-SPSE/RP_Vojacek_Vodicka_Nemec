@@ -31,7 +31,7 @@
     </style>
 </head>
 <body>
-    <h1>{{flavourtext1}}</h1>
+    <h1></h1>
     <div class="container">
         <img src="{{ url_for('static', filename=karta1) }}" alt="Gif 1" class="gif">
         <img src="{{ url_for('static', filename=karta2) }}" alt="Gif 2" class="gif">
@@ -70,7 +70,7 @@
     });
 
     document.getElementById("rollbutton").addEventListener("click", function() {
-        location.href ='/game1/running';
+        location.href ='/game3/running';
         console.log("Sending:", text);
     });
 </script>

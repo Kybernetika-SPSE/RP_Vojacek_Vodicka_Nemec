@@ -39,7 +39,7 @@
         <img src="{{ url_for('static', filename=karta4) }}" alt="Gif 4" class="gif">
     </div>
     <p style="font-size: 3vh;">{{finalni}}<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
-    <p style="margin-top: -15px;">{{kount}}</p>
+    <p style="margin-top: 1vh; font-size: 3vh;">{{kount}}</p>
     <div class="button-container">
         <button onclick="location.href ='/game3/running'" class="button" id="rollbutton">Next</button>
         <button onclick="location.href ='/'" class="button">Back</button>
@@ -63,14 +63,14 @@
 </script>
 <script>
     document.addEventListener("keydown", function(event) {
-        if (event.key === " ") {  // Spacebar key
-            event.preventDefault(); // Prevents adding space to the input
-            document.getElementById("rollbutton").click(); // Triggers button click
+        if (event.key === " ") { 
+            event.preventDefault(); 
+            document.getElementById("rollbutton").click();
         }
     });
 
     document.getElementById("rollbutton").addEventListener("click", function() {
-        location.href ='/game3/running';
+        location.href ='/game1/running';
         console.log("Sending:", text);
     });
 </script>

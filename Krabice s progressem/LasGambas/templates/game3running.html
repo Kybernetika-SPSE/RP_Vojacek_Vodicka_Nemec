@@ -33,25 +33,61 @@
 <body>
     <h1>{{flavourtext2}}</h1>
     <div class="container">
-        <img src="" alt="Gif 1" class="gif">
-        <img src="" alt="Gif 2" class="gif">
-        <img src="" alt="Gif 3" class="gif">
-        <img src="" alt="Gif 4" class="gif">
+        <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff1">
+        <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff2">
+        <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff3">
+        <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff4">
     </div>
-    <button onclick="location.href ='/game3/results'" class="button" id="rollbutton">Stop</button>
+    <button onclick="location.href ='/game1/results'" class="button" id="rollbutton">Stop</button>
     <script>
         document.addEventListener("keydown", function(event) {
-            if (event.key === " ") {  // Spacebar key
-                event.preventDefault(); // Prevents adding space to the input
-                document.getElementById("rollbutton").click(); // Triggers button click
+            if (event.key === " ") { 
+                event.preventDefault(); 
+                document.getElementById("rollbutton").click();
             }
         });
     
         document.getElementById("rollbutton").addEventListener("click", function() {
-            location.href ='/game3/results';
+            location.href ='/game1/results';
             console.log("Sending:", text);
         });
     </script>
+    <script>
+        const images_1 = JSON.parse('{{ balák1 | tojson }}')
+            .map(filename => "{{ url_for('static', filename='') }}" + filename);
+        const images_2 = JSON.parse('{{ balák2 | tojson }}')
+            .map(filename => "{{ url_for('static', filename='') }}" + filename);
+        const images_3 = JSON.parse('{{ balák3 | tojson }}')
+            .map(filename => "{{ url_for('static', filename='') }}" + filename);
+        const images_4 = JSON.parse('{{ balák4 | tojson }}')
+            .map(filename => "{{ url_for('static', filename='') }}" + filename);
+
+        console.log("Images Array 1:", images_1);
+        console.log("Images Array 2:", images_2);
+        console.log("Images Array 3:", images_3);
+        console.log("Images Array 4:", images_4);
+
+        let index_1 = 0;
+        let index_2 = 0;
+        let index_3 = 0;
+        let index_4 = 0;
+        const speed = 100;
+
+        function changeImages() {
+            index_1 = (index_1 + 1) % images_1.length;
+            index_2 = (index_2 + 1) % images_2.length;
+            index_3 = (index_3 + 1) % images_3.length;
+            index_4 = (index_4 + 1) % images_4.length;
+
+            document.querySelectorAll(".gif")[0].src = images_1[index_1];
+            document.querySelectorAll(".gif")[1].src = images_2[index_2];
+            document.querySelectorAll(".gif")[2].src = images_3[index_3];
+            document.querySelectorAll(".gif")[3].src = images_4[index_4];
+        }
+
+        setInterval(changeImages, speed);
+    </script>
+    
 </body>
 </html>
 

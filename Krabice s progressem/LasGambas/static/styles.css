@@ -55,6 +55,8 @@ h1 {
   border: 1vh solid #c0a301;
   border-radius: 1vh;
   padding: 0,5vh;
+  width: 33.6vh;
+  height: 44,8vh;
 }
 /*------------------progress bar-----------------*/
 .progress-container {

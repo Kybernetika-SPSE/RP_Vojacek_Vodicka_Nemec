@@ -1,111 +1,51 @@
 import random
 from os import path
 dir = path.dirname(__file__)
-from flask import Flask, render_template
+from flask import Flask, render_template, render_template_string, request, session, redirect, url_for, g
+import json
 
 app = Flask(__name__)
+#session["data"]["roll"] = 0
+#session["data"]["body"] = 0
+#session["data"]["savio"]=0
+#session["data"]["wolfo"]=0
+#session["data"]["impo"]=0
+#session["data"]["blackj"]=0
+#session["data"]["posobecheck"]=[]
 
+app.config["DEFAULT_DATA"] = {
+    "roll": 0,
+    "body": 0,
+    "savio": 0,
+    "wolfo": 0,
+    "impo": 0,
+    "blackj": 0,
+    "posobecheck": []
+}
+try:
+    with open(path.join(dir,"MEGA_SECRET_HYPER_PASSWORD")) as securiti:
+        app.secret_key = securiti.read().strip()
+except:
+    print("Kliuč voe, pokud nevíš, jak se ti tohle vůbec povedlo???")
+    exit()
+
+@app.before_request
+def setup():
+    if "data" not in session:
+        session["data"] = app.config["DEFAULT_DATA"].copy()
+        print("koulesex")
 
 @app.route("/")
 def main():
-    with open(path.join(dir,"sources","progress")) as rum:
-        amorgor=rum.read()
-    kapr=amorgor.split(";")
-    kapr=kapr[:-1]
-    amorgor=""
-    print(len(kapr))
-
-    with open(path.join(dir,"sources","counter")) as rum:
-        amorgor=rum.read()
-    counterer=amorgor.split(";")
-    counterer=counterer[:-1]
-    amorgor=""
-    counterer.append("I")
-
-    with open(path.join(dir,"sources","triposobe")) as rum:
-        amorgor=rum.read()
-    posobecheck=amorgor.split(";")
-    posobecheck=posobecheck[:-1]
-    amorgor=""
-
-    with open(path.join(dir,"sources","cernojecka")) as rum:
-        amorgor=rum.read()
-    blackJs=amorgor.split(";")
-    blackJs=blackJs[:-1]
-    amorgor=""
-
-    with open(path.join(dir,"sources","impove")) as rum:
-        amorgor=rum.read()
-    Imps=amorgor.split(";")
-    Imps=Imps[:-1]
-    amorgor=""
-
-    with open(path.join(dir,"sources","wolfe")) as rum:
-        amorgor=rum.read()
-    thewolf=amorgor.split(";")
-    thewolf=thewolf[:-1]
-    amorgor=""
-
-    with open(path.join(dir,"sources","victorthesaviour")) as rum:
-        amorgor=rum.read()
-    saviour=amorgor.split(";")
-    saviour=saviour[:-1]
-    amorgor=""
-
-    counterer=[]
-    kapr=[]
-    saviour=[]
-    thewolf=[]
-    Imps=[]
-    blackJs=[]
-    posobecheck=[]
-
-    amorgor=""
-    for kula in counterer:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","counter"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-
-    for kula in kapr:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","progress"),"w") as muhaha:
-        muhaha.write(amorgor)
-
-    amorgor=""
-    for kula in posobecheck:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","triposobe"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-
-    amorgor=""
-    for kula in blackJs:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","cernojecka"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-
-    amorgor=""
-    for kula in Imps:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","impove"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-
-    amorgor=""
-    for kula in thewolf:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","wolfe"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-
-    amorgor=""
-    for kula in saviour:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","victorthesaviour"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
+    session["name"] = str(random.randrange(1,40))
+    session["data"]["roll"] = 0
+    session["data"]["body"] = 0
+    session["data"]["savio"]=0
+    session["data"]["wolfo"]=0
+    session["data"]["impo"]=0
+    session["data"]["blackj"]=0
+    session["data"]["posobecheck"]=[]
+    session.modified = True
 
     return render_template("Welcome.html")
 
@@ -113,7 +53,6 @@ def main():
 #_______________________________________________________________________________________________
 @app.route("/game1/rules")
 def gamerules1():
-    ano = "spust"
     return render_template("game1rules.html")
 #_______________________________________________________________________________________________
 @app.route("/game1/running")
@@ -132,25 +71,16 @@ def gamerunning1():
     karta=[]
 
     #____________________________________________________
-    with open(path.join(dir,"sources","progress")) as rum:
-        amorgor=rum.read()
-    kapr=amorgor.split(";")
-    kapr=kapr[:-1]
-    amorgor=""
-    print(len(kapr))
+    counterer = session["data"]["roll"]
+    counterer = counterer + 1
 
-    with open(path.join(dir,"sources","counter")) as rum:
-        amorgor=rum.read()
-    counterer=amorgor.split(";")
-    counterer=counterer[:-1]
-    amorgor=""
-    counterer.append("I")
+    kapr = session["data"]["body"]
     #_________________________________________________
 
-    if 200> len(kapr)>100:
+    if 200> kapr>100:
         číslo = [8, 9, 10, "J", "Q", "K", "A"]
         symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
-    elif len(kapr)>200:
+    elif kapr>200:
         číslo = ["A"]
         symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
 
@@ -210,6 +140,7 @@ def gamerunning1():
 #_______________________________________________________________________________________________
 @app.route("/game1/results")
 def gameresults1():
+    print(session["name"])
     Jackpot=[]
     symbol= ["piky", "kříže", "káry", "srdce"]
     číslo = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
@@ -221,26 +152,18 @@ def gameresults1():
     karta=[]
 
     #____________________________________________________
-    with open(path.join(dir,"sources","progress")) as rum:
-        amorgor=rum.read()
-    kapr=amorgor.split(";")
-    kapr=kapr[:-1]
-    amorgor=""
-    print(len(kapr))
-    jauznevim = kapr
 
-    with open(path.join(dir,"sources","counter")) as rum:
-        amorgor=rum.read()
-    counterer=amorgor.split(";")
-    counterer=counterer[:-1]
-    amorgor=""
-    counterer.append("I")
+    counterer = session["data"]["roll"]
+    counterer = counterer + 1
+
+    kapr = session["data"]["body"]
+    jauznevim = kapr
     #_________________________________________________
 
-    if 200> len(kapr)>100:
+    if 200> kapr>100:
         číslo = [8, 9, 10, "J", "Q", "K", "A"]
         symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
-    elif len(kapr)>200:
+    elif kapr>200:
         číslo = ["A"]
         symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
 
@@ -480,67 +403,41 @@ def gameresults1():
 
 
     if final == "highcard":
-        if len(kapr)>=220:
-            for sos in range(20):
-                kapr.pop(-1)
+        if kapr>=220:
+            kapr = kapr - 20
         else:
-            for sos in range(10):
-                kapr.append("I")
-
-    if final == "badluck":
-        if len(kapr)>40:
-            kapr = kapr[:len(kapr)-40]
+            kapr = kapr+10
+    elif final == "badluck":
+        kapr -= 40
+    elif final == "two":
+        kapr+=15
+    elif final == "three":
+        kapr+=20
+    elif final == "full":
+        kapr+=25
+    elif final == "fullflush":
+        kapr +=30
+    elif final == "death":
+        kapr=0
+    elif final == "OOOF":
+        if 100>kapr>35:
+            kapr -= 10
+        elif kapr>100:
+            kapr -= 20
         else:
-            for sos in range(len(kapr)):
-                kapr.pop(-1)
-
-    if final == "two":
-        for sos in range(15):
-            kapr.append("I")
-    if final == "three":
-        for sos in range(20):
-            kapr.append("I")
-    if final == "full":
-        for sos in range(25):
-            kapr.append("I")
-
-    if final == "fullflush":
-        for sos in range(30):
-            kapr.append("I")
-
-    if final == "death":
-            for sos in range(len(kapr)):
-                kapr.pop(-1)
-
-    if final == "OOOF":
-        if 100>len(kapr)>35:
-            if len(kapr)>10:
-                kapr = kapr[:len(kapr)-10]
-            else:
-                for sos in range(len(kapr)):
-                    kapr.pop(-1)
-        if len(kapr)>100:
-            kapr = kapr[:len(kapr)-20]
-        else:
+            pass    
+    elif final =="nothing":
+        if 51>kapr>24:
+            kapr-=10
+        elif kapr<25:
+            kapr-=5
+        elif 100>kapr>50:
             pass
-
-        
-    if final =="nothing":
-        if 51>len(kapr)>24:
-            for sos in range(10):
-                kapr.append("I")
-        elif len(kapr)<25:
-            for sos in range(5):
-                kapr.append("I")
-        elif 100>len(kapr)>50:
-            pass
-        elif len(kapr)>100:
-            for sos in range(5):
-                kapr.pop(-1)
-        elif len(kapr)>100 and "piky" in Jackpot and "srdce" in Jackpot and "kříže" in Jackpot and "káry" in Jackpot:
+        elif kapr>100:
+            kapr-=5
+        elif kapr>100 and "piky" in Jackpot and "srdce" in Jackpot and "kříže" in Jackpot and "káry" in Jackpot:
             final="toopicky"
-            for sos in range(100):
-                kapr.pop(-1)
+            kapr-=100
 
     #-----------------aux-----------------------------
 
@@ -554,7 +451,7 @@ def gameresults1():
     karta33 = karta33.replace("'","")
     karta44 = karta44.replace("'","")
     #print(final)
-    #print(len(kapr))
+    #print(kapr)
     if final == "nothing":
         final = "Nothing"
     if final == "toopicky":
@@ -579,9 +476,11 @@ def gameresults1():
         final = "The Six Queens"
     if final =="WHAT":
         final = "???"
-
-    opakuj = len(kapr)-len(jauznevim)
-    nerozumim = len(kapr)/2
+    
+    if kapr<0:
+        kapr=0
+    opakuj = kapr - jauznevim
+    nerozumim = kapr/2
 
 
     #------------FVTXT1-----------------------------------------------
@@ -696,7 +595,7 @@ def gameresults1():
         else:
             fvtxt1 = "nedostatek sýra v sektoru 3"
     elif final =="High Card":
-        if len(kapr) < 220:
+        if kapr < 220:
             if r1 == 1:
                 fvtxt1 = "Alespoň ňeco"
             elif r1 == 2:
@@ -754,29 +653,17 @@ def gameresults1():
             fvtxt1 = "Myš"
     #----------------------------------------------------------------
 
-    amorgor=""
-    for kula in counterer:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","counter"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
+    session["data"]["body"] = kapr
+    session.modified = True
+    session["data"]["roll"] = counterer
+    session.modified = True
 
-
-    for kula in kapr:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","progress"),"w") as muhaha:
-        muhaha.write(amorgor)
-    #print(Jackpot)
-    #print(final)
-
-
-    return render_template("game1results.html",finalni = final,fidlovacka = len(kapr),brokovnice =nerozumim,kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj, flavourtext1 = fvtxt1)
+    return render_template("game1results.html",finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj, flavourtext1 = fvtxt1)
 #_______________________________________________________________________________________________
 #_______________________________________________________________________________________________
 @app.route("/game2/rules")
 def gamerules2():
-    amorgor = "spust"
-    return render_template("game2rules.html", buton = amorgor)
+    return render_template("game2rules.html",)
 #_______________________________________________________________________________________________
 @app.route("/game2/running")
 def gamerunning2():
@@ -792,28 +679,6 @@ def gamerunning2():
     karta=[]
 
     #____________________________________________________
-    with open(path.join(dir,"sources","progress")) as rum:
-        amorgor=rum.read()
-    kapr=amorgor.split(";")
-    kapr=kapr[:-1]
-    amorgor=""
-    print(len(kapr))
-
-    with open(path.join(dir,"sources","counter")) as rum:
-        amorgor=rum.read()
-    counterer=amorgor.split(";")
-    counterer=counterer[:-1]
-    amorgor=""
-    counterer.append("I")
-    #_________________________________________________
-
-    if 200> len(kapr)>100:
-        číslo = [8, 9, 10, "J", "Q", "K", "A"]
-        symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
-    elif len(kapr)>200:
-        číslo = ["A"]
-        symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
-
 
     for l in range(len(symbol)):
         karta=[]   
@@ -954,7 +819,7 @@ def gameresults2():
     karta33 = karta33.replace("'","")
     karta44 = karta44.replace("'","")
     #print(final)
-    #print(len(kapr))
+    #print(kapr)
 
     if final == "nothing":
         final = "Nuh Uh"
@@ -984,80 +849,140 @@ def gameresults2():
         final = "Nuh uh"
 
 #----------------------------------------------------------------
-      
-
-    with open(path.join(dir,"sources","counter")) as rum:
-        amorgor=rum.read()
-    counterer=amorgor.split(";")
-    counterer=counterer[:-1]
-    amorgor=""
-    counterer.append("I")
+    counterer = session["data"]["roll"]
+    counterer = counterer + 1
+    session["data"]["roll"]=counterer
+    session.modified = True
     
-    amorgor=""
-    for kula in counterer:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","counter"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-    
-    return render_template("game2results.html",finalni = final,kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44)
+    return render_template("game2results.html",finalni = final,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44)
 #_______________________________________________________________________________________________
 #_______________________________________________________________________________________________
 @app.route("/game3/rules")
 def gamerules3():
-    amorgor = "spust"
-    return render_template("game3rules.html", buton = amorgor)
+    return render_template("game3rules.html",)
 #_______________________________________________________________________________________________
 @app.route("/game3/running")
 def gamerunning3():
-    x = random.randrange(1,10)
-    return render_template("game3running.html",tohlechcu = x)
+    kapr = session["data"]["body"]
+    saviour = session["data"]["savio"]
+    thewolf = session["data"]["wolfo"]
+    Imps = session["data"]["impo"]
+    blackJs = session["data"]["blackj"]
+
+ #-------------------------------------------------------------------------------   
+    Balík= []
+    Balík2 = []
+    Balík3 = []
+    Balík4 = []
+    karta=[]
+
+    symbol= ["piky", "kříže", "káry", "srdce"]
+    číslo = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
+    
+    if 200> kapr>100:
+        číslo = [8, 9, 10, "J", "Q", "K", "A"]
+        symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
+    elif kapr>200:
+        číslo = ["J", "Q", "K", "A"]
+        symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
+    elif kapr>250:
+        číslo = ["A"]
+        symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
+
+
+    for l in range(len(symbol)):
+        karta=[]   
+        karta.append(str(symbol[l]))
+        if karta==["srdce"]:
+            for z in range(len(číslo)):
+                karta = ["srdce"]
+                karta.append(str(číslo[z]))
+                karta = str(karta) + ".png"
+                karta = karta.replace("'","")        
+                Balík.append(karta)
+                Balík2.append(karta)
+                Balík3.append(karta)
+                Balík4.append(karta)
+        if karta==["káry"]:
+            for z in range(len(číslo)):
+                karta = ["káry"]
+                karta.append(str(číslo[z]))
+                karta = str(karta) + ".png"
+                karta = karta.replace("'","")        
+                Balík.append(karta)
+                Balík2.append(karta)
+                Balík3.append(karta)
+                Balík4.append(karta)
+        if karta==["kříže"]:
+            for z in range(len(číslo)):
+                karta = ["kříže"]
+                karta.append(str(číslo[z]))
+                karta = str(karta) + ".png"
+                karta = karta.replace("'","")        
+                Balík.append(karta)
+                Balík2.append(karta)
+                Balík3.append(karta)
+                Balík4.append(karta)
+        if karta==["piky"]:
+            for z in range(len(číslo)):
+                karta = ["piky"]
+                karta.append(str(číslo[z]))
+                karta = str(karta) + ".png"
+                karta = karta.replace("'","")        
+                Balík.append(karta)
+                Balík2.append(karta)
+                Balík3.append(karta)
+                Balík4.append(karta)
+
+    blaJ = ["black","J"]
+    if blackJs==1:
+        for serio in range(100):
+            Balík.append(blaJ)
+            Balík2.append(blaJ)
+            Balík3.append(blaJ)
+            Balík4.append(blaJ)
+        blackJs=0
+
+    Imp=["imp"]
+    for ses in range(Imps):
+        Balík.append(Imp)
+        Balík2.append(Imp)
+        Balík3.append(Imp)
+        Balík4.append(Imp)  
+
+    wolf=["Wolf"]
+    if thewolf==1:
+        Balík.append(wolf)
+        Balík2.append(wolf)
+        Balík3.append(wolf)
+        Balík4.append(wolf)
+        thewolf=0 
+
+    savo=["saviour"]
+    if saviour==1:
+        Balík.append(savo)
+        Balík2.append(savo)
+        Balík3.append(savo)
+        Balík4.append(savo)
+        saviour=0  
+
+    random.shuffle(Balík4)
+    random.shuffle(Balík3)
+    random.shuffle(Balík2)
+    random.shuffle(Balík)
+
+    return render_template("game3running.html",balák1 = Balík, balák2 = Balík2, balák3 = Balík3, balák4 = Balík4)
 #_______________________________________________________________________________________________
 @app.route("/game3/results")
 def gameresults3():
-    with open(path.join(dir,"sources","progress")) as rum:
-        amorgor=rum.read()
-    kapr=amorgor.split(";")
-    kapr=kapr[:-1]
-    amorgor=""
-    print(len(kapr))
-
-    with open(path.join(dir,"sources","counter")) as rum:
-        amorgor=rum.read()
-    counterer=amorgor.split(";")
-    counterer=counterer[:-1]
-    amorgor=""
-    counterer.append("I")
-
-    with open(path.join(dir,"sources","triposobe")) as rum:
-        amorgor=rum.read()
-    posobecheck=amorgor.split(";")
-    posobecheck=posobecheck[:-1]
-    amorgor=""
-
-    with open(path.join(dir,"sources","cernojecka")) as rum:
-        amorgor=rum.read()
-    blackJs=amorgor.split(";")
-    blackJs=blackJs[:-1]
-    amorgor=""
-
-    with open(path.join(dir,"sources","impove")) as rum:
-        amorgor=rum.read()
-    Imps=amorgor.split(";")
-    Imps=Imps[:-1]
-    amorgor=""
-
-    with open(path.join(dir,"sources","wolfe")) as rum:
-        amorgor=rum.read()
-    thewolf=amorgor.split(";")
-    thewolf=thewolf[:-1]
-    amorgor=""
-
-    with open(path.join(dir,"sources","victorthesaviour")) as rum:
-        amorgor=rum.read()
-    saviour=amorgor.split(";")
-    saviour=saviour[:-1]
-    amorgor=""
+    counterer = session["data"]["roll"]
+    kapr = session["data"]["body"]
+    saviour = session["data"]["savio"]
+    thewolf = session["data"]["wolfo"]
+    Imps = session["data"]["impo"]
+    blackJs = session["data"]["blackj"]
+    posobecheck = session["data"]["posobecheck"]
+    counterer +=1
 
  #-------------------------------------------------------------------------------   
     Balík= []
@@ -1069,13 +994,13 @@ def gameresults3():
     symbol= ["piky", "kříže", "káry", "srdce"]
     číslo = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
     
-    if 200> len(kapr)>100:
+    if 200> kapr>100:
         číslo = [8, 9, 10, "J", "Q", "K", "A"]
         symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
-    elif len(kapr)>200:
+    elif kapr>200:
         číslo = ["J", "Q", "K", "A"]
         symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
-    elif len(kapr)>250:
+    elif kapr>250:
         číslo = ["A"]
         symbol= ["piky", "kříže", "káry", "srdce","piky", "kříže", "káry", "srdce"]
 
@@ -1109,26 +1034,28 @@ def gameresults3():
                 Balík2.append(karta)
 
     blaJ = ["black","J"]
-    if len(blackJs)>0:
+    if blackJs==1:
         for serio in range(100):
             Balík.append(blaJ)
             Balík2.append(blaJ)
-        blackJs=[]
+        blackJs=0
 
     Imp=["imp"]
-    for ses in range(len(Imps)):
+    for ses in range(Imps):
         Balík.append(Imp)
         Balík2.append(Imp)  
 
     wolf=["Wolf"]
-    if len(thewolf)>0:
+    if thewolf==1:
         Balík.append(wolf)
-        Balík2.append(wolf) 
+        Balík2.append(wolf)
+        thewolf=0 
 
     savo=["saviour"]
-    if len(saviour)>0:
+    if saviour==1:
         Balík.append(savo)
-        Balík2.append(savo)  
+        Balík2.append(savo)
+        saviour=0  
 
     random.shuffle(Balík2)
     random.shuffle(Balík)
@@ -1324,7 +1251,7 @@ def gameresults3():
         final="death"
     check=[]
 
-    if len(counterer)%15==0:
+    if counterer%15==0:
         muhaha=random.randrange(4)
         if muhaha==3:
             final="sixqueens"
@@ -1346,248 +1273,151 @@ def gameresults3():
 
 
     if final== "sixqueens":
-        if len(kapr)<150:
+        if kapr<150:
             posobecheck=[]
         rollin = random.randrange(20)
         if rollin < 4:
             final="SIXQUEENS:TheStalker"
-            thewolf.append("wolf")
+            thewolf = 1
         elif 4<=rollin<8:
             final="SIXQUEENS:TheImpmageddon"
-            for sxs in range(20):
-                Imps.append(Imp)
+            Imps +=20
         elif 8<=rollin<12:
             final="SIXQUEENS:CurseofRa"
-            blackJs.append("BJ")
+            blackJs = 1
         elif 12<=rollin<16:
             final="SIXQUEENS:TheSaviour"
-            saviour.append("victor")
+            saviour = 1
         elif 16<=rollin<18:
             final="SIXQUEENS:death"
         elif rollin ==20:
             final="SIXQUEENS:fullflush"
         else:
             final="SIXQUEENS:full"
-
-
-    if final == "highcard":
-        if len(kapr)<150:
+    elif final == "highcard":
+        if kapr<150:
             posobecheck=[]
-        if len(kapr)>=300:
-            for sos in range(20):
-                kapr.pop(-1)
+        if kapr>=300:
+            kapr-=20
         else:
-            for sos in range(10):
-                kapr.append("I")
-
-    if final == "badluck":
-        if len(kapr)<150:
+            kapr+=10
+    elif final == "badluck":
+        if kapr<150:
             posobecheck=[]
-        if len(kapr)<150:
-            if len(kapr)>40:
-                kapr = kapr[:len(kapr)-40]
-            else:
-                for sos in range(len(kapr)):
-                    kapr.pop(-1)
-        else:
-            for sos in range(60):
-                    kapr.pop(-1)
-
-
-    if final == "two":
+        if kapr<150:
+            kapr-=40
+        #else:
+            #kapr-=60
+    elif final == "two":
         if posobecheck==["2"] or posobecheck==[]:
-            for sos in range(30):
-                kapr.append("I")
+            kapr+=30
             posobecheck.append("2")
         elif "2" not in posobecheck and len(posobecheck)>0:
-            for sos in range(30):
-                kapr.append("I")
+            kapr+=30
             posobecheck=[]
             posobecheck.append("2") 
         elif posobecheck==["2","2"]:
             final="toorepetetive"
-            if len(kapr)>=40:
-                for sos in range(60):
-                    kapr.pop(-1)
-            else:
-                for sos in range(len(kapr)):
-                    kapr.pop(-1)
+            kapr -=60
             posobecheck=[]
-
-    if final == "three":
+    elif final == "three":
         if posobecheck==["3"] or posobecheck==[]:
-            for sos in range(35):
-                kapr.append("I")
+            kapr+=35
             posobecheck.append("3")
         elif "3" not in posobecheck and len(posobecheck)>0:
-            for sos in range(35):
-                kapr.append("I")
+            kapr+=35
             posobecheck=[]
             posobecheck.append("3")
         elif posobecheck==["3","3"]:
             final="toorepetetive"
-            if len(kapr)>=50:
-                for sos in range(70):
-                    kapr.pop(-1)
-            else:
-                for sos in range(len(kapr)):
-                    kapr.pop(-1)
+            kapr-=70
             posobecheck=[]
-
-    if final == "full" or final=="SIXQUEENS:full":
+    elif final == "full" or final=="SIXQUEENS:full":
         if posobecheck==["4"] or posobecheck==[]:
-            for sos in range(45):
-                kapr.append("I")
+            kapr+=45
             posobecheck.append("4")
         elif "4" not in posobecheck and len(posobecheck)>0:
-            for sos in range(45):
-                kapr.append("I")
+            kapr+=45
             posobecheck=[]
             posobecheck.append("4")
         elif posobecheck==["4","4"]:
             final="toorepetetive"
-            if len(kapr)>=60:
-                for sos in range(90):
-                    kapr.pop(-1)
-            else:
-                for sos in range(len(kapr)):
-                    kapr.pop(-1)
+            kapr-=90
             posobecheck=[]
-
-    if final == "fullflush" or final=="SIXQUEENS:fullflush":
-        if len(kapr)<150:
+    elif final == "fullflush" or final=="SIXQUEENS:fullflush":
+        if kapr<150:
             posobecheck=[]
-        for sos in range(75):
-            kapr.append("I")
-
-    if final == "death" or final=="SIXQUEENS:death":
-        if len(kapr)<150:
+        kapr+=75
+    elif final == "death" or final=="SIXQUEENS:death":
+        if kapr<150:
             posobecheck=[]
-        for sos in range(len(kapr)):
-            kapr.pop(-1)
-
-    if final == "OOOF":
-        if len(kapr)<150:
+        kapr = 0
+    elif final == "OOOF":
+        if kapr<150:
             posobecheck=[]
-        if 100>len(kapr)>35:
-            if len(kapr)>10:
-                kapr = kapr[:len(kapr)-10]
-            else:
-                for sos in range(len(kapr)):
-                    kapr.pop(-1)
-        if len(kapr)>100:
-            kapr = kapr[:len(kapr)-20]
+        if 100>kapr>35:
+            kapr-=10
+        if kapr>100:
+            kapr-=20
         else:
             pass
-
-        
-
-    if final =="nothing":
-        if len(kapr)>120:
+    elif final =="nothing":
+        if kapr>120:
             for kjhg in range(2):
                 Imps.append(Imp)
-        if len(kapr)<150:
+        if kapr<150:
             posobecheck=[]
-        if 51>len(kapr)>24:
-            for sos in range(10):
-                kapr.append("I")
+        if 51>kapr>24:
+            kapr +=10
             for kkot in range(len(Jackpot)):
                 for sexus in range(5):
-                    kapr.append("I")
-        elif len(kapr)<25:
-            for sos in range(5):
-                kapr.append("I")
+                    kapr -=1
+        elif kapr<25:
+            kapr +=5
             for kkot in range(len(Jackpot)):
                 for sexus in range(5):
-                    kapr.append("I")
-        elif 100>len(kapr)>50:
+                    kapr +=1
+        elif 100>kapr>50:
             pass
-        elif len(kapr)>175:
-            for sos in range(5):
-                kapr.pop(-1)
-        elif len(kapr)>100 and "piky" in Jackpot and "srdce" in Jackpot and "kříže" in Jackpot and "káry" in Jackpot:
+        elif kapr>175:
+            kapr-=5
+        elif kapr>100 and "piky" in Jackpot and "srdce" in Jackpot and "kříže" in Jackpot and "káry" in Jackpot:
             final="toopicky"
-            for sos in range(100):
-                kapr.pop(-1)
-
+            kapr-=100
 
     checkusimpus=[]
     for impáci in (Jackpot[:4]):
         if "imp" in impáci:
             checkusimpus.append("impus")
     for sulivahn in range(len(checkusimpus)):
-        Imps.pop(-1)
-        if len(kapr)>=5:
-            for i in range(5):
-                kapr.pop(-1)
-        else:
-            for kkl in range(len(kapr)):
-                kapr.pop(-1)       
+        Imps-=1
+        kapr -=5       
     if len(checkusimpus)==4:
         final="impeyes"
-        if len(kapr)>=40:
-            for kkl in range(40):
-                kapr.pop(-1)
-        else:
-            for kkl in range(len(kapr)):
-                kapr.pop(-1)
+        kapr -=40
 
     if final=="theWOLF":
-            for kkl in range(len(kapr)//2):
-                kapr.pop(-1) 
+            kapr = kapr/2
 
     if final=="saviour":
-            for kkl in range(len(kapr)):
-                kapr.append("I") 
+            kapr = kapr*2 
     checkusimpus=[]
 
 
-    amorgor=""
-    for kula in counterer:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","counter"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-
-    for kula in kapr:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","progress"),"w") as muhaha:
-        muhaha.write(amorgor)
-
-    amorgor=""
-    for kula in posobecheck:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","triposobe"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-
-    amorgor=""
-    for kula in blackJs:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","cernojecka"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-
-    amorgor=""
-    for kula in Imps:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","impove"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-
-    amorgor=""
-    for kula in thewolf:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","wolfe"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
-
-    amorgor=""
-    for kula in saviour:
-        amorgor += (str(kula)+";")
-    with open(path.join(dir,"sources","victorthesaviour"),"w") as muhaha:
-        muhaha.write(amorgor)
-    amorgor=""
+    session["data"]["roll"] = counterer
+    session.modified = True
+    session["data"]["body"] = kapr
+    session.modified = True
+    session["data"]["savio"] = saviour
+    session.modified = True
+    session["data"]["wolfo"] = thewolf
+    session.modified = True
+    session["data"]["impo"] = Imps
+    session.modified = True
+    session["data"]["blackj"] = blackJs
+    session.modified = True
+    session["data"]["posobecheck"] = posobecheck
+    session.modified = True
 
 #--------------aux------------------------------
 
@@ -1636,15 +1466,15 @@ def gameresults3():
     if final =="toorepetetive":
         final = "Too Repetetive"
 
-    opakuj = len(kapr)-len(jauznevim)
-    nerozumim = len(kapr)/2.5
+    if kapr<0:
+        kapr=0
+    opakuj = kapr - jauznevim
+    nerozumim = kapr/2.5
 
 #--------------------------------------------------------------------
     
-    return render_template("game3results.html",finalni = final,fidlovacka = len(kapr),brokovnice =nerozumim,kount=len(counterer),karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
+    return render_template("game3results.html",finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-#"<img src=C:\\Users\\Jonatán\\Documents\\školní nesmysly\\sová nožka\\chechboard.png, width="2000", height="2500""
-# <img src="{{ url_for('static', filename='chechboard.png') }}" width="200" height="267" alt="me">{{tohlechcu}}

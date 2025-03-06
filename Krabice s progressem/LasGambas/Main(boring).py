@@ -1048,14 +1048,12 @@ def gameresults3():
     wolf=["Wolf"]
     if thewolf==1:
         Balík.append(wolf)
-        Balík2.append(wolf)
-        thewolf=0 
+        Balík2.append(wolf) 
 
     savo=["saviour"]
     if saviour==1:
         Balík.append(savo)
-        Balík2.append(savo)
-        saviour=0  
+        Balík2.append(savo)  
 
     random.shuffle(Balík2)
     random.shuffle(Balík)
@@ -1227,7 +1225,7 @@ def gameresults3():
             wolfcheck.append("W")
     if len(wolfcheck)>0:
         final="theWOLF"
-        thewolf=[]
+        thewolf=0
 
     wolfcheck=[]
     for vlk in (Jackpot[:4]):
@@ -1235,7 +1233,7 @@ def gameresults3():
             wolfcheck.append("W")
     if len(wolfcheck)>0:
         final="saviour"
-        saviour=[]
+        saviour=0
 
     for As in (Jackpot[:4]):
         if "A" in As:

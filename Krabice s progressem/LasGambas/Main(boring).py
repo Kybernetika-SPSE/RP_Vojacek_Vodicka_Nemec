@@ -251,7 +251,7 @@ def gameresults1():
                 print("ihavedoneitall")
     final="nothing"
     if Jackpot==[]:
-        final="OOOF"
+        final="OOF"
 
     if len(Jackpot)==1:
         Jackpot.append("0")
@@ -339,7 +339,7 @@ def gameresults1():
         pass
     else:
         if Jackpot==[]:
-            final="OOOF"
+            final="OOF"
         elif "1" in Jackpot[0] and "2" in Jackpot[1] and "3" in Jackpot[2] and "4" in Jackpot[3]:
             final="fullflush"
         elif "2" in Jackpot[0] and "3" in Jackpot[1] and "4" in Jackpot[2] and "5" in Jackpot[3]:
@@ -419,7 +419,7 @@ def gameresults1():
         kapr +=30
     elif final == "death":
         kapr=0
-    elif final == "OOOF":
+    elif final == "OOF":
         if 100>kapr>35:
             kapr -= 10
         elif kapr>100:
@@ -456,7 +456,7 @@ def gameresults1():
         final = "Nothing"
     if final == "toopicky":
         final = "Too Picky"
-    if final =="OOOF":
+    if final =="OOF":
         final = "OOF"
     if final =="death":
         final = "Death"
@@ -934,7 +934,7 @@ def gamerunning3():
                 Balík3.append(karta)
                 Balík4.append(karta)
 
-    blaJ = ["black","J"]
+    blaJ = "[black, J].png"
     if blackJs==1:
         for serio in range(100):
             Balík.append(blaJ)
@@ -943,28 +943,28 @@ def gamerunning3():
             Balík4.append(blaJ)
         blackJs=0
 
-    Imp=["imp"]
+    Imp="[imp].png"
     for ses in range(Imps):
         Balík.append(Imp)
         Balík2.append(Imp)
         Balík3.append(Imp)
         Balík4.append(Imp)  
 
-    wolf=["Wolf"]
-    if thewolf==1:
-        Balík.append(wolf)
-        Balík2.append(wolf)
-        Balík3.append(wolf)
-        Balík4.append(wolf)
-        thewolf=0 
+    wolf="[Wolf].png"
+    if thewolf>=1:
+        for nod in range(thewolf):
+            Balík.append(wolf)
+            Balík2.append(wolf)
+            Balík3.append(wolf)
+            Balík4.append(wolf) 
 
-    savo=["saviour"]
-    if saviour==1:
-        Balík.append(savo)
-        Balík2.append(savo)
-        Balík3.append(savo)
-        Balík4.append(savo)
-        saviour=0  
+    savo="[saviour].png"
+    if saviour>=1:
+        for don in range(saviour):
+            Balík.append(savo)
+            Balík2.append(savo)
+            Balík3.append(savo)
+            Balík4.append(savo)  
 
     random.shuffle(Balík4)
     random.shuffle(Balík3)
@@ -1046,14 +1046,16 @@ def gameresults3():
         Balík2.append(Imp)  
 
     wolf=["Wolf"]
-    if thewolf==1:
-        Balík.append(wolf)
-        Balík2.append(wolf) 
+    if thewolf>=1:
+        for nod in range(thewolf):
+            Balík.append(wolf)
+            Balík2.append(wolf) 
 
     savo=["saviour"]
-    if saviour==1:
-        Balík.append(savo)
-        Balík2.append(savo)  
+    if saviour>=1:
+        for don in range(saviour):
+            Balík.append(savo)
+            Balík2.append(savo)  
 
     random.shuffle(Balík2)
     random.shuffle(Balík)
@@ -1109,7 +1111,7 @@ def gameresults3():
                 print("ihavedoneitall")
     final="nothing"
     if Jackpot==[]:
-        final="OOOF"
+        final="OOF"
     if len(Jackpot)==1:
         Jackpot.append("0")
         Jackpot.append("0")
@@ -1194,7 +1196,7 @@ def gameresults3():
         pass
     else:
         if Jackpot==[]:
-            final="OOOF"
+            final="OOF"
         elif "1" in Jackpot[0] and "2" in Jackpot[1] and "3" in Jackpot[2] and "4" in Jackpot[3]:
             final="fullflush"
         elif "2" in Jackpot[0] and "3" in Jackpot[1] and "4" in Jackpot[2] and "5" in Jackpot[3]:
@@ -1225,7 +1227,7 @@ def gameresults3():
             wolfcheck.append("W")
     if len(wolfcheck)>0:
         final="theWOLF"
-        thewolf=0
+        thewolf-=1
 
     wolfcheck=[]
     for vlk in (Jackpot[:4]):
@@ -1233,7 +1235,7 @@ def gameresults3():
             wolfcheck.append("W")
     if len(wolfcheck)>0:
         final="saviour"
-        saviour=0
+        saviour-=1
 
     for As in (Jackpot[:4]):
         if "A" in As:
@@ -1287,11 +1289,19 @@ def gameresults3():
             final="SIXQUEENS:TheSaviour"
             saviour = 1
         elif 16<=rollin<18:
-            final="SIXQUEENS:death"
+            final="SIXQUEENS:TheSQUAD"
+            thewolf = 1
+            saviour = 1
+            imps += 5
         elif rollin ==20:
-            final="SIXQUEENS:fullflush"
+            if random.randrange(1,2)==1:
+                final="SIXQUEENS:TheCursedArmy"
+                thewolf = 5
+            else:
+                final = "SIXQUEENS:TheBlessedArmy"
+                saviour = 5
         else:
-            final="SIXQUEENS:full"
+            final="SIXQUEENS:TheSaviour"
     elif final == "highcard":
         if kapr<150:
             posobecheck=[]
@@ -1350,7 +1360,7 @@ def gameresults3():
         if kapr<150:
             posobecheck=[]
         kapr = 0
-    elif final == "OOOF":
+    elif final == "OOF":
         if kapr<150:
             posobecheck=[]
         if 100>kapr>35:
@@ -1361,8 +1371,7 @@ def gameresults3():
             pass
     elif final =="nothing":
         if kapr>120:
-            for kjhg in range(2):
-                Imps.append(Imp)
+            Imps+=2
         if kapr<150:
             posobecheck=[]
         if 51>kapr>24:
@@ -1463,15 +1472,45 @@ def gameresults3():
         final = "TooPicky"
     if final =="toorepetetive":
         final = "Too Repetetive"
+    #-----------------------------------FVTXT--------------------------------
+    flávour ={
+        "Nothing": ["Meloun", "To bude na dlouho", "Za warudo", "Nic", "Ani omylem", ],
+        "Too Picky": ["+++Press Reset+++", "Tady máš odměnu : )", ":3"],
+        "OOF":["OOF", "UUF", "Nuh UH"],
+        "Death":["JUDGEMENT", "Zkus si zahrát getting over it", "*I CAST: TESTICULAR TORSION!*"],
+        "Straight": ["👍"],
+        "High Card": ["šuby duby dub", "raz dva tři hej rup", "pidimužík pracuje", "pidimužík kutá"],
+        "Four of a Kind":["FOUR"],
+        "Three of a Kind":["THREE", "sýr", "Mám problémy s Nergigante", "Kontaktujte zprávce sítě"],
+        "Two of a Kind":["TWO", "Prepare for trouble...", "\"Proč si snědla tu bramboru?\"", "Sedmimílové boty", "get a life"],
+        "Bad Luck":["I am Malenia, Blade of Miquella", "The jokes on YOU!", "Občas vyhraješ, často prohráváš"],
+        "SIXQUEENS:TheStalker": ["Woof Woof", "Sniffa", "AWOOOOOOOO"],
+        "SIXQUEENS:TheImpmageddon": ["fearmagneto.exe", "God damn the SUN", "Nesnáším Warlock hráče"],
+        "SIXQUEENS:TheSaviour": ["kontaktujte Němce", "pomoc", "kristova noho", "volejte záchranku", "WHY HE SO UGLY"],
+        "SIXQUEENS:TheSQUAD": ["The gangs all here", "5 on 1", "P"],
+        "SIXQUEENS:CurseofRa": ["𓀀𓀀𓁐𓂀𓃀𓄿𓅓𓆑𓇳𓁲𓈖𓉔𓀇𓀓𓁡𓊵𓋴𓌡𓍱𓎛𓏏𓀘𓀿𓁁𓁁𓂀"],
+        "SIXQUEENS:TheCursedArmy":["Vlkodlaci", "Who let the Dawgs out???", "  * "],
+        "SIXQUEENS:TheBlessedArmy":["Jsme spraseni!", "Výborně, teď je tu těch oblud pět",],
+        "???":["PLIN PLIN PLON"],
+        "ImpEyes":["Down you go", "Zbohem, už se nevracej"],
+        "TheWOLF":["The DAWG", "Damn bro, ok", "S I T"],
+        "TheSAVIOR":["en nomine patris et filii et spiritu sancti. Kámen", "Popálen buď Ležíš Citrus...","...Aš na Veky" ],
+        "Too Repetetive":["něco jinýho","buď originální", "stop spamming", "HŘEBÍK DO FÁZE"],
+    }
+
+    fvtxt = random.choice(flávour[final])
 
     if kapr<0:
         kapr=0
     opakuj = kapr - jauznevim
     nerozumim = kapr/2.5
+    print(kapr)
+    print(Jackpot)
+    bar = random.randrange(1,25)
 
 #--------------------------------------------------------------------
     
-    return render_template("game3results.html",finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
+    return render_template("game3results.html",baro = bar, flavour = fvtxt, finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
 
 
 if __name__ == "__main__":

@@ -29,9 +29,12 @@
             margin-bottom: 4vh;
         }
     </style>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1></h1>
+    <h1>{{flavour}}</h1>
     <div class="container">
         <img src="{{ url_for('static', filename=karta1) }}" alt="Gif 1" class="gif">
         <img src="{{ url_for('static', filename=karta2) }}" alt="Gif 2" class="gif">
@@ -44,12 +47,28 @@
         <button onclick="location.href ='/game3/running'" class="button" id="rollbutton">Next</button>
         <button onclick="location.href ='/'" class="button">Back</button>
     </div>
-    <div class="progress-container">
+    <div id = "el1" class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
+    <p class = "dancing-script-FU" id = "el2">Fuck You</p>
 </body>
 <script>
-    let progress = 0;
+        let koupel = parseFloat("{{ baro | tojson }}");
+
+        console.log("kapr value:", koupel);
+
+    let el1 = document.getElementById("el1");
+    let el2 = document.getElementById("el2");
+    if (koupel == 12) {
+                el1.style.display = "none";
+                el2.style.display = "block";
+            } else {
+                el1.style.display = "block";
+                el2.style.display = "none";
+            }
+
+</script>
+<script>
 
     function increaseProgress(dock) {
         progress = {{ brokovnice }}

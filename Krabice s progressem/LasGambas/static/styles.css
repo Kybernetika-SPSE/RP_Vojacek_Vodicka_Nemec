@@ -58,6 +58,12 @@ h1 {
   width: 33.6vh;
   height: 44,8vh;
 }
+.dancing-script-FU {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
 /*------------------progress bar-----------------*/
 .progress-container {
   width: 90%;

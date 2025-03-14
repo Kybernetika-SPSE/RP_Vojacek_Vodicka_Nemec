@@ -989,6 +989,7 @@ def gameresults3():
     Balík2 = []
     Jackpot=[]
     karta=[]
+    carto = []
     jauznevim = kapr
 
     symbol= ["piky", "kříže", "káry", "srdce"]
@@ -1184,12 +1185,35 @@ def gameresults3():
     elif len(check) == 4:
         final= "full"    
     check=[]
+    #-#
+    for piky in (Jackpot[:4]):
+        if "K" in piky:
+            check.append("P")
+    if len(check) == 2:
+        final = "two"
+    elif len(check) == 3:
+        final= "three" 
+    elif len(check) == 4:
+        final= "full"  
+    check=[]
+
+    for srdce in (Jackpot[:4]):
+        if "Q" in srdce:
+            check.append("S")
+    if len(check) == 2:
+        final = "two"
+    elif len(check) == 4:
+        final= "full" 
+    check=[]
+
 
     for Js in (Jackpot[:4]):
         if "J" in Js:
             check.append("J")
     if len(check) == 1:
         final="badluck"
+    if len(check) == 2:
+        final="2Bad2Luck"
     check=[]
 
     if len(Jackpot)== 1 or len(Jackpot)== 2 or len(Jackpot)== 3:
@@ -1275,31 +1299,50 @@ def gameresults3():
     if final== "sixqueens":
         if kapr<150:
             posobecheck=[]
+        for Qs in (Jackpot[:4]):
+            if "Q" in Qs:
+                check.append("Q")
+        if len(check) == 4:
+            final="FOURQUEENS???"
+        check=[]
         rollin = random.randrange(20)
         if rollin < 4:
             final="SIXQUEENS:TheStalker"
             thewolf = 1
+            carto.append(wolf)
         elif 4<=rollin<8:
             final="SIXQUEENS:TheImpmageddon"
             Imps +=20
+            for i in range(10):
+                carto.append(Imp)
         elif 8<=rollin<12:
             final="SIXQUEENS:CurseofRa"
             blackJs = 1
+            carto.append(blaJ)
         elif 12<=rollin<16:
             final="SIXQUEENS:TheSaviour"
             saviour = 1
+            carto.append(savo)
         elif 16<=rollin<18:
             final="SIXQUEENS:TheSQUAD"
             thewolf = 1
             saviour = 1
             imps += 5
+            carto.append(savo)
+            carto.append(wolf)
+            for n in range(5):
+                carto.append(Imp)
         elif rollin ==20:
             if random.randrange(1,2)==1:
                 final="SIXQUEENS:TheCursedArmy"
                 thewolf = 5
+                for ssa in range(5):
+                    carto.append(wolf)
             else:
                 final = "SIXQUEENS:TheBlessedArmy"
                 saviour = 5
+                for ssa in range(5):
+                    carto.append(savo)
         else:
             final="SIXQUEENS:TheSaviour"
     elif final == "highcard":
@@ -1314,8 +1357,10 @@ def gameresults3():
             posobecheck=[]
         if kapr<150:
             kapr-=40
-        #else:
-            #kapr-=60
+        else:
+            kapr-=60
+    elif final == "2Bad2Luck":
+        kapr-= 90
     elif final == "two":
         if posobecheck==["2"] or posobecheck==[]:
             kapr+=30
@@ -1372,6 +1417,8 @@ def gameresults3():
     elif final =="nothing":
         if kapr>120:
             Imps+=2
+            for i in range(2):
+                carto.append(Imp)
         if kapr<150:
             posobecheck=[]
         if 51>kapr>24:
@@ -1484,6 +1531,7 @@ def gameresults3():
         "Three of a Kind":["THREE", "sýr", "Mám problémy s Nergigante", "Kontaktujte zprávce sítě"],
         "Two of a Kind":["TWO", "Prepare for trouble...", "\"Proč si snědla tu bramboru?\"", "Sedmimílové boty", "get a life"],
         "Bad Luck":["I am Malenia, Blade of Miquella", "The jokes on YOU!", "Občas vyhraješ, často prohráváš"],
+        "2Bad2Luck":["So close, yet so far...", "\"two\" bad"],
         "SIXQUEENS:TheStalker": ["Woof Woof", "Sniffa", "AWOOOOOOOO"],
         "SIXQUEENS:TheImpmageddon": ["fearmagneto.exe", "God damn the SUN", "Nesnáším Warlock hráče"],
         "SIXQUEENS:TheSaviour": ["kontaktujte Němce", "pomoc", "kristova noho", "volejte záchranku", "WHY HE SO UGLY"],
@@ -1491,6 +1539,7 @@ def gameresults3():
         "SIXQUEENS:CurseofRa": ["𓀀𓀀𓁐𓂀𓃀𓄿𓅓𓆑𓇳𓁲𓈖𓉔𓀇𓀓𓁡𓊵𓋴𓌡𓍱𓎛𓏏𓀘𓀿𓁁𓁁𓂀"],
         "SIXQUEENS:TheCursedArmy":["Vlkodlaci", "Who let the Dawgs out???", "  * "],
         "SIXQUEENS:TheBlessedArmy":["Jsme spraseni!", "Výborně, teď je tu těch oblud pět",],
+        "FOURQUEENS???":["WHAT", "ČTYŘI??", "MOC KRÁLOVEN"],
         "???":["PLIN PLIN PLON"],
         "ImpEyes":["Down you go", "Zbohem, už se nevracej"],
         "TheWOLF":["The DAWG", "Damn bro, ok", "S I T"],
@@ -1507,10 +1556,13 @@ def gameresults3():
     print(kapr)
     print(Jackpot)
     bar = random.randrange(1,25)
+    for i in range(len(carto)):
+        carto[i]= str(carto[i]) + ".png"
+        carto[i]= (carto[i]).replace("'","")
 
 #--------------------------------------------------------------------
     
-    return render_template("game3results.html",baro = bar, flavour = fvtxt, finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
+    return render_template("game3results.html",cartos = carto, baro = bar, flavour = fvtxt, finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
 
 
 if __name__ == "__main__":

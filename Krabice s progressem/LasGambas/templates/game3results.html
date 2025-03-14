@@ -17,6 +17,7 @@
             gap: 4vh;
             max-width: 100%;
             overflow: hidden;
+            z-index: 1;
         }
         .button {
             padding: 2.5vh 7vh;
@@ -28,10 +29,25 @@
             gap: 10vh;
             margin-bottom: 4vh;
         }
+        .jif {
+            transition: opacity 0.5s ease-in-out; 
+            opacity: 1;
+            height: 33.6vh;
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            z-index: 9999; 
+            opacity: 1; 
+            transition: opacity 0.5s ease-in-out; 
+        }
+        .fade-out {
+            opacity: 0;
+        }
     </style>
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Dancing+Script:wght@400..700&family=Honk&family=Silkscreen:wght@400;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>{{flavour}}</h1>
@@ -40,6 +56,9 @@
         <img src="{{ url_for('static', filename=karta2) }}" alt="Gif 2" class="gif">
         <img src="{{ url_for('static', filename=karta3) }}" alt="Gif 3" class="gif">
         <img src="{{ url_for('static', filename=karta4) }}" alt="Gif 4" class="gif">
+    </div>
+    <div style="margin-bottom: 0vh; margin-left: 50vh;">
+        <img src="{{ url_for('static', filename=karta1) }}" style = "height: 33.6vh; position: absolute;" id = "cortor" class = "jif">
     </div>
     <p style="font-size: 3vh;">{{finalni}}<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
     <p style="margin-top: 1vh; font-size: 3vh;">{{kount}}</p>
@@ -69,6 +88,19 @@
 
 </script>
 <script>
+    document.addEventListener("keydown", function(event) {
+        if (event.key === " ") { 
+            event.preventDefault(); 
+            document.getElementById("rollbutton").click();
+        }
+    });
+
+    document.getElementById("rollbutton").addEventListener("click", function() {
+        location.href ='/game3/running';
+        console.log("Sending:", text);
+    });
+</script>
+<script>
 
     function increaseProgress(dock) {
         progress = {{ brokovnice }}
@@ -81,16 +113,46 @@
     increaseProgress({{ zmena }})
 </script>
 <script>
-    document.addEventListener("keydown", function(event) {
-        if (event.key === " ") { 
-            event.preventDefault(); 
-            document.getElementById("rollbutton").click();
-        }
-    });
+    //ano tohle vařil chat. No a?
+    document.addEventListener("DOMContentLoaded", function () {
+        const images = {{ cartos | tojson }}.map(filename => "{{ url_for('static', filename='') }}" + filename);
 
-    document.getElementById("rollbutton").addEventListener("click", function() {
-        location.href ='/game3/running';
-        console.log("Sending:", text);
+        console.log("Images Array:", images);
+
+        let index = 0;
+        const speed = 750; // Time for each image
+        const fadeDuration = 250; // Fade duration for smooth transition
+        const gif = document.getElementById("cortor");
+
+        // Check if the array is empty
+        if (images.length === 0) {
+            gif.style.display = "none"; // Hide the image element if no images are present
+            console.warn("No images found.");
+            return; // Exit the script if there are no images
+        }
+
+        // Set the initial image when array is not empty
+        gif.src = images[index];
+
+        function changeImage() {
+            if (index >= images.length - 1) {
+                setTimeout(() => {
+                    gif.classList.add("fade-out");
+                }, fadeDuration);
+                clearInterval(interval); // Stop further changes when the last image is reached
+                return;
+            }
+
+            gif.classList.add("fade-out");
+
+            setTimeout(() => {
+                index++; 
+                gif.src = images[index];
+                gif.classList.remove("fade-out"); // Fade back in after changing the image
+            }, fadeDuration);
+        }
+
+        const interval = setInterval(changeImage, speed);
     });
 </script>
 

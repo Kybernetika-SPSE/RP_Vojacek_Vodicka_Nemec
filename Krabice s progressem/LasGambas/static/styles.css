@@ -58,11 +58,26 @@ h1 {
   width: 33.6vh;
   height: 44,8vh;
 }
+/*------------------los Fontos-----------------*/
 .dancing-script-FU {
   font-family: "Dancing Script", cursive;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
+}
+.uncial-antiqua-regular {
+  font-family: "Uncial Antiqua", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+.honk-honk {
+  font-family: "Honk", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "MORF" 15,
+    "SHLN" 50;
 }
 /*------------------progress bar-----------------*/
 .progress-container {
@@ -91,4 +106,35 @@ button {
   padding: 1vh;
   font-size: 1,6vh;
   cursor: pointer;
+}
+/*------------------funni-----------------*/
+
+input{
+  border:1px solid #fff;
+  background:#fff;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  padding:0.5rem 1.2rem;
+  border-radius:20px;
+  font-size:inherit;
+}
+
+.wavy {
+  animation-name: wavy;
+  animation-duration: 1.3s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+@keyframes wavy {
+  0% {
+    top: 0px;
+  }
+  50% {
+    top: -15px;
+  }
+  100% {
+    top: 0px;
+  }
 }

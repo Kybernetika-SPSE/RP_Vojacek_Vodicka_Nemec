@@ -6,7 +6,12 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Las Gambas</h1>  
+  <p style="position: absolute; top: 2vh; left: 2vh; font-size: 1vh; line-height: 1vh; text-align: left; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><u>Created by:</u><br>
+    Vojáček J.<br>
+    Vodička T.<br>
+    Němec T.</p> 
+    <h1 id = "animated">Las Gambas</h1> 
+
   
     <div class="container">
     <a onclick="location.href='/game1/rules'" class="button left">Easy</a>
@@ -22,6 +27,32 @@
       sound.currentTime = 0; 
       sound.play();
     }
+  </script>
+  <script>
+  function updateText(text){
+
+    let delay = 200;
+    
+      let h1 = document.getElementById("animated");
+    
+          h1.innerHTML = text
+            .split("")
+            .map(letter => {
+              console.log(letter);
+              return `<span>` + letter + `</span>`;
+            })
+            .join("");
+          
+          Array.from(h1.children).forEach((span, index) => {
+            setTimeout(() => {
+              span.classList.add("wavy");
+            }, index * 100 + delay);
+          });
+    
+    }
+  
+    
+    updateText("Las Gambas");
   </script>
   
 </body>

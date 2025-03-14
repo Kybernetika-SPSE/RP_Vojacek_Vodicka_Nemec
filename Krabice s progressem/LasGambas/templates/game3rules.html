@@ -4,18 +4,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pravidla</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Dancing+Script:wght@400..700&family=Honk&family=Silkscreen:wght@400;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1><u>Pravidla</u></h1>
-    <div class="text-block"><p>Rollujte stisknutím tlačítka "next"</p><br>
-                            <p>Každý roll má svou bodovou hodnotu, některé dávají, <i>některé</i> berou</p>
+    <div class="uncial-antiqua-regular" style="line-height: 0.5vh;"><p>Rollujte stisknutím tlačítka "next"</p><br>
+                            <p>Každý roll má svou bodovou hodnotu, některé dávají, <i>některé</i> berou</p><br>
                             <p>Čím více bodů tím je výhra snažší<b>(Ze začátku)</b></p><br>
                             <p>Ve hře se objevují <i>s p e c i á l n í</i> karty</p><br>
-                            <p>Při každém ukončení hry tlačítkem "back" se dosažené body uloží pod vámi zvoleným jménem to tabulky</p><br>
-                            <p>Výhra jsou čtyři A v jednom rollu</p><br>
+                            <p>(Blikající karty se přimíchávají do balíku)</p><br>
+                            <p>Při každém ukončení hry tlačítkem "back" se dosažené body uloží pod vámi zvoleným jménem do tabulky</p><br>
+                            <p>Výhra jsou čtyři <u>A</u> v jednom rollu</p><br>
                             <p>Hodně ŠTĚSTÍ</p><br>
                             <p>Nebo taky ne :></p><br>
-                            <p>PS: HAHAHAHAHAHAHAHAHAHA</p><br>
+                            <p style="font-size: 0.75vh;">PS: HAHAHAHAHAHAHAHAHAHA</p><br>
                         </div>
     <button class="button" onclick="location.href='/game3/running'">Play</button>
 </body>

@@ -18,6 +18,7 @@
             max-width: 100%;
             overflow: hidden;
             z-index: 1;
+            
         }
         .button {
             padding: 2.5vh 7vh;
@@ -61,16 +62,29 @@
         <img src="{{ url_for('static', filename=karta1) }}" style = "height: 33.6vh; position: absolute;" id = "cortor" class = "jif">
     </div>
     <p style="font-size: 3vh;">{{finalni}}<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
-    <p style="margin-top: 1vh; font-size: 3vh;">{{kount}}</p>
+    <p style="margin-top: 1vh; font-size: 4vh; position: absolute; top: 2vh; left: 5vh;"><br>{{kount}}</p><p id = ":D" style="margin-top: 1vh; font-size: 4vh; position: absolute; top: 2vh; left: 5vh;">Nice 👌</p>
     <div class="button-container">
         <button onclick="location.href ='/game3/running'" class="button" id="rollbutton">Next</button>
         <button onclick="location.href ='/'" class="button">Back</button>
     </div>
     <div id = "el1" class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
+        <p class = "dancing-script-FU" id = "el2">Fuck You</p>
     </div>
-    <p class = "dancing-script-FU" id = "el2">Fuck You</p>
 </body>
+<script>
+    let kůň = parseFloat("{{ kount | tojson }}");
+
+    console.log("kapr value:", kůň);
+
+let oD = document.getElementById(":D");
+if (kůň == 69) {
+            oD.style.display = "block";
+        } else {
+            oD.style.display = "none";
+        }
+
+</script>
 <script>
         let koupel = parseFloat("{{ baro | tojson }}");
 

@@ -1561,9 +1561,49 @@ def gameresults3():
         carto[i]= (carto[i]).replace("'","")
 
 #--------------------------------------------------------------------
+    datosRES = {
+        "carto": [carto],
+        "baro": [bar],
+        "flavour":[fvtxt],
+        "finalni":[final],
+        "fidlovacka":[kapr],
+        "brokovnice":[nerozumim],
+        "kount":[counterer],
+        "karta1":[karta11],
+        "karta2":[karta22],
+        "karta3":[karta33],
+        "karta4":[karta44],
+        "zmena" : [opakuj]
+    }
     
-    return render_template("game3results.html",cartos = carto, baro = bar, flavour = fvtxt, finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
+    return datosRES #render_template("game3results.html" cartos = carto, baro = bar, flavour = fvtxt, finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
 
 
+@app.route("/game/test")
+def test():
+    counterer = session["data"]["roll"]
+    kapr = session["data"]["body"]
+    saviour = session["data"]["savio"]
+    thewolf = session["data"]["wolfo"]
+    Imps = session["data"]["impo"]
+    blackJs = session["data"]["blackj"]
+
+    #delet
+    carto = []
+    fvtxt = "testfvtxt"
+    final = "testfinal"
+    nerozumim = 0
+    opakuj = 0
+    karta11="0.png"
+    karta22="0.png"
+    karta33="0.png"
+    karta44="0.png"
+
+    bar = random.randrange(1,25)
+    for i in range(len(carto)):
+        carto[i]= str(carto[i]) + ".png"
+        carto[i]= (carto[i]).replace("'","")
+    return render_template("gamble3.html",cartos = carto, baro = bar, flavour = fvtxt, finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
+    
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,220 @@
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hra</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        h1 {
+            margin-bottom: 7vh;
+            font-size: 5vh;
+        }
+        .RES {
+            display: none; 
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .RUN {
+            display: block; 
+        }
+        .container {
+            margin-bottom: 1vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4vh;
+            max-width: 100%;
+            overflow: hidden;
+            z-index: 1;
+            position: absolute;
+            bottom: 90vh; 
+            
+        }
+        .button {
+            padding: 2.5vh 7vh;
+            font-size: 3vh;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10vh;
+            margin-bottom: 4vh;
+            position: absolute;
+            bottom: 24.2vh
+        }
+        .jif {
+            transition: opacity 0.5s ease-in-out; 
+            opacity: 1;
+            height: 33.6vh;
+            position: absolute;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            z-index: 9999; 
+            opacity: 1; 
+            transition: opacity 0.5s ease-in-out; 
+        }
+        .fade-out {
+            opacity: 0;
+        }
+    </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Dancing+Script:wght@400..700&family=Honk&family=Silkscreen:wght@400;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 class="RES">{{flavour}}</h1>
+    <div class="container">
+        <img src="{{ url_for('static', filename=karta1) }}" alt="Gif 1" class="gif">
+        <img src="{{ url_for('static', filename=karta2) }}" alt="Gif 2" class="gif">
+        <img src="{{ url_for('static', filename=karta3) }}" alt="Gif 3" class="gif">
+        <img src="{{ url_for('static', filename=karta4) }}" alt="Gif 4" class="gif">
+    </div>
+    <div style="margin-bottom: 0vh; margin-left: 50vh;">
+        <img src="{{ url_for('static', filename=karta1) }}" style = "height: 33.6vh; position: absolute;" id = "cortor" class = "jif">
+    </div>
+    <p class = "RES" style="font-size: 3vh;">{{finalni}}<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
+    <p class = "RES" style="margin-top: 1vh; font-size: 4vh; position: absolute; top: 2vh; left: 5vh;"><br>{{kount}}</p>
+    <div class="RES button-container">
+        <button class="button" id="rollbuttonRUN">Next</button>
+        <button onclick="location.href ='/'" class="button">Back</button>
+    </div>
+    <div class = "RUN">
+        <button class="button" id="rollbuttonRES" style="position: absolute; bottom: 24.2vh; right: 85vh;">Stop</button>
+    </div>
+        <div class="progress-container">
+            <div class="RES progress-bar" id="progressBar"></div>
+    </div>
+    <!----------------Ano, officialne jsem  to vzdal, nechte mě prosím žít--------------------------------------------->
+    <!--NE-->
+    <!--SA-->
+    <!--HAT-->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let RUN = document.querySelector(".RUN");
+        let RES = document.querySelectorAll(".RES");
+
+        // Get buttons
+        let ROLLRES = document.getElementById("rollbuttonRES");
+        let ROLLRUN = document.getElementById("rollbuttonRUN");
+
+        // "Stop" button (hides RUN, shows RES)
+        ROLLRES.addEventListener("click", function () {
+            console.log("Stop button clicked! Showing RES elements.");
+
+            // Hide RUN and show RES
+            RUN.style.display = "none";  // Hide RUN
+            RES.forEach(el => {
+                console.log("Making element visible:", el);
+                el.style.display = "block";  // Show RES elements
+                el.style.visibility = "visible";  // Make them visible
+                el.style.opacity = "1";  // Full opacity
+            });
+        });
+
+        // "Next" button (shows RUN, hides RES)
+        ROLLRUN.addEventListener("click", function () {
+            console.log("Next button clicked! Hiding RES and showing RUN elements.");
+
+            // Hide RES and show RUN
+            RES.forEach(el => {
+                console.log("Hiding element:", el);
+                el.style.display = "none";  // Hide RES elements
+            });
+            RUN.style.display = "block";  // Show RUN
+        });
+
+        // Spacebar press functionality
+        document.addEventListener("keydown", function (event) {
+            if (event.key === " ") {  // If spacebar is pressed
+                event.preventDefault();  // Prevent default spacebar behavior
+
+                console.log("Spacebar pressed!");
+
+                // Check if elements exist
+                if (!RUN || RES.length === 0) {
+                    console.error("Elements not found!");
+                    return;
+                }
+
+                // Log the current display styles of RUN and RES elements
+                let runDisplay = RUN.style.display;
+                let resDisplay = window.getComputedStyle(RES[0]).display;
+
+                console.log("runDisplay:", runDisplay, "resDisplay:", resDisplay);  // Log the display styles
+
+                // If RUN is visible, trigger "Stop" button (show RES), otherwise trigger "Next" button (show RUN)
+                if (runDisplay !== "none") {
+                    console.log("RUN is visible, triggering Stop button (rollbuttonRES).");
+                    document.getElementById("rollbuttonRES").click();
+                } else if (resDisplay !== "none") {
+                    console.log("RES is visible, triggering Next button (rollbuttonRUN).");
+                    document.getElementById("rollbuttonRUN").click();
+                }
+            }
+        });
+    });
+        </script>  
+        <!--------------------------------------------------------------->
+        <script>
+        
+            function increaseProgress(dock) {
+                progress = {{ brokovnice }}
+                if (progress < 250) {
+                    const progressBar = document.getElementById("progressBar");
+                    progressBar.style.width = progress + "%";
+                  
+                }
+            }
+            increaseProgress({{ zmena }})
+        </script>
+        <script>
+            //ano tohle vařil chat. No a?
+            document.addEventListener("DOMContentLoaded", function () {
+                const images = {{ cartos | tojson }}.map(filename => "{{ url_for('static', filename='') }}" + filename);
+        
+                console.log("Images Array:", images);
+        
+                let index = 0;
+                const speed = 750; // Time for each image
+                const fadeDuration = 250; // Fade duration for smooth transition
+                const gif = document.getElementById("cortor");
+        
+                // Check if the array is empty
+                if (images.length === 0) {
+                    gif.style.display = "none"; // Hide the image element if no images are present
+                    console.warn("No images found.");
+                    return; // Exit the script if there are no images
+                }
+        
+                // Set the initial image when array is not empty
+                gif.src = images[index];
+        
+                function changeImage() {
+                    if (index >= images.length - 1) {
+                        setTimeout(() => {
+                            gif.classList.add("fade-out");
+                        }, fadeDuration);
+                        clearInterval(interval); // Stop further changes when the last image is reached
+                        return;
+                    }
+        
+                    gif.classList.add("fade-out");
+        
+                    setTimeout(() => {
+                        index++; 
+                        gif.src = images[index];
+                        gif.classList.remove("fade-out"); // Fade back in after changing the image
+                    }, fadeDuration);
+                }
+        
+                const interval = setInterval(changeImage, speed);
+            });
+        </script>
+        
+</body>
+
+
+
+</html>

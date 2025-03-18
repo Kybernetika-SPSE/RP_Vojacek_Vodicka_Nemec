@@ -17,6 +17,7 @@
             gap: 4vh;
             max-width: 100%;
             overflow: hidden;
+
         }
         .button {
             padding: 2.5vh 7vh;
@@ -32,13 +33,13 @@
 </head>
 <body>
     <h1>{{flavourtext2}}</h1>
-    <div class="container">
+    <div class="container" style="bottom: 29.4vh; position: absolute;">
         <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff1">
         <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff2">
         <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff3">
         <img src="{{ url_for('static', filename='0.png') }}" alt="Gif 1" class="gif" id="giff4">
     </div>
-    <button onclick="location.href ='/game3/results'" class="button" id="rollbutton3">Stop</button>
+    <button onclick="location.href ='/game3/results'" class="button" id="rollbutton3" style="position: absolute; bottom: 22vh;">Stop</button>
     <script>
         document.addEventListener("keydown", function(event) {
             if (event.key === " ") { 

@@ -1561,18 +1561,19 @@ def gameresults3():
         carto[i]= (carto[i]).replace("'","")
 
 #--------------------------------------------------------------------
+    progbar = kapr/2.5
     datosRES = {
         "carto": [carto],
         "baro": [bar],
         "flavour":[fvtxt],
         "finalni":[final],
-        "fidlovacka":[kapr],
+        "progreso":[progbar],
         "brokovnice":[nerozumim],
         "kount":[counterer],
-        "karta1":[karta11],
-        "karta2":[karta22],
-        "karta3":[karta33],
-        "karta4":[karta44],
+        "karta1":karta11,
+        "karta2":karta22,
+        "karta3":karta33,
+        "karta4":karta44,
         "zmena" : [opakuj]
     }
     

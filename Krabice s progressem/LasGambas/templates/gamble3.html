@@ -64,18 +64,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Dancing+Script:wght@400..700&family=Honk&family=Silkscreen:wght@400;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 class="RES">{{flavour}}</h1>
+    <h1 class="RES" id="flavour">{{flavour}}</h1>
     <div class="container">
-        <img src="{{ url_for('static', filename=karta1) }}" alt="Gif 1" class="gif">
-        <img src="{{ url_for('static', filename=karta2) }}" alt="Gif 2" class="gif">
-        <img src="{{ url_for('static', filename=karta3) }}" alt="Gif 3" class="gif">
-        <img src="{{ url_for('static', filename=karta4) }}" alt="Gif 4" class="gif">
+        <img src="{{ url_for('static', filename=karta1) }}" alt="Gif 1" class="gif" id="K1">
+        <img src="{{ url_for('static', filename=karta2) }}" alt="Gif 2" class="gif" id="K2">
+        <img src="{{ url_for('static', filename=karta3) }}" alt="Gif 3" class="gif" id="K3">
+        <img src="{{ url_for('static', filename=karta4) }}" alt="Gif 4" class="gif" id="K4">
     </div>
     <div style="margin-bottom: 0vh; margin-left: 50vh;">
         <img src="{{ url_for('static', filename=karta1) }}" style = "height: 33.6vh; position: absolute;" id = "cortor" class = "jif">
     </div>
-    <p class = "RES" style="font-size: 3vh;">{{finalni}}<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
-    <p class = "RES" style="margin-top: 1vh; font-size: 4vh; position: absolute; top: 2vh; left: 5vh;"><br>{{kount}}</p>
+    <p class = "RES" style="font-size: 3vh;" id="finalni">{{finalni}}<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
+    <p class = "RES" style="margin-top: 1vh; font-size: 4vh; position: absolute; top: 2vh; left: 5vh;" id = "kount"><br>{{kount}}</p>
     <div class="RES button-container">
         <button class="button" id="rollbuttonRUN">Next</button>
         <button onclick="location.href ='/'" class="button">Back</button>
@@ -83,9 +83,9 @@
     <div class = "RUN">
         <button class="button" id="rollbuttonRES" style="position: absolute; bottom: 24.2vh; right: 85vh;">Stop</button>
     </div>
-        <div class="progress-container">
-            <div class="RES progress-bar" id="progressBar"></div>
-    </div>
+            <div class="RES progress-container">
+                <div class="RES progress-bar" id="progressBar"></div>
+            </div>
     <!----------------Ano, officialne jsem  to vzdal, nechte mě prosím žít--------------------------------------------->
     <!--NE-->
     <!--SA-->
@@ -155,19 +155,78 @@
             }
         });
     });
-        </script>  
+        </script>
+        <script>
+            let ROLLRES = document.getElementById("rollbuttonRES");
+            let datos;
+
+            ROLLRES.addEventListener("click", function () {
+                fetch("/game3/results")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error, status = ${response.status}`);
+                    }
+                    return response.json();
+                    })
+                .then((data) => {
+                    console.log(data);
+                    console.log("Type of data.karta:", typeof data.karta1);
+                    console.log("Value of data.karta:", data.karta1);
+                    let datosbrokovnice = data["nerozumim"]
+                    
+                    // carto prevodno
+                    let cleanK1 = JSON.stringify(data.karta1);
+                    let cleanK2 = JSON.stringify(data.karta2);
+                    let cleanK3 = JSON.stringify(data.karta3);
+                    let cleanK4 = JSON.stringify(data.karta4);
+                    console.log(cleanK1)
+                    let cleanerK1 = cleanK1.replace("\"","");
+                    cleanerK1 = cleanerK1.replace("\"","");
+                    let cleanerK2 = cleanK2.replace("\"","");
+                    cleanerK2 = cleanerK2.replace("\"","");
+                    let cleanerK3 = cleanK3.replace("\"","");
+                    cleanerK3 = cleanerK3.replace("\"","");
+                    let cleanerK4 = cleanK4.replace("\"","");
+                    cleanerK4 = cleanerK4.replace("\"","");
+
+                    //datos = data;
+                    document.getElementById("flavour").innerHTML = data.flavour;
+                    document.getElementById("finalni").innerHTML = data.finalni;
+                    document.getElementById("kount").innerHTML = data.kount;
+                    //document.getElementById("progressBar").innerHTML = data.progreso
+                    document.getElementById("K1").src = "{{ url_for('static', filename='') }}" + cleanerK1;
+                    document.getElementById("K2").src = "{{ url_for('static', filename='') }}" + cleanerK2;
+                    document.getElementById("K3").src = "{{ url_for('static', filename='') }}" + cleanerK3;
+                    document.getElementById("K4").src = "{{ url_for('static', filename='') }}" + cleanerK4;
+
+
+                    updateProgress(data.progreso)
+                    
+                })});
+                
+                
+                
+        </script>
         <!--------------------------------------------------------------->
         <script>
-        
-            function increaseProgress(dock) {
-                progress = {{ brokovnice }}
-                if (progress < 250) {
-                    const progressBar = document.getElementById("progressBar");
-                    progressBar.style.width = progress + "%";
-                  
-                }
+            function updateProgress(value) {
+            console.log("updateProgress called with:", value);
+            
+            if (isNaN(value) || value < 0) value = 0; 
+            const progress = Math.min(value, 100);
+
+            const progressBar = document.getElementById("progressBar");
+            
+            if (progressBar) {
+                console.log("Before update: ", progressBar.style.width);
+                
+                progressBar.style.width = progress + "%"; // Expanding the bar
+                
+                console.log("After update: ", progressBar.style.width);
+            } else {
+                console.error("Progress bar element not found!");
             }
-            increaseProgress({{ zmena }})
+        }
         </script>
         <script>
             //ano tohle vařil chat. No a?

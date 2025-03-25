@@ -1,7 +1,7 @@
 import random
 from os import path
 dir = path.dirname(__file__)
-from flask import Flask, render_template, render_template_string, request, session, redirect, url_for, g
+from flask import Flask, render_template, render_template_string, request, session, redirect, url_for, g, jsonify
 import json
 
 app = Flask(__name__)
@@ -971,7 +971,17 @@ def gamerunning3():
     random.shuffle(Balík2)
     random.shuffle(Balík)
 
-    return render_template("game3running.html",balák1 = Balík, balák2 = Balík2, balák3 = Balík3, balák4 = Balík4)
+    balíky = {
+        "balák1":Balík,
+        "balák2":Balík2,
+        "balák3":Balík3,
+        "balák4":Balík4,
+    }
+    for key in balíky:
+        balíky[key] = [url_for('static', filename=img) for img in balíky[key]]
+
+    return jsonify(balíky)
+    #return balíky  #render_template("game3running.html",balák1 = Balík, balák2 = Balík2, balák3 = Balík3, balák4 = Balík4)
 #_______________________________________________________________________________________________
 @app.route("/game3/results")
 def gameresults3():
@@ -1559,11 +1569,13 @@ def gameresults3():
     for i in range(len(carto)):
         carto[i]= str(carto[i]) + ".png"
         carto[i]= (carto[i]).replace("'","")
+    if carto == []:
+        carto = None
 
 #--------------------------------------------------------------------
     progbar = kapr/2.5
     datosRES = {
-        "carto": [carto],
+        "carto": carto,
         "baro": [bar],
         "flavour":[fvtxt],
         "finalni":[final],

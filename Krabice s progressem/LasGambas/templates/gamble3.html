@@ -90,7 +90,7 @@
         <img src="{{ url_for('static', filename=karta4) }}" alt="Gif 4" class="gif" id="K4">
     </div>
     <div style="margin-bottom: 0vh; margin-left: 50vh;">
-        <img src="{{ url_for('static', filename=karta1) }}" style = "height: 33.6vh; position: absolute;" id = "cortor" class = "jif">
+        <img src="{{ url_for('static', filename=karta0) }}" style = "height: 33.6vh; position: absolute;" id = "cortor" class = "jif">
     </div>
     <p class = "RES" style="font-size: 3vh;" id="finalni">{{finalni}}<!--{{karta1}}{{karta2}}{{karta3}}{{karta4}}--></p>
     <p class = "RES" style="margin-top: 1vh; font-size: 4vh; position: absolute; top: 2vh; left: 5vh;" id = "kount"><br>{{kount}}</p>
@@ -101,8 +101,8 @@
     <div class = "RUN">
         <button class="button" id="rollbuttonRES" style="position: absolute; bottom: 24.2vh; right: 85vh;">Stop</button>
     </div>
-            <div class="RES progress-container">
-                <div class="RES progress-bar" id="progressBar"></div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
             </div>
     <!----------------Ano, officialne jsem  to vzdal, nechte mě prosím žít--------------------------------------------->
     <!--NE-->
@@ -110,8 +110,52 @@
     <!--HAT-->
     <script>
     document.addEventListener("DOMContentLoaded", function () {
+
+        fetch("/game3/results")
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error, status = ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+
+        // Get the reference to the 'sif' (the cortor element)
+        const sif = document.getElementById("cortor");
+        console.log("SIF1")
+        console.log("Element #cortor:", sif); // Check if it's properly selected
+
+        // Check if carto is an empty array
+        if (data.carto == null) {
+    console.log("No images in carto, hiding #cortor.");
+    if (sif) {
+        sif.style.setProperty('display', 'none', 'important');  // Use 'important' to override any other CSS rules
+        console.log("Hiding #cortor, display style:", sif.style.display);
+    }
+} else {
+    if (sif) {
+        sif.style.setProperty('display', 'block', 'important');  // Show the element explicitly
+        console.log("Showing #cortor, display style:", sif.style.display);
+    }
+}
+
+        appendo(data.carto);
+        
+})
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error, status = ${response.status}`);
+                    }
+                    return response.json();
+                    })
+                .then((data) => {
+                    startSlideshow();
+                })
+        
+        
         let RUN = document.querySelector(".RUN");
         let RES = document.querySelectorAll(".RES");
+
 
         // Get buttons
         let ROLLRES = document.getElementById("rollbuttonRES");
@@ -175,11 +219,14 @@
     });
         </script>
         <script>
-            let ROLLRES = document.getElementById("rollbuttonRES");
-            let datos;
+            let images_1;
+            let images_2;
+            let images_3;
+            let images_4;
 
-            ROLLRES.addEventListener("click", function () {
-                fetch("/game3/results")
+
+                window.onload =  () => {
+                fetch("/game3/running")
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error(`HTTP error, status = ${response.status}`);
@@ -188,42 +235,144 @@
                     })
                 .then((data) => {
                     console.log(data);
-                    console.log("Type of data.karta:", typeof data.karta1);
-                    console.log("Value of data.karta:", data.karta1);
-                    let datosbrokovnice = data["nerozumim"]
+                    startSlideshow()
+            
+            images_1 = data.balák1;
+            images_2 = data.balák2;
+            images_3 = data.balák3;
+            images_4 = data.balák4;
+                })};
+            //RES
+
+            let isSlideshowActive = false;
+            let slideshowInterval = null;    
+
+            let ROLLRUN = document.getElementById("rollbuttonRUN")
+            ROLLRUN.addEventListener("click", function () {
+                isSlideshowActive = false;
+                startSlideshow()
+  
+            }); 
+
+            let ROLLRES = document.getElementById("rollbuttonRES")
+            ROLLRES.addEventListener("click", function () {
+                isSlideshowActive = true;
+                stopSlideshow()   
+            });             
+
+        </script>
+        <script>
+            const sped = 100;
+            console.log("Images Array 1:", images_1);
+            console.log("Images Array 2:", images_2);
+            console.log("Images Array 3:", images_3);
+            console.log("Images Array 4:", images_4);
+            
+            let index_1 = 0;
+            let index_2 = 0;
+            let index_3 = 0;
+            let index_4 = 0;
+            
+            
+            function startSlideshow() {
+            console.log("Slideshow starting...");
+            
+            fetch("/game3/running")
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                    return response.json();
+                })
+                .then(data => {
+                    images_1 = data.balák1;
+                    images_2 = data.balák2;
+                    images_3 = data.balák3;
+                    images_4 = data.balák4;
+
+                    // Clear any existing interval before starting a new one
+                    if (slideshowInterval) {
+                        clearInterval(slideshowInterval);
+                    }
+
+                    slideshowInterval = setInterval(changeImages, 100);
+                })
+                .catch(error => console.error("Error fetching images:", error));
+        }
+            function stopSlideshow() {
+                console.log("Slideshow stopping...");
+                
+                // Ensure the interval is cleared
+                clearInterval(slideshowInterval);
+                slideshowInterval = null;
+                isSlideshowActive = false; // Prevent further updates
+
+                fetch("/game3/results")
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error, status = ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log("pomocpmocpomockopjkjbkjb")
+                        console.log(data);
+                        console.log(data.carto)
+
+                        // Ensure new images are properly set
+                        let cleanerK1 = data.karta1.replace(/^"|"$/g, ''); // Remove quotes
+                        let cleanerK2 = data.karta2.replace(/^"|"$/g, '');
+                        let cleanerK3 = data.karta3.replace(/^"|"$/g, '');
+                        let cleanerK4 = data.karta4.replace(/^"|"$/g, '');
+
+                        document.getElementById("K1").src = "{{ url_for('static', filename='') }}" + cleanerK1;
+                        document.getElementById("K2").src = "{{ url_for('static', filename='') }}" + cleanerK2;
+                        document.getElementById("K3").src = "{{ url_for('static', filename='') }}" + cleanerK3;
+                        document.getElementById("K4").src = "{{ url_for('static', filename='') }}" + cleanerK4;
+                        document.getElementById("flavour").innerHTML = data.flavour;
+                        document.getElementById("finalni").innerHTML = data.finalni;
+                        document.getElementById("kount").innerHTML = data.kount;
+                        updateProgress(data.progreso)
+                        
                     
-                    // carto prevodno
-                    let cleanK1 = JSON.stringify(data.karta1);
-                    let cleanK2 = JSON.stringify(data.karta2);
-                    let cleanK3 = JSON.stringify(data.karta3);
-                    let cleanK4 = JSON.stringify(data.karta4);
-                    console.log(cleanK1)
-                    let cleanerK1 = cleanK1.replace("\"","");
-                    cleanerK1 = cleanerK1.replace("\"","");
-                    let cleanerK2 = cleanK2.replace("\"","");
-                    cleanerK2 = cleanerK2.replace("\"","");
-                    let cleanerK3 = cleanK3.replace("\"","");
-                    cleanerK3 = cleanerK3.replace("\"","");
-                    let cleanerK4 = cleanK4.replace("\"","");
-                    cleanerK4 = cleanerK4.replace("\"","");
 
-                    //datos = data;
-                    document.getElementById("flavour").innerHTML = data.flavour;
-                    document.getElementById("finalni").innerHTML = data.finalni;
-                    document.getElementById("kount").innerHTML = data.kount;
-                    //document.getElementById("progressBar").innerHTML = data.progreso
-                    document.getElementById("K1").src = "{{ url_for('static', filename='') }}" + cleanerK1;
-                    document.getElementById("K2").src = "{{ url_for('static', filename='') }}" + cleanerK2;
-                    document.getElementById("K3").src = "{{ url_for('static', filename='') }}" + cleanerK3;
-                    document.getElementById("K4").src = "{{ url_for('static', filename='') }}" + cleanerK4;
+                        // Get the reference to the 'sif' (the cortor element)
+                        const sif = document.getElementById("cortor");
+                                console.log("SIF1")
+                                console.log("Element #cortor:", sif); // Check if it's properly selected
 
+                                // Check if carto is an empty array
+                                if (data.carto == null) {
+                            console.log("No images in carto, hiding #cortor.");
+                            if (sif) {
+                                sif.style.setProperty('display', 'none', 'important');  // Use 'important' to override any other CSS rules
+                                console.log("Hiding #cortor, display style:", sif.style.display);
+                            }
+                        } else {
+                            if (sif) {
+                                sif.style.setProperty('display', 'block', 'important');  // Show the element explicitly
+                                console.log("Showing #cortor, display style:", sif.style.display);
+                            }
+                        }
 
-                    updateProgress(data.progreso)
-                    
-                })});
-                
-                
-                
+                                appendo(data.carto);
+                            })
+                            .catch(error => {
+                                console.error("Error fetching images:", error);
+                            });
+    };
+    
+        
+            function changeImages() {
+            index_1 = (index_1 + 1) % images_1.length;
+            index_2 = (index_2 + 1) % images_2.length;
+            index_3 = (index_3 + 1) % images_3.length;
+            index_4 = (index_4 + 1) % images_4.length;
+
+            document.querySelectorAll(".gif")[0].src = images_1[index_1];
+            document.querySelectorAll(".gif")[1].src = images_2[index_2];
+            document.querySelectorAll(".gif")[2].src = images_3[index_3];
+            document.querySelectorAll(".gif")[3].src = images_4[index_4];
+            }
+        
         </script>
         <!--------------------------------------------------------------->
         <script>
@@ -249,45 +398,74 @@
         <script>
             //ano tohle vařil chat. No a?
             document.addEventListener("DOMContentLoaded", function () {
-                const images = {{ cartos | tojson }}.map(filename => "{{ url_for('static', filename='') }}" + filename);
-        
-                console.log("Images Array:", images);
-        
-                let index = 0;
-                const speed = 750; // Time for each image
-                const fadeDuration = 250; // Fade duration for smooth transition
-                const gif = document.getElementById("cortor");
-        
-                // Check if the array is empty
-                if (images.length === 0) {
-                    gif.style.display = "none"; // Hide the image element if no images are present
-                    console.warn("No images found.");
-                    return; // Exit the script if there are no images
-                }
-        
-                // Set the initial image when array is not empty
-                gif.src = images[index];
-        
-                function changeImage() {
-                    if (index >= images.length - 1) {
-                        setTimeout(() => {
-                            gif.classList.add("fade-out");
-                        }, fadeDuration);
-                        clearInterval(interval); // Stop further changes when the last image is reached
-                        return;
-                    }
-        
-                    gif.classList.add("fade-out");
-        
-                    setTimeout(() => {
-                        index++; 
-                        gif.src = images[index];
-                        gif.classList.remove("fade-out"); // Fade back in after changing the image
-                    }, fadeDuration);
-                }
-        
-                const interval = setInterval(changeImage, speed);
+                const sif = document.getElementById("cortor");
+                console.log("tady bude sif, jestli tu neci, well gl")
+                console.log(sif); 
+                appendo(data.carto);
             });
+            function appendo(carto) {
+                let images = carto.map((filename) => {
+        // If filename already contains "/static/", remove it
+        if (filename.startsWith("/static/")) {
+            return filename.replace("/static/", ""); // Remove "/static/" if present
+        } else {
+            return "{{ url_for('static', filename='') }}" + filename; // Prepend "/static/" otherwise
+        }
+                });
+
+    // Check if the carto array is empty
+    if (images.length === 0) {
+        // If the array is empty, hide the image and stop further execution
+        const sif = document.getElementById("cortor");
+        console.log("Before hiding:", sif.style.display); // Log current display value
+        if (sif) {
+            sif.style.display = "none";  // Hide the image element
+            console.log("After hiding:", sif.style.display); // Log after hiding
+            console.warn("No images found in carto array. Slideshow will not start.");
+        }
+        return;  // Exit the function early if no images are present
+    }
+
+    // If there are images, proceed with the slideshow
+    console.log("Images Array:", images);
+
+    let index = 0;
+const speed = 750; // Time for each image
+const fadeDuration = 250; // Fade duration for smooth transition
+const sif = document.getElementById("cortor");
+
+if (sif) {
+    // Ensure the gif element is visible
+    sif.style.display = "block";
+    
+    // Start with the first image and apply fade-in effect
+    sif.src = images[index];
+    sif.classList.add("fade-in");  // Apply fade-in for the first image
+
+    function changeImage() {
+        if (index >= images.length - 1) {
+            setTimeout(() => {
+                sif.classList.add("fade-out");
+            }, fadeDuration);
+            clearInterval(interval); // Stop further changes when the last image is reached
+            return;
+        }
+
+        // First, fade-out the current image
+        sif.classList.add("fade-out");
+
+        // After the fade-out is done, change the image and fade it back in
+        setTimeout(() => {
+            index++;  // Move to the next image
+            sif.src = images[index];  // Change the image source
+            sif.classList.remove("fade-out");  // Remove fade-out class
+            sif.classList.add("fade-in");  // Apply fade-in for the new image
+        }, fadeDuration);
+    }
+
+    // Set interval to change images
+    const interval = setInterval(changeImage, 700);
+}}
         </script>
         
 </body>

@@ -129,12 +129,13 @@
         if (data.carto == null) {
     console.log("No images in carto, hiding #cortor.");
     if (sif) {
-        sif.style.setProperty('display', 'none', 'important');  // Use 'important' to override any other CSS rules
+        sif.style.setProperty('display', 'none', );//'important');  // Use 'important' to override any other CSS rules
         console.log("Hiding #cortor, display style:", sif.style.display);
     }
 } else {
     if (sif) {
-        sif.style.setProperty('display', 'block', 'important');  // Show the element explicitly
+        sif.style.setProperty('display', 'block',); //'important');  // Show the element explicitly
+        sif.classList.remove("fade-out");
         console.log("Showing #cortor, display style:", sif.style.display);
     }
 }
@@ -288,6 +289,13 @@
                     images_3 = data.balák3;
                     images_4 = data.balák4;
 
+                    
+                    // Reset indices explicitly
+                    index_1 = 0;
+                    index_2 = 0;
+                    index_3 = 0;
+                    index_4 = 0;
+
                     // Clear any existing interval before starting a new one
                     if (slideshowInterval) {
                         clearInterval(slideshowInterval);
@@ -313,6 +321,7 @@
                         return response.json();
                     })
                     .then((data) => {
+                        console.log(data.maximalka)
                         console.log("pomocpmocpomockopjkjbkjb")
                         console.log(data);
                         console.log(data.carto)
@@ -343,12 +352,13 @@
                                 if (data.carto == null) {
                             console.log("No images in carto, hiding #cortor.");
                             if (sif) {
-                                sif.style.setProperty('display', 'none', 'important');  // Use 'important' to override any other CSS rules
+                                sif.style.setProperty('display', 'none', );//'important');  // Use 'important' to override any other CSS rules
                                 console.log("Hiding #cortor, display style:", sif.style.display);
                             }
                         } else {
                             if (sif) {
-                                sif.style.setProperty('display', 'block', 'important');  // Show the element explicitly
+                                sif.style.setProperty('display', 'block', );//'important');  // Show the element explicitly
+                                sif.classList.remove("fade-out");
                                 console.log("Showing #cortor, display style:", sif.style.display);
                             }
                         }

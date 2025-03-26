@@ -16,6 +16,7 @@ app = Flask(__name__)
 app.config["DEFAULT_DATA"] = {
     "roll": 0,
     "body": 0,
+    "maxus": 0,
     "savio": 0,
     "wolfo": 0,
     "impo": 0,
@@ -40,6 +41,7 @@ def main():
     session["name"] = str(random.randrange(1,40))
     session["data"]["roll"] = 0
     session["data"]["body"] = 0
+    session["data"]["maxus"] = 0
     session["data"]["savio"]=0
     session["data"]["wolfo"]=0
     session["data"]["impo"]=0
@@ -987,6 +989,7 @@ def gamerunning3():
 def gameresults3():
     counterer = session["data"]["roll"]
     kapr = session["data"]["body"]
+    maximus = session["data"]["maxus"]
     saviour = session["data"]["savio"]
     thewolf = session["data"]["wolfo"]
     Imps = session["data"]["impo"]
@@ -1467,10 +1470,18 @@ def gameresults3():
             kapr = kapr*2 
     checkusimpus=[]
 
+    if kapr<0:
+        kapr=0
+    if maximus < kapr:
+        maximus = kapr
+    else:
+        pass
 
     session["data"]["roll"] = counterer
     session.modified = True
     session["data"]["body"] = kapr
+    session.modified = True
+    session["data"]["maxus"] = maximus
     session.modified = True
     session["data"]["savio"] = saviour
     session.modified = True
@@ -1577,6 +1588,7 @@ def gameresults3():
     datosRES = {
         "carto": carto,
         "baro": [bar],
+        "maximalka": [maximus],
         "flavour":[fvtxt],
         "finalni":[final],
         "progreso":[progbar],

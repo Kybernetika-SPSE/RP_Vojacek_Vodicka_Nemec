@@ -76,6 +76,19 @@
             transform: translateX(-50%);
             width: 80%;
         }
+        /*------------------WIDE-----------------*/
+        @media screen and (max-aspect-ratio: 9/16) {  
+            body * { display: none !important; }  
+            body::before {  
+                content: "Otočte své zařízení na šířku";  
+                display: block;  
+                text-align: center;  
+                font-size: 20px;  
+                color: red;  
+                margin-top: 50vh;  
+            }  
+        }
+        /*------------------WIDE-----------------*/
     </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -136,6 +136,17 @@ def gamerunning1():
     random.shuffle(balík3)
     random.shuffle(balík4)
 
+    balíky = {
+        "balák1":balík1,
+        "balák2":balík2,
+        "balák3":balík3,
+        "balák4":balík4,
+    }
+    for key in balíky:
+        balíky[key] = [url_for('static', filename=img) for img in balíky[key]]
+
+    return jsonify(balíky)
+
 
     #---------------------------------------------------------------
     return render_template("game1running.html", flavourtext2 = fvtxt2, balák1 = balík1, balák2 = balík2, balák3 = balík3, balák4 = balík4 )
@@ -159,7 +170,7 @@ def gameresults1():
     counterer = counterer + 1
 
     kapr = session["data"]["body"]
-    jauznevim = kapr
+    maximus = session["data"]["maxus"]
     #_________________________________________________
 
     if 200> kapr>100:
@@ -481,9 +492,10 @@ def gameresults1():
     
     if kapr<0:
         kapr=0
-    opakuj = kapr - jauznevim
-    nerozumim = kapr/2
-
+    if maximus < kapr:
+        maximus = kapr
+    else:
+        pass
 
     #------------FVTXT1-----------------------------------------------
     numero = random.randrange(1,30)
@@ -657,10 +669,27 @@ def gameresults1():
 
     session["data"]["body"] = kapr
     session.modified = True
+    session["data"]["maxus"] = maximus
     session["data"]["roll"] = counterer
     session.modified = True
+    carto = []
 
-    return render_template("game1results.html",finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj, flavourtext1 = fvtxt1)
+    progbar = kapr/2
+    datosRES = {
+        "carto": carto,
+        "maximalka": [maximus],
+        "flavour":[fvtxt1],
+        "finalni":[final],
+        "progreso":[progbar],
+        "kount":[counterer],
+        "karta1":karta11,
+        "karta2":karta22,
+        "karta3":karta33,
+        "karta4":karta44,
+    }
+
+    return datosRES 
+    # render_template("game1results.html",finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj, flavourtext1 = fvtxt1)
 #_______________________________________________________________________________________________
 #_______________________________________________________________________________________________
 @app.route("/game2/rules")
@@ -669,7 +698,6 @@ def gamerules2():
 #_______________________________________________________________________________________________
 @app.route("/game2/running")
 def gamerunning2():
-    fvtxt2 = "Zkouška Zkouška"
     symbol= ["piky", "kříže", "káry", "srdce"]
     číslo = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"]
 
@@ -730,8 +758,19 @@ def gamerunning2():
     random.shuffle(balík2)
     random.shuffle(balík3)
     random.shuffle(balík4)
+
+    balíky = {
+        "balák1":balík1,
+        "balák2":balík2,
+        "balák3":balík3,
+        "balák4":balík4,
+    }
+    for key in balíky:
+        balíky[key] = [url_for('static', filename=img) for img in balíky[key]]
+
+    return jsonify(balíky)
     
-    return render_template("game2running.html",flavourtext2 = fvtxt2, balák1 = balík1, balák2 = balík2, balák3 = balík3, balák4 = balík4 )
+    #return render_template("game2running.html",flavourtext2 = fvtxt2, balák1 = balík1, balák2 = balík2, balák3 = balík3, balák4 = balík4 )
 #_______________________________________________________________________________________________
 @app.route("/game2/results")
 def gameresults2():
@@ -855,8 +894,19 @@ def gameresults2():
     counterer = counterer + 1
     session["data"]["roll"]=counterer
     session.modified = True
+
+    datosRES = {
+        "finalni":[final],
+        "kount":[counterer],
+        "karta1":karta11,
+        "karta2":karta22,
+        "karta3":karta33,
+        "karta4":karta44,
+    }
     
-    return render_template("game2results.html",finalni = final,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44)
+    return datosRES
+    
+    #return render_template("game2results.html",finalni = final,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44)
 #_______________________________________________________________________________________________
 #_______________________________________________________________________________________________
 @app.route("/game3/rules")
@@ -1592,20 +1642,48 @@ def gameresults3():
         "flavour":[fvtxt],
         "finalni":[final],
         "progreso":[progbar],
-        "brokovnice":[nerozumim],
         "kount":[counterer],
         "karta1":karta11,
         "karta2":karta22,
         "karta3":karta33,
         "karta4":karta44,
-        "zmena" : [opakuj]
     }
     
     return datosRES #render_template("game3results.html" cartos = carto, baro = bar, flavour = fvtxt, finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
 
+@app.route("/game/Game1")
+def gamba1():
+    counterer = session["data"]["roll"]
+    kapr = session["data"]["body"]
 
-@app.route("/game/test")
-def test():
+    #delet
+    carto = []
+    fvtxt = "testfvtxt"
+    final = "testfinal"
+    karta11="0.png"
+    karta22="0.png"
+    karta33="0.png"
+    karta44="0.png"
+
+    return render_template("gamble1.html",carto = carto, flavour = fvtxt, finalni = final,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,)
+    
+
+@app.route("/game/Game2")
+def gamba2():
+    counterer = session["data"]["roll"]
+
+    #delet
+    final = "testfinal"
+    karta11="0.png"
+    karta22="0.png"
+    karta33="0.png"
+    karta44="0.png"
+
+    return render_template("gamble2.html",finalni = final,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,)
+    
+
+@app.route("/game/Game3")
+def gamba3():
     counterer = session["data"]["roll"]
     kapr = session["data"]["body"]
     saviour = session["data"]["savio"]
@@ -1617,18 +1695,15 @@ def test():
     carto = []
     fvtxt = "testfvtxt"
     final = "testfinal"
-    nerozumim = 0
-    opakuj = 0
     karta11="0.png"
     karta22="0.png"
     karta33="0.png"
     karta44="0.png"
 
-    bar = random.randrange(1,25)
     for i in range(len(carto)):
         carto[i]= str(carto[i]) + ".png"
         carto[i]= (carto[i]).replace("'","")
-    return render_template("gamble3.html",cartos = carto, baro = bar, flavour = fvtxt, finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
+    return render_template("gamble3.html",cartos = carto, flavour = fvtxt, finalni = final,fidlovacka = kapr,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,)
     
 if __name__ == "__main__":
     app.run(debug=True)

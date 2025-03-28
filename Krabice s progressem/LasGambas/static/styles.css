@@ -41,6 +41,8 @@ h1 {
   border-radius: 30vh;
   text-align: center;
   font-size: 3vh;
+  margin-left: 1vh;
+  margin-right: 1vh;
   box-shadow: 0 4vh 8vh rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
 }

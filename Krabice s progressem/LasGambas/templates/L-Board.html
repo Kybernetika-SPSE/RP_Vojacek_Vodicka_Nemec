@@ -1,0 +1,23 @@
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabulka</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>Jméno</th>
+        <th>Body</th>
+        <th>rolly</th>
+    </tr>
+    <tr>
+        <td>{{name}}</td>
+        <td>{{bodos}}</td>
+        <td>{{rolos}}</td>
+    </tr>
+</table>
+
+</body>

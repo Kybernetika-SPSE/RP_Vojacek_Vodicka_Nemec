@@ -1707,6 +1707,16 @@ def gamba3():
         carto[i]= str(carto[i]) + ".png"
         carto[i]= (carto[i]).replace("'","")
     return render_template("gamble3.html",cartos = carto, flavour = fvtxt, finalni = final,fidlovacka = kapr,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,)
+#-------------------------------------------------------------------
+@app.route("/Lboard")
+def lboard():
+    Tname = "pepa"
+    Tbodos = 51
+    Trolos = 12
+    return render_template("L-Board.html",
+                            name = Tname,
+                            bodos = Tbodos, 
+                            rollos = Trolos)
     
 if __name__ == "__main__":
     app.run(debug=True)

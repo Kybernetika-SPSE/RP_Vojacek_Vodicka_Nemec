@@ -34,7 +34,7 @@ except:
 def setup():
     if "data" not in session:
         session["data"] = app.config["DEFAULT_DATA"].copy()
-        print("koulesex")
+        print("Felix")
 
 @app.route("/")
 def main():
@@ -50,7 +50,10 @@ def main():
     session.modified = True
 
     return render_template("Welcome.html")
-
+#_______________________________________________________________________________________________
+@app.route("/secret")
+def secret():
+    return render_template("secretum.html")
 
 #_______________________________________________________________________________________________
 @app.route("/game1/rules")

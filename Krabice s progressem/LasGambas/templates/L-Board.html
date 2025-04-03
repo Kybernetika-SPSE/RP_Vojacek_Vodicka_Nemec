@@ -16,13 +16,48 @@
     text-shadow: 3vh 3vh 8vh rgba(0, 0, 0, 0.5);
     }
 </style>
-<table>
-    <tr>
-        <th>Jméno</th>
-        <th>Body</th>
-        <th>rolly</th>
-    </tr>
+<table id="leaderboard">
+    <thead>
+        <tr>
+            <th onclick="sortTable(0, 'asc')">Jméno</th>
+            <th onclick="sortTable(1, 'desc')">Body</th>
+            <th onclick="sortTable(2, 'desc')">Počet otoček</th>
+        </tr>
+    </thead>
     {{ board | safe }}
 </table>
+<script>
+    let lastSortedColumn = -1;
 
+    function sortTable(n, direction) {
+        let table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("leaderboard");
+        switching = true;
+        
+        if (lastSortedColumn === n) return;
+        
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                
+                let xValue = isNaN(x.innerHTML) ? x.innerHTML.toLowerCase() : Number(x.innerHTML);
+                let yValue = isNaN(y.innerHTML) ? y.innerHTML.toLowerCase() : Number(y.innerHTML);
+                
+                if ((direction === "asc" && xValue > yValue) || (direction === "desc" && xValue < yValue)) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+        lastSortedColumn = n;
+    }
+</script>
 </body>

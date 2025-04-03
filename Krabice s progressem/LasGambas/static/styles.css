@@ -132,7 +132,7 @@ th {
 }
 tr:hover {
   background-color: #990909;
-  
+  cursor: pointer;
 }
 /*------------------funni-----------------*/
 

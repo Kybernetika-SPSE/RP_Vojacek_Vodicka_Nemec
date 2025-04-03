@@ -1710,13 +1710,20 @@ def gamba3():
 #-------------------------------------------------------------------
 @app.route("/Lboard")
 def lboard():
-    Tname = "pepa"
-    Tbodos = 51
-    Trolos = 12
-    return render_template("L-Board.html",
-                            name = Tname,
-                            bodos = Tbodos, 
-                            rollos = Trolos)
+
+    with open(path.join(dir,"users","users.json")) as rum:
+        step0 = json.load(rum)
+    
+    step1 = dict(sorted(step0.items(), key=lambda item: (item[1]["body"]/item[1]["rolly"])+item[1]["body"], reverse=True))
+
+    AbhorrentTemplate = "<tr><td>{kluc}</td><td>{body}</td><td>{rolly}</td></tr>"
+
+    Lbord = ""
+    for i in step1:
+        Lbord += AbhorrentTemplate.format(kluc = i, **step1[i])
+
+
+    return render_template("L-Board.html",board = Lbord)
     
 if __name__ == "__main__":
     app.run(debug=True)

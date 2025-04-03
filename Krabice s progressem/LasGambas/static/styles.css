@@ -109,6 +109,31 @@ button {
   font-size: 1,6vh;
   cursor: pointer;
 }
+/*------------------Leaderboard-----------------*/
+table {
+  width: 50%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: #771205;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+th, td {
+  font-size: 25px;
+  padding: 30px;
+  text-align: center;
+  border-bottom: 1px solid #521109;
+}
+th {
+  background-color: #e6c300;
+  text-align: center;
+  color: rgb(53, 31, 31);
+}
+tr:hover {
+  background-color: #990909;
+  
+}
 /*------------------funni-----------------*/
 
 input{

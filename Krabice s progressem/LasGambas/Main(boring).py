@@ -1724,6 +1724,10 @@ def lboard():
 
 
     return render_template("L-Board.html",board = Lbord)
-    
+
+@app.route("/game3/legend")
+def legend():
+    return render_template("legend.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

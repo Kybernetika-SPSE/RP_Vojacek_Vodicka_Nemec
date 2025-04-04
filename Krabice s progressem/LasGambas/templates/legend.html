@@ -1,0 +1,38 @@
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pravidla</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<style>
+    .buttonL {
+    padding: 2.5vh 2.5vh;
+    text-decoration: none;
+    color: #FFD700;
+    background-color: #880808;
+    border: none;
+    border-radius: 30vh;
+    text-align: center;
+    font-size: 3vh;
+    box-shadow: 0 4vh 8vh rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    position: absolute;
+  }
+</style>
+<body>
+    <h1><u>Speciální karty</u></h1>
+    <div class="container">
+        <img src="{{ url_for('static', filename='[imp].png') }}" alt="Gif 1" class="gif" id="K1">
+        <img src="{{ url_for('static', filename='[wolf].png') }}" alt="Gif 2" class="gif" id="K2">
+        <img src="{{ url_for('static', filename='[saviour].png') }}" alt="Gif 3" class="gif" id="K3">
+    </div>
+    <div class="container">
+        <p>-5 bodů pokud je vytočena</p>
+        <p>-50% aktuální počet bodů</p>
+        <p>2x aktuální počet bodů</p>
+    </div>
+
+    <button class="buttonL" onclick="location.href='/game3/rules'">back</button>
+</body>
+</html> 

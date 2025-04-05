@@ -1,0 +1,37 @@
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konec</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<h3 style="font-size: 10vh;"id="prohra">KONEC</h3>
+<h3 style="font-size: 10vh;"id="výhra">VÝHRA</h3>
+<h2>Zadejte Jméno</h2>
+<h3>Diakritika není plně podporována, použijte na vlastní nebezpečí</h3><br>
+<h3>momentálně nejsou implementována <b>žádná</b> opatření proti opakujícím se jménům</h3><br>
+<h3>prosíme, pokuste se být co nejkreativnější</h3>
+<form method="POST" action="/game/end/thankyou3">
+    <label for="username">Uživatelské jméno:</label>
+    <input type="text" id="username" name="username">
+    <br>
+    <input type="submit" value="✓">
+</form>
+<script>
+    const finalll = {{ finalll | tojson }};
+    let V = document.getElementById("výhra")
+    let P = document.getElementById("prohra")
+    console.log(finalll)
+
+    if (finalll === 1){
+        V.style.display = "block"
+        P.style.display = "none"
+    }
+    else{
+        P.style.display = "block"
+        V.style.display = "none"
+    }
+</script>
+</body>
+</html> 

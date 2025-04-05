@@ -3,6 +3,7 @@ from os import path
 dir = path.dirname(__file__)
 from flask import Flask, render_template, render_template_string, request, session, redirect, url_for, g, jsonify
 import json
+import uuid
 
 app = Flask(__name__)
 #session["data"]["roll"] = 0
@@ -21,7 +22,8 @@ app.config["DEFAULT_DATA"] = {
     "wolfo": 0,
     "impo": 0,
     "blackj": 0,
-    "posobecheck": []
+    "posobecheck": [],
+    "victory": 0
 }
 try:
     with open(path.join(dir,"MEGA_SECRET_HYPER_PASSWORD")) as securiti:
@@ -47,6 +49,7 @@ def main():
     session["data"]["impo"]=0
     session["data"]["blackj"]=0
     session["data"]["posobecheck"]=[]
+    session["data"]["victory"] = 0
     session.modified = True
 
     return render_template("Welcome.html")
@@ -492,6 +495,8 @@ def gameresults1():
         final = "The Six Queens"
     if final =="WHAT":
         final = "???"
+        session["data"]["victory"] = 1
+        session.modified = True
     
     if kapr<0:
         kapr=0
@@ -889,6 +894,8 @@ def gameresults2():
         final = "Nuh Uh"
     if final =="WHAT":
         final = "???"
+        session["data"]["victory"] = 1
+        session.modified = True
     if final == "bigX":
         final = "Nuh uh"
 
@@ -1583,6 +1590,8 @@ def gameresults3():
         final = "The Six Queens"
     if final =="WHAT":
         final = "???"
+        session["data"]["victory"] = 1
+        session.modified = True
     if final =="impeyes":
         final = "ImpEyes"
     if final =="theWOLF":
@@ -1707,27 +1716,57 @@ def gamba3():
         carto[i]= str(carto[i]) + ".png"
         carto[i]= (carto[i]).replace("'","")
     return render_template("gamble3.html",cartos = carto, flavour = fvtxt, finalni = final,fidlovacka = kapr,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,)
-#-------------------------------------------------------------------
-@app.route("/Lboard")
+
+@app.route("/game3/legend")
+def legend():
+    return render_template("legend.html")
+#----------------------------Lboardy--------------------------------
+@app.route("/Lboard3")
 def lboard():
 
-    with open(path.join(dir,"users","users.json")) as rum:
+    with open(path.join(dir,"users","users3.json")) as rum:
         step0 = json.load(rum)
-    
+
     step1 = dict(sorted(step0.items(), key=lambda item: (item[1]["body"]/item[1]["rolly"])+item[1]["body"], reverse=True))
 
-    AbhorrentTemplate = "<tr><td>{kluc}</td><td>{body}</td><td>{rolly}</td></tr>"
+    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td></tr>"
 
     Lbord = ""
     for i in step1:
         Lbord += AbhorrentTemplate.format(kluc = i, **step1[i])
 
 
-    return render_template("L-Board.html",board = Lbord)
+    return render_template("L-Board3.html",board = Lbord)
 
-@app.route("/game3/legend")
-def legend():
-    return render_template("legend.html")
+
+#--------------------------konec game3-----------------------------------------
+@app.route('/game/end3')
+def index():
+    final = session["data"]["victory"]
+    return render_template('konec3.html',finalll = final)
+
+@app.route('/game/end/thankyou3', methods=['POST'])
+def submit():
+    savename = request.form['username']
+
+    counterer = session["data"]["roll"]
+    kapr = session["data"]["body"]
+    if session["data"]["victory"] == 1:
+        verdict = "Ano"
+    else:
+        verdict = "Ne"
+
+    with open(path.join(dir,"users","users3.json")) as rum:
+        saving = json.load(rum)
+    klic = str(uuid.uuid4())
+
+    saving[klic] = {"jmeno": savename, "body": kapr, "rolly": counterer, "vyhra": verdict} 
+
+    with open(path.join(dir,"users","users3.json"),"w") as rum:
+        json.dump(saving,rum)
+
+    return render_template("thankyou3.html")
+#---------------------------------------------------------------------------
 
 if __name__ == "__main__":
     app.run(debug=True)

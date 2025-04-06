@@ -123,7 +123,7 @@
         <br>{{kount}}</p>
     <div class="RES button-container">
         <button class="button" id="rollbuttonRUN">Next</button>
-        <button onclick="location.href ='/game/end'" class="button">Back</button>
+        <button onclick="location.href ='/game/end2'" class="button">Back</button>
     </div>
     <div class="RUN button-container">
         <button class="button center" id="rollbuttonRES" >Stop</button>
@@ -276,9 +276,23 @@
         let ROLLRUN = document.getElementById("rollbuttonRUN")
         ROLLRUN.addEventListener("click", function () {
             isSlideshowActive = false;
-            startSlideshow()
+            fetch("/victorier")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error, status = ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data);
+                if (data == 0){
+                    startSlideshow();
+                }
+                else{
+                    window.location.href = "/game/end2";
+                };
 
-        });
+        })});
 
         let ROLLRES = document.getElementById("rollbuttonRES")
         ROLLRES.addEventListener("click", function () {

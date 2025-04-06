@@ -287,7 +287,7 @@ def gameresults1():
         Jackpot.append("0")
         Jackpot.append("0")
     Jackpot=Jackpot[:4]
-    print(Jackpot)
+
 
     check=[]
 
@@ -695,6 +695,10 @@ def gameresults1():
         "karta3":karta33,
         "karta4":karta44,
     }
+
+    print(Jackpot)
+    print(final)
+    print(kapr)
 
     return datosRES 
     # render_template("game1results.html",finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj, flavourtext1 = fvtxt1)
@@ -1720,9 +1724,14 @@ def gamba3():
 @app.route("/game3/legend")
 def legend():
     return render_template("legend.html")
+#-------------------------------------------------------------------
+@app.route("/victorier")
+def victorier():
+    vic = session["data"]["victory"]
+    return jsonify(vic)
 #----------------------------Lboardy--------------------------------
 @app.route("/Lboard3")
-def lboard():
+def lboard3():
 
     with open(path.join(dir,"users","users3.json")) as rum:
         step0 = json.load(rum)
@@ -1737,16 +1746,50 @@ def lboard():
 
 
     return render_template("L-Board3.html",board = Lbord)
+#-----------------
+@app.route("/Lboard2")
+def lboard2():
+
+    with open(path.join(dir,"users","users2.json")) as rum:
+        step0 = json.load(rum)
+
+    step1 = dict(sorted(step0.items(), key=lambda item: item[1]["rolly"], reverse=True))
+
+    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{rolly}</td><td>{vyhra}</td></tr>"
+
+    Lbord = ""
+    for i in step1:
+        Lbord += AbhorrentTemplate.format(kluc = i, **step1[i])
+
+
+    return render_template("L-Board2.html",board = Lbord)
+#----------
+@app.route("/Lboard1")
+def lboard1():
+
+    with open(path.join(dir,"users","users1.json")) as rum:
+        step0 = json.load(rum)
+
+    step1 = dict(sorted(step0.items(), key=lambda item: (item[1]["body"]/item[1]["rolly"])+item[1]["body"], reverse=True))
+
+    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td></tr>"
+
+    Lbord = ""
+    for i in step1:
+        Lbord += AbhorrentTemplate.format(kluc = i, **step1[i])
+
+
+    return render_template("L-Board1.html",board = Lbord)
 
 
 #--------------------------konec game3-----------------------------------------
 @app.route('/game/end3')
-def index():
+def index3():
     final = session["data"]["victory"]
     return render_template('konec3.html',finalll = final)
 
 @app.route('/game/end/thankyou3', methods=['POST'])
-def submit():
+def submit3():
     savename = request.form['username']
 
     counterer = session["data"]["roll"]
@@ -1765,7 +1808,64 @@ def submit():
     with open(path.join(dir,"users","users3.json"),"w") as rum:
         json.dump(saving,rum)
 
-    return render_template("thankyou3.html")
+    return render_template("thankyou.html")
+#---------------------------------------------------------------------------
+
+#--------------------------konec game2-----------------------------------------
+@app.route('/game/end2')
+def index2():
+    final = session["data"]["victory"]
+    return render_template('konec2.html',finalll = final)
+
+@app.route('/game/end/thankyou2', methods=['POST'])
+def submit2():
+    savename = request.form['username']
+
+    counterer = session["data"]["roll"]
+    if session["data"]["victory"] == 1:
+        verdict = "Ano"
+    else:
+        verdict = "Ne"
+
+    with open(path.join(dir,"users","users2.json")) as rum:
+        saving = json.load(rum)
+    klic = str(uuid.uuid4())
+
+    saving[klic] = {"jmeno": savename, "rolly": counterer, "vyhra": verdict} 
+
+    with open(path.join(dir,"users","users2.json"),"w") as rum:
+        json.dump(saving,rum)
+
+    return render_template("thankyou.html")
+#---------------------------------------------------------------------------
+
+#--------------------------konec game1-----------------------------------------
+@app.route('/game/end1')
+def index1():
+    final = session["data"]["victory"]
+    return render_template('konec1.html',finalll = final)
+
+@app.route('/game/end/thankyou1', methods=['POST'])
+def submit1():
+    savename = request.form['username']
+
+    counterer = session["data"]["roll"]
+    kapr = session["data"]["body"]
+    if session["data"]["victory"] == 1:
+        verdict = "Ano"
+    else:
+        verdict = "Ne"
+
+    with open(path.join(dir,"users","users1.json")) as rum:
+        saving = json.load(rum)
+    klic = str(uuid.uuid4())
+
+    saving[klic] = {"jmeno": savename, "body": kapr, "rolly": counterer, "vyhra": verdict} 
+
+    with open(path.join(dir,"users","users1.json"),"w") as rum:
+        json.dump(saving,rum)
+
+    return render_template("thankyou.html")
 #---------------------------------------------------------------------------
 
 if __name__ == "__main__":

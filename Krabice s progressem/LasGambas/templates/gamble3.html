@@ -284,8 +284,7 @@
         let ROLLRUN = document.getElementById("rollbuttonRUN")
         ROLLRUN.addEventListener("click", function () {
             isSlideshowActive = false;
-            const finalni = {{ finalni | tojson }};
-            fetch("/game3/results")
+            fetch("/victorier")
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error(`HTTP error, status = ${response.status}`);
@@ -293,14 +292,13 @@
                     return response.json();
                 })
                 .then((data) => {
-                    console.log(data.finalni)
-
-            if(data.finalni === "???"){
-                window.location.href = "/game/end3";
-            }
-            else{
-                startSlideshow();
-            };
+                    console.log(data);
+                if (data == 0){
+                    startSlideshow();
+                }
+                else{
+                    window.location.href = "/game/end3";
+                };
             
 
         })});

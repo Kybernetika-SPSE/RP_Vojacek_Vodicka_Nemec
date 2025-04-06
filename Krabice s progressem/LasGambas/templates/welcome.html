@@ -4,6 +4,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DefNotGamba</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+  /*------------------WIDE-----------------*/
+  @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+          display: none !important;
+      }
+
+      body::before {
+          content: "Otočte své zařízení na šířku";
+          display: block;
+          text-align: center;
+          font-size: 20px;
+          color: red;
+          margin-top: 50vh;
+      }
+  }
+
+  /*------------------WIDE-----------------*/
+</style>
 </head>
 <body>
   <p onclick="location.href='/secret'" style="position: absolute; top: 2vh; left: 2vh; font-size: 1vh; line-height: 1vh; text-align: left; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><u>Created by:</u><br>
@@ -14,11 +33,16 @@
 
   
     <div class="container">
-    <a onclick="location.href='/Lboard3'" class="button center">Board3</a>
     <a onclick="location.href='/game1/rules'" class="button left">Easy</a>
     <a onclick="location.href='/game2/rules'" class="button center">Classic</a>
     <a onclick="location.href='/game3/rules'" class="button right" onmouseover="playSound()">Dark souls</a>
   </div>
+  <div class="container">
+    <a onclick="location.href='/Lboard1'" class="button center">Board1</a>
+    <a onclick="location.href='/Lboard2'" class="button center">Board2</a>
+    <a onclick="location.href='/Lboard3'" class="button center">Board3</a>
+  </div>
+  <p style="position: absolute;left: 3vh;bottom: 3vh; font-size: 2vh;line-height: 3vh;"><u>Betatest build</u><br>Přijmeme designové návrhy</p>
 
   <audio id="DS3" src="{{ url_for('static', filename='DS3.mp3') }}" preload="auto"></audio>
 

@@ -30,7 +30,7 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 10vh;
-  padding: 0 20vh;
+  padding: 5 20vh;
 }
 .button {
   padding: 2.5vh 7vh;

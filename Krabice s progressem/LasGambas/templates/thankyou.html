@@ -4,6 +4,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Děkujeme že s námi hrajete!</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+    /*------------------WIDE-----------------*/
+    @media screen and (max-aspect-ratio: 9/16) {
+        body * {
+            display: none !important;
+        }
+  
+        body::before {
+            content: "Otočte své zařízení na šířku";
+            display: block;
+            text-align: center;
+            font-size: 20px;
+            color: red;
+            margin-top: 50vh;
+        }
+    }
+  
+    /*------------------WIDE-----------------*/
+  </style>
 </head>
 <body>
 <h1>Úspěšně uloženo</h1>

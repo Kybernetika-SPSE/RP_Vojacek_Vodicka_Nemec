@@ -52,7 +52,7 @@ def main():
     session["data"]["victory"] = 0
     session.modified = True
 
-    return render_template("Welcome.html")
+    return render_template("welcome.html")
 #_______________________________________________________________________________________________
 @app.route("/secret")
 def secret():

@@ -43,14 +43,14 @@ h1 {
   font-size: 3vh;
   margin-left: 1vh;
   margin-right: 1vh;
-  box-shadow: 0 4vh 8vh rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
 }
 
 .button:hover {
   background-color: #a30000;
   transform: scale(1.1);
-  box-shadow: 0 6vh 15vh rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2vh 3vh rgba(0, 0, 0, 0.4);
   color: #ffffff;
 }
 .gif {

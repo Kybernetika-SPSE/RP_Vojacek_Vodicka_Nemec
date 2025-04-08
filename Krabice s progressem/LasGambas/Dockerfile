@@ -28,7 +28,7 @@ EXPOSE 5000
 ENV PYTHONUNBUFFERED=1
 
 # declare volume (optional)
-VOLUME ["/home/app/data"]
+VOLUME ["/home/app/users"]
 
 # launch
 CMD ["gunicorn", "-w", "4", "--bind", "0.0.0.0:5000", "wsgi:app"]

@@ -25,6 +25,7 @@
       </style>
 </head>
 <body>
+    <a style="position:absolute; top: 10dvh;right: 5dvh;" class="button" id="fulls">⛶</a>
     <h1><u>Pravidla</u></h1>
     <h2><i>Klasický automat</i></h2>
     <div class="text-block"><p>Rollujte stisknutím tlačítka "next"</p><br>
@@ -33,5 +34,31 @@
                             <p>Prostě <b>Točka</b></p><br>
                         </div>
     <button class="button" onclick="location.href='/game/Game2'">Play</button>
+    <script>
+        const button = document.getElementById('fulls');
+    
+        button.addEventListener('click', () => {
+          if (!document.fullscreenElement) {
+            // Enter fullscreen
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+              elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+              elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+              elem.msRequestFullscreen();
+            }
+          } else {
+            // Exit fullscreen
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+              document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+              document.msExitFullscreen();
+            }
+          }
+        });
+      </script>
 </body>
 </html> 

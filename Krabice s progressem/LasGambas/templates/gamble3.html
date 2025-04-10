@@ -123,6 +123,7 @@
 </head>
 
 <body>
+    <a style="position:absolute; top: 10dvh;right: 5dvh;" class="button" id="fulls">⛶</a>
     <h1 class="RES" id="flavour">{{flavour}}</h1>
     <div class="container">
         <img src="{{ url_for('static', filename=karta1) }}" alt="Gif 1" class="gif" id="K1">
@@ -537,6 +538,32 @@
             }
         }
     </script>
+      <script>
+        const button = document.getElementById('fulls');
+    
+        button.addEventListener('click', () => {
+          if (!document.fullscreenElement) {
+            // Enter fullscreen
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+              elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) {
+              elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+              elem.msRequestFullscreen();
+            }
+          } else {
+            // Exit fullscreen
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+              document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+              document.msExitFullscreen();
+            }
+          }
+        });
+      </script>
 
 </body>
 

@@ -39,6 +39,7 @@
     Vojáček J.<br>
     Vodička T.<br>
     Němec T.</p> 
+  <p style="top: 5dvh;left: 5dvh;" id="fulls">⛶</p>
     <h1 id = "animated">Las Gambas</h1> 
 
   
@@ -93,6 +94,16 @@
     
     updateText("Las Gambas");
   </script>
-  
+  <script>
+    const button = document.getElementById('fulls');
+
+    button.addEventListener('click', () => {
+      const element = document.documentElement; // Fullscreen the whole page
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.webkitRequestFullscreen) { // Safari
+        element.webkitRequestFullscreen();
+    }});
+  </script>
 </body>
 </html>

@@ -6,9 +6,20 @@
     <title>Hra</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            max-width: 100vw;
+            max-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            box-sizing: border-box;
+            position: relative;
+        }
+        
         h1 {
             position: absolute;
-            top: 5vh;
+            top: 5dvh;
             left: 50%;
             transform: translateX(-50%);
             font-size: 5vh;
@@ -16,7 +27,7 @@
 
         p {
             position: absolute;
-            bottom: 25vh;
+            bottom: 25dvh;
             left: 50%;
             transform: translateX(-50%);
             font-size: 3vh;
@@ -35,7 +46,7 @@
 
         .container {
             position: absolute;
-            bottom: 35vh;
+            bottom: 35dvh;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -45,6 +56,7 @@
             max-width: 100%;
             overflow: hidden;
             z-index: 1;
+            outline: 1px rgb(250, 248, 248);
         }
 
         .button {
@@ -54,11 +66,12 @@
 
         .button-container {
             position: absolute;
-            bottom: 14vh;
+            bottom: 14dvh;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 5vh;
+            
         }
 
         .jif {
@@ -80,10 +93,11 @@
 
         .progress-container {
             position: absolute;
-            bottom: 3vh;
+            bottom: 3dvh;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
+            overflow: hidden;
         }
 
         /*------------------WIDE-----------------*/

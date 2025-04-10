@@ -6,6 +6,17 @@
     <title>Hra</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            max-width: 100vw;
+            max-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            box-sizing: border-box;
+            position: relative;
+        }
+        
         h1 {
             position: absolute;
             top: 5vh;

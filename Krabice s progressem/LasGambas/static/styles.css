@@ -69,7 +69,7 @@ h1 {
   transition: background-color 0.3s ease;
   z-index: 100;
   position: absolute;
-  top: 3dvh;
+  top: 15dvh;
   right: 2.5dvh;
 }
 

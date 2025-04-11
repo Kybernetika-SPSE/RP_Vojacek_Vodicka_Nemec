@@ -1,3 +1,9 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 body {
   font-family: georgia, Georgia;
   text-align: center;
@@ -11,26 +17,28 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  height: 100dvh;
   background-color: #2b0000;
   color: #f5d506;
 }
 h1 {
-  margin-bottom: 5vh;
+  margin-bottom: 5dvh;
   font-size: 10vh;
   font-weight: bold;
   text-align: center;
   color: #FFD700;
   animation: fadeInSlide 1.5s ease-in-out;
   text-shadow: 3vh 3vh 8vh rgba(0, 0, 0, 0.5);
-  margin-top: 0vh;
+  margin-top: 0dvh;
   line-height: 1.2;
 }
 .container {
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 10vh;
-  padding: 5 20vh;
+  padding: 5vh 20vh;
 }
 .button {
   padding: 2.5vh 7vh;
@@ -41,24 +49,60 @@ h1 {
   border-radius: 30vh;
   text-align: center;
   font-size: 3vh;
-  margin-left: 1vh;
-  margin-right: 1vh;
-  box-shadow: 0 4vh 8vh rgba(0, 0, 0, 0.2);
+  margin-left: 1dvh;
+  margin-right: 1dvh;
+  box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
+}
+.buttonF {
+  padding: 2.5vh;
+  text-decoration: none;
+  color: #FFD700;
+  background-color: #880808;
+  border: none;
+  border-radius: 30vh;
+  text-align: center;
+  font-size: 3vh;
+  margin-left: 1dvh;
+  margin-right: 1dvh;
+  box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  z-index: 100;
+  position: absolute;
+  top: 4dvh;
+  right: 2.5dvh;
+}
+.buttonL {
+  padding: 2.5vh;
+  text-decoration: none;
+  color: #FFD700;
+  background-color: #880808;
+  border: none;
+  border-radius: 30vh;
+  text-align: center;
+  font-size: 3vh;
+  margin-left: 1dvh;
+  margin-right: 1dvh;
+  box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  z-index: 100;
+  position: absolute;
+  top: 4dvh;
+  right: 2.5dvh;
 }
 
 .button:hover {
   background-color: #a30000;
   transform: scale(1.1);
-  box-shadow: 0 6vh 15vh rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2vh 3vh rgba(0, 0, 0, 0.4);
   color: #ffffff;
 }
 .gif {
   border: 1vh solid #c0a301;
   border-radius: 1vh;
-  padding: 0,5vh;
-  width: 33.6vh;
-  height: 44,8vh;
+  padding: 0.5vh;
+  width: 33.6dvh;
+  height: 44.8dvh;
 }
 /*------------------los Fontos-----------------*/
 .dancing-script-FU {
@@ -88,7 +132,7 @@ h1 {
   border-radius: 10vh;
   overflow: hidden;
   max-width: 70vh;
-  margin: 3vh auto;
+  margin: 3dvh auto;
   box-shadow: 0 6vh 12vh rgba(0, 0, 0, 0.3);
 }
 .progress-bar {
@@ -106,7 +150,7 @@ h1 {
 button {
   margin-top: 1vh;
   padding: 1vh;
-  font-size: 1,6vh;
+  font-size: 1.6vh;
   cursor: pointer;
 }
 /*------------------Leaderboard-----------------*/

@@ -39,21 +39,22 @@
     Vojáček J.<br>
     Vodička T.<br>
     Němec T.</p> 
+  <a class="buttonF" id="fulls">⛶</a>
     <h1 id = "animated">Las Gambas</h1> 
 
   
     <div class="container" style="display: flex; justify-content: center;">
       <div class="game-block">
         <a onclick="location.href='/game1/rules'" class="button">Easy</a>
-        <a onclick="location.href='/Lboard1'" class="button">Board1</a>
+        <a onclick="location.href='/Lboard1'" class="button">Leaderboard</a>
       </div>
       <div class="game-block">
         <a onclick="location.href='/game2/rules'" class="button">Classic</a>
-        <a onclick="location.href='/Lboard2'" class="button">Board2</a>
+        <a onclick="location.href='/Lboard2'" class="button">Leaderboard</a>
       </div>
       <div class="game-block">
         <a onclick="location.href='/game3/rules'" class="button" onmouseover="playSound()">Dark souls</a>
-        <a onclick="location.href='/Lboard3'" class="button">Board3</a>
+        <a onclick="location.href='/Lboard3'" class="button">Leaderboard</a>
       </div>
     </div>
   <p style="position: absolute;left: 3vh;bottom: 3vh; font-size: 2vh;line-height: 3vh;"><u>Betatest build</u><br>Přijmeme designové návrhy</p>
@@ -93,6 +94,31 @@
     
     updateText("Las Gambas");
   </script>
-  
+  <script>
+    const button = document.getElementById('fulls');
+
+    button.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        // Enter fullscreen
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+          elem.msRequestFullscreen();
+        }
+      } else {
+        // Exit fullscreen
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      }
+    });
+  </script>
 </body>
 </html>

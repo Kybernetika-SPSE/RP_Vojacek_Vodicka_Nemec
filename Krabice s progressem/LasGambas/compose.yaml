@@ -1,6 +1,15 @@
+
 services:
   lasgambas:
     restart: always
     build: .
     ports:
-      - "127.0.0.1:5000:5000/tcp"
+      - "127.0.0.1:5000:5000"
+    volumes:
+      - appdata:/home/app/users
+    environment:
+      - PYTHONUNBUFFERED=1
+    user: flask
+
+volumes:
+  appdata:

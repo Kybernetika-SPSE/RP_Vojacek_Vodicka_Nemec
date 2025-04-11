@@ -4,6 +4,7 @@ dir = path.dirname(__file__)
 from flask import Flask, render_template, render_template_string, request, session, redirect, url_for, g, jsonify
 import json
 import uuid
+import datetime
 
 app = Flask(__name__)
 #session["data"]["roll"] = 0
@@ -23,7 +24,8 @@ app.config["DEFAULT_DATA"] = {
     "impo": 0,
     "blackj": 0,
     "posobecheck": [],
-    "victory": 0
+    "victory": 0,
+    "datum": ""
 }
 try:
     with open(path.join(dir,"MEGA_SECRET_HYPER_PASSWORD")) as securiti:
@@ -598,7 +600,7 @@ def gameresults1():
         elif r1 == 6:
             fvtxt1 = "Žádná cesta ono to dostává body!"
         elif r1 == 7:
-            fvtxt1 = "Jako jarní vánek... Co to znamená? Jak to mam vědět"
+            fvtxt1 = "Myš"
         elif r1 == 8:
             fvtxt1 = "No dobrá, vem si ty svoje Drobný"
         else:
@@ -1617,7 +1619,7 @@ def gameresults3():
         "Four of a Kind":["FOUR"],
         "Three of a Kind":["THREE", "sýr", "Mám problémy s Nergigante", "Kontaktujte zprávce sítě"],
         "Two of a Kind":["TWO", "Prepare for trouble...", "\"Proč si snědla tu bramboru?\"", "Sedmimílové boty", "get a life"],
-        "Bad Luck":["I am Malenia, Blade of Miquella", "The jokes on YOU!", "Občas vyhraješ, často prohráváš"],
+        "Bad Luck":["I am Malenia, Blade of Miquella", "The jokes on YOU!", "Občas vyhraješ, často prohráváš","samozřejmě skill based"],
         "2Bad2Luck":["So close, yet so far...", "\"two\" bad"],
         "SIXQUEENS:TheStalker": ["Woof Woof", "Sniffa", "AWOOOOOOOO"],
         "SIXQUEENS:TheImpmageddon": ["fearmagneto.exe", "God damn the SUN", "Nesnáším Warlock hráče"],
@@ -1628,7 +1630,7 @@ def gameresults3():
         "SIXQUEENS:TheBlessedArmy":["Jsme spraseni!", "Výborně, teď je tu těch oblud pět",],
         "FOURQUEENS???":["WHAT", "ČTYŘI??", "MOC KRÁLOVEN"],
         "???":["PLIN PLIN PLON"],
-        "ImpEyes":["Down you go", "Zbohem, už se nevracej"],
+        "ImpEyes":["Down you go", "Zbohem, už se nevracej", "dont give up, skeleton!" ],
         "TheWOLF":["The DAWG", "Damn bro, ok", "S I T"],
         "TheSAVIOR":["en nomine patris et filii et spiritu sancti. Kámen", "Popálen buď Ležíš Citrus...","...Aš na Veky" ],
         "Too Repetetive":["něco jinýho","buď originální", "stop spamming", "HŘEBÍK DO FÁZE"],
@@ -1738,7 +1740,7 @@ def lboard3():
 
     step1 = dict(sorted(step0.items(), key=lambda item: (item[1]["body"]/item[1]["rolly"])+item[1]["body"], reverse=True))
 
-    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td></tr>"
+    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
     Lbord = ""
     for i in step1:
@@ -1755,7 +1757,7 @@ def lboard2():
 
     step1 = dict(sorted(step0.items(), key=lambda item: item[1]["rolly"], reverse=True))
 
-    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{rolly}</td><td>{vyhra}</td></tr>"
+    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
     Lbord = ""
     for i in step1:
@@ -1772,7 +1774,7 @@ def lboard1():
 
     step1 = dict(sorted(step0.items(), key=lambda item: (item[1]["body"]/item[1]["rolly"])+item[1]["body"], reverse=True))
 
-    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td></tr>"
+    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
     Lbord = ""
     for i in step1:
@@ -1791,7 +1793,9 @@ def index3():
 @app.route('/game/end/thankyou3', methods=['POST'])
 def submit3():
     savename = request.form['username']
-
+    zz = datetime.datetime.now()
+    date = str(zz.strftime("%x"))
+    
     counterer = session["data"]["roll"]
     kapr = session["data"]["body"]
     if session["data"]["victory"] == 1:
@@ -1803,7 +1807,7 @@ def submit3():
         saving = json.load(rum)
     klic = str(uuid.uuid4())
 
-    saving[klic] = {"jmeno": savename, "body": kapr, "rolly": counterer, "vyhra": verdict} 
+    saving[klic] = {"jmeno": savename, "body": kapr, "rolly": counterer, "vyhra": verdict, "datte": date} 
 
     with open(path.join(dir,"users","users3.json"),"w") as rum:
         json.dump(saving,rum)
@@ -1820,6 +1824,8 @@ def index2():
 @app.route('/game/end/thankyou2', methods=['POST'])
 def submit2():
     savename = request.form['username']
+    zz = datetime.datetime.now()
+    date = str(zz.strftime("%x"))
 
     counterer = session["data"]["roll"]
     if session["data"]["victory"] == 1:
@@ -1831,7 +1837,7 @@ def submit2():
         saving = json.load(rum)
     klic = str(uuid.uuid4())
 
-    saving[klic] = {"jmeno": savename, "rolly": counterer, "vyhra": verdict} 
+    saving[klic] = {"jmeno": savename, "rolly": counterer, "vyhra": verdict, "datte": date} 
 
     with open(path.join(dir,"users","users2.json"),"w") as rum:
         json.dump(saving,rum)
@@ -1848,6 +1854,8 @@ def index1():
 @app.route('/game/end/thankyou1', methods=['POST'])
 def submit1():
     savename = request.form['username']
+    zz = datetime.datetime.now()
+    date = str(zz.strftime("%x"))
 
     counterer = session["data"]["roll"]
     kapr = session["data"]["body"]
@@ -1860,7 +1868,7 @@ def submit1():
         saving = json.load(rum)
     klic = str(uuid.uuid4())
 
-    saving[klic] = {"jmeno": savename, "body": kapr, "rolly": counterer, "vyhra": verdict} 
+    saving[klic] = {"jmeno": savename, "body": kapr, "rolly": counterer, "vyhra": verdict, "datte": date} 
 
     with open(path.join(dir,"users","users1.json"),"w") as rum:
         json.dump(saving,rum)

@@ -51,6 +51,7 @@ h1 {
   font-size: 3vh;
   margin-left: 1dvh;
   margin-right: 1dvh;
+  margin-top: 2dvh;
   box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
 }
@@ -103,6 +104,9 @@ h1 {
   padding: 0.5vh;
   width: 33.6dvh;
   height: 44.8dvh;
+}
+.game-block{
+  padding: 0vh;
 }
 /*------------------los Fontos-----------------*/
 .dancing-script-FU {

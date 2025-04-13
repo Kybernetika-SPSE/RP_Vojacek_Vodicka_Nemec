@@ -1740,7 +1740,7 @@ def lboard3():
 
     step1 = dict(sorted(step0.items(), key=lambda item: (item[1]["body"]/item[1]["rolly"])+item[1]["body"], reverse=True))
 
-    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
+    AbhorrentTemplate = "<tr><td>0</td><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
     Lbord = ""
     for i in step1:
@@ -1757,7 +1757,7 @@ def lboard2():
 
     step1 = dict(sorted(step0.items(), key=lambda item: item[1]["rolly"], reverse=True))
 
-    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
+    AbhorrentTemplate = "<tr><td>0</td><td>{jmeno}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
     Lbord = ""
     for i in step1:
@@ -1774,7 +1774,7 @@ def lboard1():
 
     step1 = dict(sorted(step0.items(), key=lambda item: (item[1]["body"]/item[1]["rolly"])+item[1]["body"], reverse=True))
 
-    AbhorrentTemplate = "<tr><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
+    AbhorrentTemplate = "<tr><td>0</td><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
     Lbord = ""
     for i in step1:

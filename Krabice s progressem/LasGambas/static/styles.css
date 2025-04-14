@@ -39,6 +39,8 @@ h1 {
   flex-wrap: wrap;
   gap: 10vh;
   padding: 5vh 20vh;
+  position: absolute;
+  top: 12dvh;
 }
 .button {
   padding: 2.5vh 7vh;

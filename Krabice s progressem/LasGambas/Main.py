@@ -1778,7 +1778,10 @@ def lboard1():
 
     Lbord = ""
     for i in step1:
-        Lbord += AbhorrentTemplate.format(kluc = i, **step1[i])
+        if all(k in step1[i] for k in ["jmeno", "body", "rolly", "vyhra", "datte"]):
+            Lbord += AbhorrentTemplate.format(kluc = i, **step1[i])
+        else:
+            print(f"Skipping incomplete record: {step1[i]}")
 
 
     return render_template("L-Board1.html",board = Lbord)

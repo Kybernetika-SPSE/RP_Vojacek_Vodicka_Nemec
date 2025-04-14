@@ -42,6 +42,14 @@ h1 {
   position: absolute;
   top: 12dvh;
 }
+.containerR {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10vh;
+  padding: 5vh 20vh;
+}
 .button {
   padding: 2.5vh 7vh;
   text-decoration: none;

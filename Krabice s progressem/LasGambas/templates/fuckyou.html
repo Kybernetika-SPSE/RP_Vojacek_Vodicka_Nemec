@@ -1,0 +1,31 @@
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>???</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /*------------------WIDE-----------------*/
+        @media screen and (max-aspect-ratio: 9/16) {
+            body * {
+                display: none !important;
+            }
+      
+            body::before {
+                content: "Otočte své zařízení na šířku";
+                display: block;
+                text-align: center;
+                font-size: 20px;
+                color: red;
+                margin-top: 50vh;
+            }
+        }
+      
+        /*------------------WIDE-----------------*/
+      </style>
+</head>
+<body>
+    <h1><b>Neumíš<br>číst?</b></h1>
+    <button class="button" onclick="history.back()">back</button>
+</body>
+</html> 

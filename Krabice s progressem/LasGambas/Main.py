@@ -1802,26 +1802,29 @@ def index3():
 @app.route('/game/end/thankyou3', methods=['POST'])
 def submit3():
     savename = request.form['username']
-    zz = datetime.datetime.now()
-    date = str(zz.strftime("%x"))
-    
-    counterer = session["data"]["roll"]
-    kapr = session["data"]["body"]
-    if session["data"]["victory"] == 1:
-        verdict = "Ano"
+    if savename.isalnum() == True:
+        zz = datetime.datetime.now()
+        date = str(zz.strftime("%x"))
+        
+        counterer = session["data"]["roll"]
+        kapr = session["data"]["body"]
+        if session["data"]["victory"] == 1:
+            verdict = "Ano"
+        else:
+            verdict = "Ne"
+
+        with open(path.join(dir,"users","users3.json")) as rum:
+            saving = json.load(rum)
+        klic = str(uuid.uuid4())
+
+        saving[klic] = {"jmeno": savename, "body": kapr, "rolly": counterer, "vyhra": verdict, "datte": date} 
+
+        with open(path.join(dir,"users","users3.json"),"w") as rum:
+            json.dump(saving,rum)
+
+        return render_template("thankyou.html")
     else:
-        verdict = "Ne"
-
-    with open(path.join(dir,"users","users3.json")) as rum:
-        saving = json.load(rum)
-    klic = str(uuid.uuid4())
-
-    saving[klic] = {"jmeno": savename, "body": kapr, "rolly": counterer, "vyhra": verdict, "datte": date} 
-
-    with open(path.join(dir,"users","users3.json"),"w") as rum:
-        json.dump(saving,rum)
-
-    return render_template("thankyou.html")
+        return render_template("fuckyou.html")
 #---------------------------------------------------------------------------
 
 #--------------------------konec game2-----------------------------------------
@@ -1833,25 +1836,28 @@ def index2():
 @app.route('/game/end/thankyou2', methods=['POST'])
 def submit2():
     savename = request.form['username']
-    zz = datetime.datetime.now()
-    date = str(zz.strftime("%x"))
+    if savename.isalnum() == True:
+        zz = datetime.datetime.now()
+        date = str(zz.strftime("%x"))
 
-    counterer = session["data"]["roll"]
-    if session["data"]["victory"] == 1:
-        verdict = "Ano"
+        counterer = session["data"]["roll"]
+        if session["data"]["victory"] == 1:
+            verdict = "Ano"
+        else:
+            verdict = "Ne"
+
+        with open(path.join(dir,"users","users2.json")) as rum:
+            saving = json.load(rum)
+        klic = str(uuid.uuid4())
+
+        saving[klic] = {"jmeno": savename, "rolly": counterer, "vyhra": verdict, "datte": date} 
+
+        with open(path.join(dir,"users","users2.json"),"w") as rum:
+            json.dump(saving,rum)
+
+        return render_template("thankyou.html")
     else:
-        verdict = "Ne"
-
-    with open(path.join(dir,"users","users2.json")) as rum:
-        saving = json.load(rum)
-    klic = str(uuid.uuid4())
-
-    saving[klic] = {"jmeno": savename, "rolly": counterer, "vyhra": verdict, "datte": date} 
-
-    with open(path.join(dir,"users","users2.json"),"w") as rum:
-        json.dump(saving,rum)
-
-    return render_template("thankyou.html")
+        return render_template("fuckyou.html")
 #---------------------------------------------------------------------------
 
 #--------------------------konec game1-----------------------------------------
@@ -1863,26 +1869,29 @@ def index1():
 @app.route('/game/end/thankyou1', methods=['POST'])
 def submit1():
     savename = request.form['username']
-    zz = datetime.datetime.now()
-    date = str(zz.strftime("%x"))
+    if savename.isalnum() == True:
+        zz = datetime.datetime.now()
+        date = str(zz.strftime("%x"))
 
-    counterer = session["data"]["roll"]
-    kapr = session["data"]["body"]
-    if session["data"]["victory"] == 1:
-        verdict = "Ano"
+        counterer = session["data"]["roll"]
+        kapr = session["data"]["body"]
+        if session["data"]["victory"] == 1:
+            verdict = "Ano"
+        else:
+            verdict = "Ne"
+
+        with open(path.join(dir,"users","users1.json")) as rum:
+            saving = json.load(rum)
+        klic = str(uuid.uuid4())
+
+        saving[klic] = {"jmeno": savename, "body": kapr, "rolly": counterer, "vyhra": verdict, "datte": date} 
+
+        with open(path.join(dir,"users","users1.json"),"w") as rum:
+            json.dump(saving,rum)
+
+        return render_template("thankyou.html")
     else:
-        verdict = "Ne"
-
-    with open(path.join(dir,"users","users1.json")) as rum:
-        saving = json.load(rum)
-    klic = str(uuid.uuid4())
-
-    saving[klic] = {"jmeno": savename, "body": kapr, "rolly": counterer, "vyhra": verdict, "datte": date} 
-
-    with open(path.join(dir,"users","users1.json"),"w") as rum:
-        json.dump(saving,rum)
-
-    return render_template("thankyou.html")
+        return render_template("fuckyou.html")
 #---------------------------------------------------------------------------
 if __name__ == "__main__":
     app.run(debug=True)

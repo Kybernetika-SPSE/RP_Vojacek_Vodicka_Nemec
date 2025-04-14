@@ -1875,6 +1875,6 @@ def submit1():
 
     return render_template("thankyou.html")
 #---------------------------------------------------------------------------
-
+#Krabice s progressem/LasGambas/users/
 if __name__ == "__main__":
     app.run(debug=True)

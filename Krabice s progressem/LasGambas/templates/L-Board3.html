@@ -34,18 +34,24 @@
     /*------------------WIDE-----------------*/
 </style>
 <a class="buttonF" id="fulls">⛶</a>
-<button class="button" onclick="location.href='/'">Zpět na hlavní stránku</button>
-<table id="leaderboard">
-  <thead>
-      <tr>
-          <th onclick="sortTable(0, 'asc')">Pořadí</th>
-          <th>Jméno</th>
-          <th onclick="sortTable(1, 'desc')">Body</th>
-          <th onclick="sortTable(2, 'desc')">Počet otoček</th>
-          <th onclick="sortTable(3, 'desc')">Výhra</th>
-          <th onclick="sortTable(4, 'desc')">Datum</th>
-      </tr>
-  </thead>
+<div class="Bcontainer">
+  <button class="button" onclick="location.href='/'">Zpět na hlavní stránku</button>
+  </div>
+  <div class="container">
+  <table id="leaderboard">
+      <thead>
+          <tr>
+              <th onclick="sortTable(0, 'asc')">Pořadí</th>
+              <th>Jméno</th>
+              <th onclick="sortTable(1, 'desc')">Body</th>
+              <th onclick="sortTable(2, 'desc')">Počet otoček</th>
+              <th onclick="sortTable(3, 'desc')">Výhra</th>
+              <th onclick="sortTable(4, 'desc')">Datum</th>
+          </tr>
+      </thead>
+      {{ board | safe }}
+  </table>
+  </div>
   {{ board | safe }}
 </table>
 <script>

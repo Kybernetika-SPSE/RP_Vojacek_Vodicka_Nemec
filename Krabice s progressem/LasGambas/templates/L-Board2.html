@@ -34,7 +34,10 @@
     /*------------------WIDE-----------------*/
 </style>
 <a class="buttonF" id="fulls">⛶</a>
-<button class="button" onclick="location.href='/'">Zpět na hlavní stránku</button>
+<div class="Bcontainer">
+  <button class="button" onclick="location.href='/'">Zpět na hlavní stránku</button>
+</div>
+<div class="container">
 <table id="leaderboard">
   <thead>
       <tr>
@@ -47,6 +50,7 @@
   </thead>
   {{ board | safe }}
 </table>
+</div>
 <script>
 let lastSortedColumn = -1;
 let lastSortDirection = 'asc';

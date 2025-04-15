@@ -39,16 +39,16 @@
 </style>
 
 <body>
-    <h1><u>Speciální karty</u></h1>
+    <h1 style="top: 3dvh; position: absolute;"><u>Speciální karty</u></h1>
     <div class="container">
         <img src="{{ url_for('static', filename='[imp].png') }}" alt="Gif 1" class="gif" id="K1">
         <img src="{{ url_for('static', filename='[wolf].png') }}" alt="Gif 2" class="gif" id="K2">
         <img src="{{ url_for('static', filename='[saviour].png') }}" alt="Gif 3" class="gif" id="K3">
     </div>
-    <div class="container">
-        <p>-5 bodů pokud je vytočena</p>
-        <p>-50% aktuální počet bodů</p>
-        <p>2x aktuální počet bodů</p>
+    <div style="position: absolute; bottom: 15dvh;">
+        <pre>
+        <p>-5 bodů pokud je vytočena        -50% aktuální počet bodů       2x aktuální počet bodů</p>
+        </pre>
     </div>
 
     <button class="buttonL" onclick="location.href='/game3/rules'">back</button>

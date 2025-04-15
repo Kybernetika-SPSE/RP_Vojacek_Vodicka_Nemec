@@ -1745,7 +1745,10 @@ def lboard3():
     Lbord = ""
     for i in step1:
         if all(k in step1[i] for k in ["jmeno", "body", "rolly", "vyhra", "datte"]):
-            Lbord += AbhorrentTemplate.format(kluc = i, **step1[i])
+            if len(step1[i]["jmeno"]) <= 20:
+                Lbord += AbhorrentTemplate.format(kluc=i, **step1[i])
+            else:
+                print(f"Skipping long name: {step1[i]['jmeno']}")
         else:
             print(f"Skipping incomplete record: {step1[i]}")
 
@@ -1765,7 +1768,10 @@ def lboard2():
     Lbord = ""
     for i in step1:
         if all(k in step1[i] for k in ["jmeno", "body", "rolly", "vyhra", "datte"]):
-            Lbord += AbhorrentTemplate.format(kluc = i, **step1[i])
+            if len(step1[i]["jmeno"]) <= 20:
+                Lbord += AbhorrentTemplate.format(kluc=i, **step1[i])
+            else:
+                print(f"Skipping long name: {step1[i]['jmeno']}")
         else:
             print(f"Skipping incomplete record: {step1[i]}")
 
@@ -1785,7 +1791,10 @@ def lboard1():
     Lbord = ""
     for i in step1:
         if all(k in step1[i] for k in ["jmeno", "body", "rolly", "vyhra", "datte"]):
-            Lbord += AbhorrentTemplate.format(kluc = i, **step1[i])
+            if len(step1[i]["jmeno"]) <= 20:
+                Lbord += AbhorrentTemplate.format(kluc=i, **step1[i])
+            else:
+                print(f"Skipping long name: {step1[i]['jmeno']}")
         else:
             print(f"Skipping incomplete record: {step1[i]}")
 
@@ -1802,7 +1811,7 @@ def index3():
 @app.route('/game/end/thankyou3', methods=['POST'])
 def submit3():
     savename = request.form['username']
-    if savename.isalnum() == True:
+    if savename.isalnum() == True and len(savename)<21:
         zz = datetime.datetime.now()
         date = str(zz.strftime("%x"))
         
@@ -1836,7 +1845,7 @@ def index2():
 @app.route('/game/end/thankyou2', methods=['POST'])
 def submit2():
     savename = request.form['username']
-    if savename.isalnum() == True:
+    if savename.isalnum() == True and len(savename)<21:
         zz = datetime.datetime.now()
         date = str(zz.strftime("%x"))
 
@@ -1869,7 +1878,7 @@ def index1():
 @app.route('/game/end/thankyou1', methods=['POST'])
 def submit1():
     savename = request.form['username']
-    if savename.isalnum() == True:
+    if savename.isalnum() == True and len(savename)<21:
         zz = datetime.datetime.now()
         date = str(zz.strftime("%x"))
 

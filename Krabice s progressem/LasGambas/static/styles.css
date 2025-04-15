@@ -1,8 +1,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  overflow: hidden;
+
 }
 body {
   font-family: georgia, Georgia;
@@ -41,6 +40,17 @@ h1 {
   padding: 5vh 20vh;
   position: absolute;
   top: 12dvh;
+}
+.Bcontainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10vh;
+  padding: 5vh 20vh;
+  position: absolute;
+  top: 5dvh;
+  z-index: 100;
 }
 .containerR {
   width: 100%;

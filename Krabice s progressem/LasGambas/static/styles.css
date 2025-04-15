@@ -1,6 +1,8 @@
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: auto;
 
 }
 body {
@@ -42,15 +44,11 @@ h1 {
   top: 12dvh;
 }
 .Bcontainer {
-  width: 100%;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 10vh;
-  padding: 5vh 20vh;
-  position: absolute;
-  top: 5dvh;
-  z-index: 100;
+  padding: 2vh 0;
+  background-color: #2b0000;
+  width: 100%;
 }
 .containerR {
   width: 100%;
@@ -61,17 +59,10 @@ h1 {
   padding: 5vh 20vh;
 }
 .scrollable-container {
-  max-height: 100dvh;
+  max-height: 90vh;
   overflow-y: auto;
-  overflow-x: hidden;
-  padding: 5vh 5vw;
+  padding: 2vh 5vw;
   box-sizing: border-box;
-  width: 100%;
-  position: relative; /* Keeps it in flow, unlike `absolute` */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5vh;
 }
 .button {
   padding: 2.5vh 7vh;

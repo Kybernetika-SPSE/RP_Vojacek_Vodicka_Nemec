@@ -1734,71 +1734,131 @@ def victorier():
 #----------------------------Lboardy--------------------------------
 @app.route("/Lboard3")
 def lboard3():
-
-    with open(path.join(dir,"users","users3.json")) as rum:
+    with open(path.join(dir, "users", "users3.json")) as rum:
         step0 = json.load(rum)
 
-    step1 = dict(sorted(step0.items(), key=lambda item: (item[1]["body"]/item[1]["rolly"])+item[1]["body"], reverse=True))
+    # Sort safely
+    try:
+        step1 = dict(sorted(
+            step0.items(),
+            key=lambda item: (item[1]["body"] / item[1]["rolly"]) + item[1]["body"],
+            reverse=True
+        ))
+    except Exception as e:
+        print(f"Sorting failed: {e}")
+        return render_template("L-Board3.html", board="<tr><td colspan='6'>Error sorting data</td></tr>")
 
     AbhorrentTemplate = "<tr><td>0</td><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
     Lbord = ""
-    for i in step1:
-        if all(k in step1[i] for k in ["jmeno", "body", "rolly", "vyhra", "datte"]):
-            if len(step1[i]["jmeno"]) <= 20:
-                Lbord += AbhorrentTemplate.format(kluc=i, **step1[i])
+    keys_to_delete = []
+
+    for i in list(step1):  # convert to list to safely delete during iteration
+        try:
+            if all(k in step1[i] for k in ["jmeno", "body", "rolly", "vyhra", "datte"]):
+                if len(step1[i]["jmeno"]) <= 20:
+                    Lbord += AbhorrentTemplate.format(kluc=i, **step1[i])
+                else:
+                    print(f"Skipping long name: {step1[i]['jmeno']}")
+                    keys_to_delete.append(i)
             else:
-                print(f"Skipping long name: {step1[i]['jmeno']}")
-        else:
-            print(f"Skipping incomplete record: {step1[i]}")
+                print(f"Skipping incomplete record: {step1[i]}")
+                keys_to_delete.append(i)
+        except Exception as e:
+            print(f"Error processing record {i}: {e}")
+            keys_to_delete.append(i)
 
+    # Delete the problematic entries
+    for key in keys_to_delete:
+        del step0[key]
 
+    # Optional: write the cleaned data back to file
+    with open(path.join(dir, "users", "users3.json"), "w") as fixfile:
+        json.dump(step0, fixfile, indent=4)
+    
     return render_template("L-Board3.html",board = Lbord)
 #-----------------
 @app.route("/Lboard2")
 def lboard2():
-
-    with open(path.join(dir,"users","users2.json")) as rum:
+    with open(path.join(dir, "users", "users2.json")) as rum:
         step0 = json.load(rum)
+    step1 = step0
 
-    step1 = dict(sorted(step0.items(), key=lambda item: item[1]["rolly"], reverse=True))
 
     AbhorrentTemplate = "<tr><td>0</td><td>{jmeno}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
     Lbord = ""
-    for i in step1:
-        if all(k in step1[i] for k in ["jmeno", "body", "rolly", "vyhra", "datte"]):
-            if len(step1[i]["jmeno"]) <= 20:
-                Lbord += AbhorrentTemplate.format(kluc=i, **step1[i])
+    keys_to_delete = []
+
+    for i in list(step1):  # convert to list to safely delete during iteration
+        try:
+            if all(k in step1[i] for k in ["jmeno", "rolly", "vyhra", "datte"]):
+                if len(step1[i]["jmeno"]) <= 20:
+                    Lbord += AbhorrentTemplate.format(kluc=i, **step1[i])
+                else:
+                    print(f"Skipping long name: {step1[i]['jmeno']}")
+                    keys_to_delete.append(i)
             else:
-                print(f"Skipping long name: {step1[i]['jmeno']}")
-        else:
-            print(f"Skipping incomplete record: {step1[i]}")
+                print(f"Skipping incomplete record: {step1[i]}")
+                keys_to_delete.append(i)
+        except Exception as e:
+            print(f"Error processing record {i}: {e}")
+            keys_to_delete.append(i)
 
+    # Delete the problematic entries
+    for key in keys_to_delete:
+        del step0[key]
 
+    # Optional: write the cleaned data back to file
+    with open(path.join(dir, "users", "users2.json"), "w") as fixfile:
+        json.dump(step0, fixfile, indent=4)
+    
     return render_template("L-Board2.html",board = Lbord)
 #----------
 @app.route("/Lboard1")
 def lboard1():
-
-    with open(path.join(dir,"users","users1.json")) as rum:
+    with open(path.join(dir, "users", "users1.json")) as rum:
         step0 = json.load(rum)
 
-    step1 = dict(sorted(step0.items(), key=lambda item: (item[1]["body"]/item[1]["rolly"])+item[1]["body"], reverse=True))
+    # Sort safely
+    try:
+        step1 = dict(sorted(
+            step0.items(),
+            key=lambda item: (item[1]["body"] / item[1]["rolly"]) + item[1]["body"],
+            reverse=True
+        ))
+    except Exception as e:
+        print(f"Sorting failed: {e}")
+        return render_template("L-Board1.html", board="<tr><td colspan='6'>Error sorting data</td></tr>")
 
     AbhorrentTemplate = "<tr><td>0</td><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
     Lbord = ""
-    for i in step1:
-        if all(k in step1[i] for k in ["jmeno", "body", "rolly", "vyhra", "datte"]):
-            if len(step1[i]["jmeno"]) <= 20:
-                Lbord += AbhorrentTemplate.format(kluc=i, **step1[i])
+    keys_to_delete = []
+
+    for i in list(step1):  # convert to list to safely delete during iteration
+        try:
+            if all(k in step1[i] for k in ["jmeno", "body", "rolly", "vyhra", "datte"]):
+                if len(step1[i]["jmeno"]) <= 20:
+                    Lbord += AbhorrentTemplate.format(kluc=i, **step1[i])
+                else:
+                    print(f"Skipping long name: {step1[i]['jmeno']}")
+                    keys_to_delete.append(i)
             else:
-                print(f"Skipping long name: {step1[i]['jmeno']}")
-        else:
-            print(f"Skipping incomplete record: {step1[i]}")
+                print(f"Skipping incomplete record: {step1[i]}")
+                keys_to_delete.append(i)
+        except Exception as e:
+            print(f"Error processing record {i}: {e}")
+            keys_to_delete.append(i)
 
+    # Delete the problematic entries
+    for key in keys_to_delete:
+        del step0[key]
 
+    # Optional: write the cleaned data back to file
+    with open(path.join(dir, "users", "users1.json"), "w") as fixfile:
+        json.dump(step0, fixfile, indent=4)
+    
     return render_template("L-Board1.html",board = Lbord)
 
 

@@ -1737,16 +1737,29 @@ def lboard3():
     with open(path.join(dir, "users", "users3.json")) as rum:
         step0 = json.load(rum)
 
-    # Sort safely
-    try:
-        step1 = dict(sorted(
-            step0.items(),
-            key=lambda item: (item[1]["body"] / item[1]["rolly"]) + item[1]["body"],
-            reverse=True
-        ))
-    except Exception as e:
-        print(f"Sorting failed: {e}")
-        return render_template("L-Board3.html", board="<tr><td colspan='6'>Error sorting data</td></tr>")
+    keys_to_delete = []
+
+    # Clean entries before sorting
+    valid_items = {}
+    for key, value in step0.items():
+        try:
+            # Check that all required keys exist and values are valid for math
+            if all(k in value for k in ["body", "rolly"]) and isinstance(value["body"], (int, float)) and isinstance(value["rolly"], (int, float)) and value["rolly"] != 0:
+                # Calculate score once to avoid recalculating later
+                score = (value["body"] / value["rolly"]) + value["body"]
+                valid_items[key] = (score, value)
+            else:
+                raise ValueError("Missing or invalid keys/values")
+        except Exception as e:
+            print(f"Excluding from sort due to error ({key}): {e}")
+            keys_to_delete.append(key)
+
+    # Now sort the valid items
+    step1 = dict(sorted(
+        ((k, v[1]) for k, v in valid_items.items()),
+        key=lambda item: valid_items[item[0]][0],
+        reverse=True
+    ))
 
     AbhorrentTemplate = "<tr><td>0</td><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
@@ -1820,17 +1833,29 @@ def lboard1():
     with open(path.join(dir, "users", "users1.json")) as rum:
         step0 = json.load(rum)
 
-    # Sort safely
-    try:
-        step1 = dict(sorted(
-            step0.items(),
-            key=lambda item: (item[1]["body"] / item[1]["rolly"]) + item[1]["body"],
-            reverse=True
-        ))
-    except Exception as e:
-        print(f"Sorting failed: {e}")
-        return render_template("L-Board1.html", board="<tr><td colspan='6'>Error sorting data</td></tr>")
+    keys_to_delete = []
 
+    # Clean entries before sorting
+    valid_items = {}
+    for key, value in step0.items():
+        try:
+            # Check that all required keys exist and values are valid for math
+            if all(k in value for k in ["body", "rolly"]) and isinstance(value["body"], (int, float)) and isinstance(value["rolly"], (int, float)) and value["rolly"] != 0:
+                # Calculate score once to avoid recalculating later
+                score = (value["body"] / value["rolly"]) + value["body"]
+                valid_items[key] = (score, value)
+            else:
+                raise ValueError("Missing or invalid keys/values")
+        except Exception as e:
+            print(f"Excluding from sort due to error ({key}): {e}")
+            keys_to_delete.append(key)
+
+    # Now sort the valid items
+    step1 = dict(sorted(
+        ((k, v[1]) for k, v in valid_items.items()),
+        key=lambda item: valid_items[item[0]][0],
+        reverse=True
+    ))
     AbhorrentTemplate = "<tr><td>0</td><td>{jmeno}</td><td>{body}</td><td>{rolly}</td><td>{vyhra}</td><td>{datte}</td></tr>"
 
     Lbord = ""

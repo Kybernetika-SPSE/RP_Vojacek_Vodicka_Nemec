@@ -15,8 +15,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: auto;
-  overflow-y: auto;
+  height: 100vh;
+  height: 100dvh;
   background-color: #2b0000;
   color: #f5d506;
 }
@@ -59,6 +59,19 @@ h1 {
   flex-wrap: wrap;
   gap: 10vh;
   padding: 5vh 20vh;
+}
+.scrollable-container {
+  max-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 5vh 5vw;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative; /* Keeps it in flow, unlike `absolute` */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5vh;
 }
 .button {
   padding: 2.5vh 7vh;
@@ -185,6 +198,7 @@ table {
   background: #771205;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+
 }
 th, td {
   font-size: 20px;

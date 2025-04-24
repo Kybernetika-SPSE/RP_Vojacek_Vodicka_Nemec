@@ -1667,7 +1667,7 @@ def gameresults3():
         "karta4":karta44,
     }
     
-    return datosRES #render_template("game3results.html" cartos = carto, baro = bar, flavour = fvtxt, finalni = final,fidlovacka = kapr,brokovnice =nerozumim,kount=counterer,karta1=karta11,karta2=karta22,karta3=karta33,karta4=karta44,zmena = opakuj)
+    return datosRES 
 
 @app.route("/game/Game1")
 def gamba1():

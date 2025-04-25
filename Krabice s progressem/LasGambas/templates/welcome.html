@@ -5,59 +5,105 @@
   <title>DefNotGamba</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <style>
-  /*------------------WIDE-----------------*/
-  @media screen and (max-aspect-ratio: 9/16) {
+    @media screen and (max-aspect-ratio: 9/16) {
       body * {
-          display: none !important;
+        display: none !important;
       }
-
       body::before {
-          content: "Otočte své zařízení na šířku";
-          display: block;
-          text-align: center;
-          font-size: 20px;
-          color: red;
-          margin-top: 50vh;
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
       }
-  }
-  .game-block {
-    display: inline-block;
-    text-align: center;
-    margin: 0 1vw;
-}
+    }
 
-.button {
-    display: block;
-    margin: vh 0;
-}
+    .game-block {
+      display: inline-block;
+      text-align: center;
+      margin: 0 1vw;
+    }
 
-  /*------------------WIDE-----------------*/
-</style>
+    .button {
+      display: block;
+      margin: 1vh 0;
+    }
+
+    .cards-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .card {
+      position: absolute;
+      width: 70px;
+      height: 90px;
+      background-size: cover;
+      opacity: 0.9;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    h1, .containerR, .buttonF, p {
+      position: relative;
+      z-index: 2;
+    }
+
+    .buttonF {
+      position: absolute;
+      top: 2vh;
+      right: 2vh;
+      font-size: 3vh;
+      cursor: pointer;
+      z-index: 3;
+    }
+  </style>
 </head>
 <body>
+  
+  <div class="cards-container" id="cardsContainer"></div>
+
   <p onclick="location.href='/secret'" style="position: absolute; top: 2vh; left: 2vh; font-size: 1vh; line-height: 1vh; text-align: left; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><u>Created by:</u><br>
     Vojáček J.<br>
     Vodička T.<br>
     Němec T.</p> 
-  <a class="buttonF" id="fulls">⛶</a>
-    <h1 id = "animated">Las Gambas</h1> 
 
-  
-    <div class="containerR" style="display: flex; justify-content: center;">
-      <div class="game-block">
-        <a onclick="location.href='/game1/rules'" class="button">Easy</a>
-        <a onclick="location.href='/Lboard1'" class="button">Leaderboard</a>
-      </div>
-      <div class="game-block">
-        <a onclick="location.href='/game2/rules'" class="button">Classic</a>
-        <a onclick="location.href='/Lboard2'" class="button">Leaderboard</a>
-      </div>
-      <div class="game-block">
-        <a onclick="location.href='/game3/rules'" class="button" onmouseover="playSound()">Dark souls</a>
-        <a onclick="location.href='/Lboard3'" class="button">Leaderboard</a>
-      </div>
+  <a class="buttonF" id="fulls">⛶</a>
+  <h1 id="animated">Las Gambas</h1> 
+
+  <div class="containerR" style="display: flex; justify-content: center;">
+    <div class="game-block">
+      <a onclick="location.href='/game1/rules'" class="button">Easy</a>
+      <a onclick="location.href='/Lboard1'" class="button">Leaderboard</a>
     </div>
-  <p style="position: absolute;left: 3vh;bottom: 3vh; font-size: 2vh;line-height: 3vh;"><u>Betatest build</u><br>Přijmeme designové návrhy</p>
+    <div class="game-block">
+      <a onclick="location.href='/game2/rules'" class="button">Classic</a>
+      <a onclick="location.href='/Lboard2'" class="button">Leaderboard</a>
+    </div>
+    <div class="game-block">
+      <a onclick="location.href='/game3/rules'" class="button" onmouseover="playSound()">Dark souls</a>
+      <a onclick="location.href='/Lboard3'" class="button">Leaderboard</a>
+    </div>
+  </div>
+
+  <p style="position: absolute; left: 3vh; bottom: 3vh; font-size: 2vh; line-height: 3vh;"><u>Betatest build</u><br>Přijmeme designové návrhy</p>
 
   <audio id="DS3" src="{{ url_for('static', filename='DS3.mp3') }}" preload="auto"></audio>
 
@@ -67,39 +113,25 @@
       sound.currentTime = 0; 
       sound.play();
     }
-  </script>
-  <script>
-  function updateText(text){
 
-    let delay = 200;
-    
+    function updateText(text) {
+      let delay = 200;
       let h1 = document.getElementById("animated");
-    
-          h1.innerHTML = text
-            .split("")
-            .map(letter => {
-              console.log(letter);
-              return `<span>` + letter + `</span>`;
-            })
-            .join("");
-          
-          Array.from(h1.children).forEach((span, index) => {
-            setTimeout(() => {
-              span.classList.add("wavy");
-            }, index * 100 + delay);
-          });
-    
-    }
-  
-    
-    updateText("Las Gambas");
-  </script>
-  <script>
-    const button = document.getElementById('fulls');
 
+      h1.innerHTML = text.split("").map(letter => `<span>${letter}</span>`).join("");
+
+      Array.from(h1.children).forEach((span, index) => {
+        setTimeout(() => {
+          span.classList.add("wavy");
+        }, index * 100 + delay);
+      });
+    }
+
+    updateText("Las Gambas");
+
+    const button = document.getElementById('fulls');
     button.addEventListener('click', () => {
       if (!document.fullscreenElement) {
-        // Enter fullscreen
         const elem = document.documentElement;
         if (elem.requestFullscreen) {
           elem.requestFullscreen();
@@ -109,7 +141,6 @@
           elem.msRequestFullscreen();
         }
       } else {
-        // Exit fullscreen
         if (document.exitFullscreen) {
           document.exitFullscreen();
         } else if (document.webkitExitFullscreen) {
@@ -119,6 +150,77 @@
         }
       }
     });
+
+    
+    const cardImages = [
+    "{{ url_for('static', filename='[srdce, 2].png') }}",
+    "{{ url_for('static', filename='[srdce, 3].png') }}",
+    "{{ url_for('static', filename='[srdce, 4].png') }}",
+    "{{ url_for('static', filename='[srdce, 5].png') }}",
+    "{{ url_for('static', filename='[srdce, 6].png') }}",
+    "{{ url_for('static', filename='[srdce, 7].png') }}",
+    "{{ url_for('static', filename='[srdce, 8].png') }}",
+    "{{ url_for('static', filename='[srdce, 9].png') }}",
+    "{{ url_for('static', filename='[srdce, 10].png') }}",
+    "{{ url_for('static', filename='[srdce, A].png') }}",
+    "{{ url_for('static', filename='[srdce, J].png') }}",
+    "{{ url_for('static', filename='[srdce, K].png') }}",
+    "{{ url_for('static', filename='[srdce, Q].png') }}",
+    "{{ url_for('static', filename='[kary, 2].png') }}",
+    "{{ url_for('static', filename='[kary, 3].png') }}",
+    "{{ url_for('static', filename='[kary, 4].png') }}",
+    "{{ url_for('static', filename='[kary, 5].png') }}",
+    "{{ url_for('static', filename='[kary, 6].png') }}",
+    "{{ url_for('static', filename='[kary, 7].png') }}",
+    "{{ url_for('static', filename='[kary, 8].png') }}",
+    "{{ url_for('static', filename='[kary, 9].png') }}",
+    "{{ url_for('static', filename='[kary, 10].png') }}",
+    "{{ url_for('static', filename='[kary, A].png') }}",
+    "{{ url_for('static', filename='[kary, J].png') }}",
+    "{{ url_for('static', filename='[kary, K].png') }}",
+    "{{ url_for('static', filename='[kary, Q].png') }}",
+    "{{ url_for('static', filename='[piky, 2].png') }}",
+    "{{ url_for('static', filename='[piky, 3].png') }}",
+    "{{ url_for('static', filename='[piky, 4].png') }}",
+    "{{ url_for('static', filename='[piky, 5].png') }}",
+    "{{ url_for('static', filename='[piky, 6].png') }}",
+    "{{ url_for('static', filename='[piky, 7].png') }}",
+    "{{ url_for('static', filename='[piky, 8].png') }}",
+    "{{ url_for('static', filename='[piky, 9].png') }}",
+    "{{ url_for('static', filename='[piky, 10].png') }}",
+    "{{ url_for('static', filename='[piky, A].png') }}",
+    "{{ url_for('static', filename='[piky, J].png') }}",
+    "{{ url_for('static', filename='[piky, K].png') }}",
+    "{{ url_for('static', filename='[piky, Q].png') }}",
+    "{{ url_for('static', filename='[krize, 2].png') }}",
+    "{{ url_for('static', filename='[krize, 3].png') }}",
+    "{{ url_for('static', filename='[krize, 4].png') }}",
+    "{{ url_for('static', filename='[krize, 5].png') }}",
+    "{{ url_for('static', filename='[krize, 6].png') }}",
+    "{{ url_for('static', filename='[krize, 7].png') }}",
+    "{{ url_for('static', filename='[krize, 8].png') }}",
+    "{{ url_for('static', filename='[krize, 9].png') }}",
+    "{{ url_for('static', filename='[krize, 10].png') }}",
+    "{{ url_for('static', filename='[krize, A].png') }}",
+    "{{ url_for('static', filename='[krize, J].png') }}",
+    "{{ url_for('static', filename='[krize, K].png') }}",
+    "{{ url_for('static', filename='[krize, Q].png') }}"
+    ];
+
+    const container = document.getElementById('cardsContainer');
+
+    function createCard() {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.style.left = Math.random() * 100 + 'vw';
+      card.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      const imgUrl = cardImages[Math.floor(Math.random() * cardImages.length)];
+      card.style.backgroundImage = `url('${imgUrl}')`;
+      container.appendChild(card);
+      setTimeout(() => card.remove(), 6000);
+    }
+
+    setInterval(createCard, 400);
   </script>
 </body>
 </html>

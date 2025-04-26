@@ -37,8 +37,8 @@ except:
 
 def censor(text, word):
     for w in word:
-        pattern = re.compile(re.escape(word), re.IGNORECASE)
-        texto = pattern.sub("***", text)
+        pattern = re.compile(re.escape(w), re.IGNORECASE)
+        texto = pattern.sub("[censored]", text)
     return texto
 nopewords = ["neg","nig","nag"]
     

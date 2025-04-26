@@ -36,8 +36,12 @@ except:
     exit()
 
 def censor(text, word):
-    pattern = re.compile(re.escape(word), re.IGNORECASE)
-    return pattern.sub("***", text)
+    for w in word:
+        pattern = re.compile(re.escape(word), re.IGNORECASE)
+        texto = pattern.sub("***", text)
+    return texto
+nopewords = ["neg","nig","nag"]
+    
 
 @app.before_request
 def setup():
@@ -62,7 +66,7 @@ def main():
     with open(path.join(dir,"users","users1.json")) as rum:
         saving = json.load(rum)
     for i in saving:
-        saving[i]["jmeno"] = censor(saving[i]["jmeno"],"neg")
+        saving[i]["jmeno"] = censor(saving[i]["jmeno"],nopewords)
     with open(path.join(dir,"users","users1.json"),"w") as rum:
         json.dump(saving,rum)
 
@@ -70,7 +74,7 @@ def main():
     with open(path.join(dir,"users","users1.json")) as rum:
         saving = json.load(rum)
     for i in saving:
-        saving[i]["jmeno"] = censor(saving[i]["jmeno"],"neg")
+        saving[i]["jmeno"] = censor(saving[i]["jmeno"],nopewords)
     with open(path.join(dir,"users","users1.json"),"w") as rum:
         json.dump(saving,rum)
 
@@ -78,7 +82,7 @@ def main():
     with open(path.join(dir,"users","users1.json")) as rum:
         saving = json.load(rum)
     for i in saving:
-        saving[i]["jmeno"] = censor(saving[i]["jmeno"],"neg")
+        saving[i]["jmeno"] = censor(saving[i]["jmeno"],nopewords)
     with open(path.join(dir,"users","users1.json"),"w") as rum:
         json.dump(saving,rum)
 
@@ -1925,7 +1929,7 @@ def index3():
 @app.route('/game/end/thankyou3', methods=['POST'])
 def submit3():
     savename = request.form['username']
-    savename = censor(savename,"neg")
+    savename = censor(savename,nopewords)
     
     if savename.isalnum() == True and len(savename)<21:
         zz = datetime.datetime.now()
@@ -1961,7 +1965,7 @@ def index2():
 @app.route('/game/end/thankyou2', methods=['POST'])
 def submit2():
     savename = request.form['username']
-    savename = censor(savename,"neg")
+    savename = censor(savename,nopewords)
 
     if savename.isalnum() == True and len(savename)<21:
         zz = datetime.datetime.now()
@@ -1996,7 +2000,7 @@ def index1():
 @app.route('/game/end/thankyou1', methods=['POST'])
 def submit1():
     savename = request.form['username']
-    savename = censor(savename,"neg")
+    savename = censor(savename,nopewords)
 
     if savename.isalnum() == True and len(savename)<21:
         zz = datetime.datetime.now()

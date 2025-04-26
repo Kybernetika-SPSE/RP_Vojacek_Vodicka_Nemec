@@ -35,10 +35,10 @@ except:
     print("Kliuč voe, pokud nevíš, jak se ti tohle vůbec povedlo???")
     exit()
 
-def censor(text, word):
+def censor(texto, word):
     for w in word:
         pattern = re.compile(re.escape(w), re.IGNORECASE)
-        texto = pattern.sub("[censored]", text)
+        texto = pattern.sub("***", texto)
     return texto
 nopewords = ["neg","nig","nag"]
     

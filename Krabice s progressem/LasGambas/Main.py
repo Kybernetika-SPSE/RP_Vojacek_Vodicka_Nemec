@@ -5,6 +5,7 @@ from flask import Flask, render_template, render_template_string, request, sessi
 import json
 import uuid
 import datetime
+import re
 
 app = Flask(__name__)
 #session["data"]["roll"] = 0
@@ -34,6 +35,10 @@ except:
     print("Kliuč voe, pokud nevíš, jak se ti tohle vůbec povedlo???")
     exit()
 
+def censor(text, word):
+    pattern = re.compile(re.escape(word), re.IGNORECASE)
+    return pattern.sub("***", text)
+
 @app.before_request
 def setup():
     if "data" not in session:
@@ -53,6 +58,29 @@ def main():
     session["data"]["posobecheck"]=[]
     session["data"]["victory"] = 0
     session.modified = True
+
+    with open(path.join(dir,"users","users1.json")) as rum:
+        saving = json.load(rum)
+    for i in saving:
+        saving[i]["jmeno"] = censor(saving[i]["jmeno"],"neg")
+    with open(path.join(dir,"users","users1.json"),"w") as rum:
+        json.dump(saving,rum)
+
+
+    with open(path.join(dir,"users","users1.json")) as rum:
+        saving = json.load(rum)
+    for i in saving:
+        saving[i]["jmeno"] = censor(saving[i]["jmeno"],"neg")
+    with open(path.join(dir,"users","users1.json"),"w") as rum:
+        json.dump(saving,rum)
+
+
+    with open(path.join(dir,"users","users1.json")) as rum:
+        saving = json.load(rum)
+    for i in saving:
+        saving[i]["jmeno"] = censor(saving[i]["jmeno"],"neg")
+    with open(path.join(dir,"users","users1.json"),"w") as rum:
+        json.dump(saving,rum)
 
     return render_template("welcome.html")
 #_______________________________________________________________________________________________
@@ -1888,6 +1916,7 @@ def lboard1():
 
 
 #--------------------------konec game3-----------------------------------------
+
 @app.route('/game/end3')
 def index3():
     final = session["data"]["victory"]
@@ -1896,6 +1925,8 @@ def index3():
 @app.route('/game/end/thankyou3', methods=['POST'])
 def submit3():
     savename = request.form['username']
+    savename = censor(savename,"neg")
+    
     if savename.isalnum() == True and len(savename)<21:
         zz = datetime.datetime.now()
         date = str(zz.strftime("%x"))
@@ -1930,6 +1961,8 @@ def index2():
 @app.route('/game/end/thankyou2', methods=['POST'])
 def submit2():
     savename = request.form['username']
+    savename = censor(savename,"neg")
+
     if savename.isalnum() == True and len(savename)<21:
         zz = datetime.datetime.now()
         date = str(zz.strftime("%x"))
@@ -1963,6 +1996,8 @@ def index1():
 @app.route('/game/end/thankyou1', methods=['POST'])
 def submit1():
     savename = request.form['username']
+    savename = censor(savename,"neg")
+
     if savename.isalnum() == True and len(savename)<21:
         zz = datetime.datetime.now()
         date = str(zz.strftime("%x"))

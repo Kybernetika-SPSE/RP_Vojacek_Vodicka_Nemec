@@ -40,7 +40,7 @@ def censor(texto, word):
         pattern = re.compile(re.escape(w), re.IGNORECASE)
         texto = pattern.sub("***", texto)
     return texto
-nopewords = ["neg","nig","nag"]
+nopewords = ["neg","nig","nag","卐"]
     
 
 @app.before_request

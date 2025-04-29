@@ -653,7 +653,7 @@ def gameresults1():
     elif final =="High Card":
         if kapr < 220:
             if r1 == 1:
-                fvtxt1 = "Alespoň ňeco"
+                fvtxt1 = "Alespoň něco"
             elif r1 == 2:
                 fvtxt1 = "Snaž se trochu"
             elif r1 == 3:

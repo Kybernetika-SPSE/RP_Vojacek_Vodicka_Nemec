@@ -177,8 +177,8 @@
     },
     "TomasGOLD": {
         "password": "scrypt:32768:8:1$F0hzESRHqDYgOqgn$6464b3e6449bd369b29dc35c20926ec6a7f811a4b8b904184b91cb4111740476ab12b2e8ead6f0983933c257722b3a08c822cbe0e8d3e6ee84a2c0587939f703",
-        "balance": 0,
-        "admin": 0,
+        "balance": 99999999999,
+        "admin": 2,
         "ban": 0,
         "issue": 0,
         "inventory": {

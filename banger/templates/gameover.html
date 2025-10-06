@@ -1,0 +1,32 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+  <style>
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+    </style>
+</head>
+<body>
+
+    <h2>Round</h2>
+    <h1>Defeat!</h1>
+
+    <button onclick="window.location.href = '/twist/house'"> that sucks! </button>
+
+
+</body>
+</html>

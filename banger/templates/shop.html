@@ -1,0 +1,58 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+  <style>
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+    </style>
+</head>
+<body>
+    <p style="position: absolute;top: 4dvh; left: 4dvh;">
+        balance: <span id="balance">...</span>
+    </p> <!--prozatimně-->
+    <div id="shop">
+        plswork
+    </div>
+
+<script src="{{ url_for('static', filename='twist/javas.js') }}"></script>
+<script>
+
+async function buy(item) {
+    try {
+        const response = await fetch("/twist/fet/transaction", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+            body: item 
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+        const result = await response.text();
+        alert(result);
+        balance()
+        loaditemstable("shop")
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+}
+window.addEventListener('load', balance);
+window.addEventListener('load', loaditemstable("shop"));
+
+</script>
+</body>

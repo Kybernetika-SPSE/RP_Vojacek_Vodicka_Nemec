@@ -1,0 +1,252 @@
+/*------------------new-----------------*/
+
+/*------------------basics-----------------*/
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: auto;
+
+}
+body {
+  font-family: georgia, Georgia;
+  text-align: center;
+  font-size: 3vh;
+  line-height: 0.5;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #2b0000;
+  color: #f5d506;
+}
+h1 {
+  margin-bottom: 5dvh;
+  font-size: 10vh;
+  font-weight: bold;
+  text-align: center;
+  color: #FFD700;
+  animation: fadeInSlide 1.5s ease-in-out;
+  text-shadow: 3vh 3vh 8vh rgba(0, 0, 0, 0.5);
+  margin-top: 0dvh;
+  line-height: 1.2;
+}
+/*------------------containers-----------------*/
+.slotcontainer {      /*new*/
+  width: 150%;
+  scale: 75%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10vh;
+  padding: 5vh 20vh;
+  position: absolute;
+  top: 12dvh;
+}
+.container-deck {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10vh;
+  padding: 5vh 20vh;
+  position: absolute;
+  top: 12dvh;
+  right: 0dvh;
+  scale: 25%;
+}
+.Bcontainer {
+  display: flex;
+  justify-content: center;
+  padding: 2vh 0;
+  background-color: #2b0000;
+  width: 100%;
+}
+.containerR {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10vh;
+  padding: 5vh 20vh;
+}
+.scrollable-container {
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2vh 5vw;
+  box-sizing: border-box;
+}
+.playcontainer{
+  width: 150%;
+  scale: 35%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10vh;
+  padding: 5vh 20vh;
+  position: absolute;
+  bottom: -10dvh;
+}
+/*------------------ buttons -----------------*/
+.button {
+  padding: 2.5vh 7vh;
+  text-decoration: none;
+  color: #FFD700;
+  background-color: #880808;
+  border: none;
+  border-radius: 30vh;
+  text-align: center;
+  font-size: 3vh;
+  margin-left: 1dvh;
+  margin-right: 1dvh;
+  margin-top: 2dvh;
+  box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+.buttonF {
+  padding: 2.5vh;
+  text-decoration: none;
+  color: #FFD700;
+  background-color: #880808;
+  border: none;
+  border-radius: 30vh;
+  text-align: center;
+  font-size: 3vh;
+  margin-left: 1dvh;
+  margin-right: 1dvh;
+  box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  z-index: 100;
+  position: absolute;
+  top: 4dvh;
+  right: 2.5dvh;
+}
+.buttonL {
+  padding: 2.5vh;
+  text-decoration: none;
+  color: #FFD700;
+  background-color: #880808;
+  border: none;
+  border-radius: 30vh;
+  text-align: center;
+  font-size: 3vh;
+  margin-left: 1dvh;
+  margin-right: 1dvh;
+  box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  z-index: 100;
+  position: absolute;
+  top: 4dvh;
+  right: 2.5dvh;
+}
+.functionbutton{
+  padding: 2.5vh 7vh;
+  text-decoration: none;
+  color: #FFD700;
+  background-color: #880808;
+  border: none;
+  border-radius: 30vh;
+  text-align: center;
+  font-size: 3vh;
+  margin-left: 1dvh;
+  margin-right: 1dvh;
+  margin-top: 2dvh;
+  box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 15dvh;
+}
+
+.button:hover {
+  background-color: #a30000;
+  transform: scale(1.1);
+  box-shadow: 0 2vh 3vh rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+/*------------------ misc -----------------*/
+.places {
+  border: 1vh solid #c0a301;
+  border-radius: 1vh;
+  padding: 0.5vh;
+  width: 33.6dvh;
+  height: 44.8dvh;
+}
+.slots {
+  border: 1vh solid #c0a301;
+  border-radius: 1vh;
+  padding: 0.5vh;
+  width: 33.6dvh;
+  height: 44.8dvh;
+}
+.game-block{
+  padding: 0vh;
+}
+.specialcounter {            /*new*/
+  position: absolute;
+  top: 5dvh;
+  left: 5dvh;
+}
+.pointscounter{
+  position: absolute;
+  bottom: 30dvh;
+}
+.textcounter{
+  position: absolute;
+  top: 10dvh;
+}
+/*------------------los Fontos-----------------*/
+.dancing-script-FU {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+.uncial-antiqua-regular {
+  font-family: "Uncial Antiqua", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+.honk-honk {
+  font-family: "Honk", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "MORF" 15,
+    "SHLN" 50;
+}
+/*------------------progress bar-----------------*/
+.progress-container {
+  width: 90%;
+  background-color: #440000;
+  border-radius: 10vh;
+  overflow: hidden;
+  max-width: 70vh;
+  margin: 3dvh auto;
+  box-shadow: 0 6vh 12vh rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 4dvh;
+}
+.progress-bar {
+  width: 0%;
+  height: 4vh;
+  background-color: #FFD700;
+  text-align: center;
+  line-height: 3vh;
+  font-size: 1,8vh;
+  color: black;
+  transition: width 0.4s ease-in-out;
+  /*margin-bottom: 5vh;*/
+}
+
+button {
+  margin-top: 1vh;
+  padding: 1vh;
+  font-size: 1.6vh;
+  cursor: pointer;
+}

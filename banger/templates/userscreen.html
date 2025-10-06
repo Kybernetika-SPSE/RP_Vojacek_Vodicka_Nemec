@@ -1,0 +1,89 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+  <style>
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+    </style>
+</head>
+<body>
+    <div style="position: absolute;left: 5dvh;">
+        {{listU | safe}}
+    </div>
+    <div id="users">
+        work
+    </div>
+</body>
+<script>
+    let stuff
+    async function startup(){
+        try {
+          const response = await fetch("/twist/fet/userlist");
+          if (!response.ok) {
+              throw new Error(`HTTP error: ${response.status}`);
+          }
+          stuff = await response.text()
+          console.log(stuff)
+      } catch (error) {
+          console.error("Fetch error:", error);
+      }
+      const tableHTML = stuff; 
+        document.getElementById(`users`).innerHTML = tableHTML; 
+    }
+    async function ban(user) {
+    try{
+      response = await fetch("/twist/fet/userlistaction", {
+        method: 'POST',
+        headers: {'Content-Type': "application/json"},
+        body: JSON.stringify({ 
+            "user": user,
+            "action": "ban" 
+            })
+        })
+    } catch (error) {
+      console.error("Fetch error:", error);
+    };
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }else{
+      startup()
+    }
+    }
+    
+    async function adminize(user) {
+    try{
+      response = await fetch("/twist/fet/userlistaction", {
+        method: 'POST',
+        headers: {'Content-Type': "application/json"},
+        body: JSON.stringify({ 
+            "user": user,
+            "action": "admin" 
+            })
+        })
+    } catch (error) {
+      console.error("Fetch error:", error);
+    };
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }else{
+      startup()
+    }
+    }
+
+
+    window.addEventListener('load', startup)
+</script>

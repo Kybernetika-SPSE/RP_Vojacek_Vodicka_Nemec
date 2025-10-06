@@ -1,0 +1,247 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+  <style>
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="specialcounter">
+      <p1 id="turnhere">XXX</p1>
+      <p id="roundhere">YYY</p>
+    </div>
+    <h2 id="finaltexthere" class="textcounter">nah</h2>
+    <div class="slotcontainer">
+        <img src="{{ url_for('static', filename=karta1) }}" alt="place1" class="places" id="place1">
+        <img src="{{ url_for('static', filename=karta2) }}" alt="place2" class="places" id="place2">
+        <img src="{{ url_for('static', filename=karta3) }}" alt="place3" class="places" id="place3">
+        <img src="{{ url_for('static', filename=karta4) }}" alt="place4" class="places" id="place4">
+        <img src="{{ url_for('static', filename=karta5) }}" alt="place5" class="places" id="place5">
+    </div>
+    <div class="pointscounter">
+    <p id="pointshere">pointz</p>
+    <p id="pointsafterhere">ZZZ</p>
+    </div>
+    <div class="playcontainer">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot1" class="slots" id="slot1" onclick="nextstep('slot1')">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot2" class="slots" id="slot2" onclick="nextstep('slot2')">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slotA" class="slots" id="slotA" onclick="nextstep('slotA')">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot3" class="slots" id="slot3" onclick="nextstep('slot3')">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot4" class="slots" id="slot4" onclick="nextstep('slot4')">
+    </div>
+    <button class="functionbutton" id="functionbutton1" onclick="switchstuff()">ඞ</button>
+    <button class="functionbutton" id="functionbutton2" onclick="reset()">sus</button>
+
+    <script>
+      let array
+      let slideshowImages
+      let stuff
+      let results
+      let playcards
+
+      async function startup() {
+        await update()
+        await startSlideshow()
+        document.querySelector(".playcontainer").style.display = "none"
+        document.getElementById("pointshere").style.visibility = "hidden"
+        document.getElementById("finaltexthere").style.visibility = "hidden"
+        document.getElementById("pointsafterhere").style.visibility = "hidden"
+        document.getElementById("functionbutton2").style.visibility = "hidden"
+        document.getElementById("functionbutton1").style.visibility = "visible"
+      }
+      async function update() {
+        await getstuff()
+        document.getElementById("turnhere").textContent = stuff.misc.turn
+        document.getElementById("roundhere").textContent = stuff.misc.round
+
+      }
+      async function getstuff() {
+      try {
+          const response = await fetch("/twist/fet/draw_phase");
+          if (!response.ok) {
+              throw new Error(`HTTP error: ${response.status}`);
+          }
+          stuff = await response.json()
+          console.log(stuff)
+      } catch (error) {
+          console.error("Fetch error:", error);
+      }
+
+      
+      
+  }
+  
+  //slideshow--------------------------------------------
+  
+  let slideshowInterval
+  let index_1 = 0;
+  let index_2 = 0;
+  let index_3 = 0;
+  let index_4 = 0;
+  let index_5 = 0;
+
+  function startSlideshow() {
+  console.log("Slideshow starting...");
+
+
+  images_1 = stuff.cards.pack1.map(img => "/static/" + img);
+  images_2 = stuff.cards.pack2.map(img => "/static/" + img);
+  images_3 = stuff.cards.pack3.map(img => "/static/" + img);
+  images_4 = stuff.cards.pack4.map(img => "/static/" + img);
+  images_5 = stuff.cards.pack5.map(img => "/static/" + img);
+
+  console.log("Images Array 1:", images_1);
+  console.log("Images Array 2:", images_2);
+  console.log("Images Array 3:", images_3);
+  console.log("Images Array 4:", images_4);
+
+  
+  index_1 = 0;
+  index_2 = 0;
+  index_3 = 0;
+  index_4 = 0;
+  index_5 = 0;
+
+  
+  if (slideshowInterval) {
+    clearInterval(slideshowInterval);
+  }
+  slideshowInterval = setInterval(changeImages, 100);
+}
+          
+  function stopSlideshow() {
+    console.log("Slideshow stopping...");
+    clearInterval(slideshowInterval);
+  }
+
+  function changeImages() {
+  index_1 = (index_1 + 1) % images_1.length;
+  index_2 = (index_2 + 1) % images_2.length;
+  index_3 = (index_3 + 1) % images_3.length;
+  index_4 = (index_4 + 1) % images_4.length;
+  index_5 = (index_5 + 1) % images_5.length;
+
+  document.querySelectorAll(".places")[0].src = images_1[index_1];
+  document.querySelectorAll(".places")[1].src = images_2[index_2];
+  document.querySelectorAll(".places")[2].src = images_3[index_3];
+  document.querySelectorAll(".places")[3].src = images_4[index_4];
+  document.querySelectorAll(".places")[4].src = images_5[index_5];
+}
+
+//jackpot------------------------------------------------------------
+
+async function switchstuff(){
+  await stopSlideshow()
+  
+  playcards = stuff.deck;
+  Object.keys(playcards).forEach(key => {
+    playcards[key] = playcards[key] + ".png";
+  });
+
+  document.getElementById("place1").src = "{{ url_for('static', filename='') }}" + stuff.cards.jack1
+  document.getElementById("place2").src = "{{ url_for('static', filename='') }}" + stuff.cards.jack2
+  document.getElementById("place3").src = "{{ url_for('static', filename='') }}" + stuff.cards.jack3
+  document.getElementById("place4").src = "{{ url_for('static', filename='') }}" + stuff.cards.jack4
+  document.getElementById("place5").src = "{{ url_for('static', filename='') }}" + stuff.cards.jack5
+  
+  document.getElementById("slot1").src = "{{ url_for('static', filename='') }}" + playcards.slot1
+  document.getElementById("slot2").src = "{{ url_for('static', filename='') }}" + playcards.slot2
+  document.getElementById("slot3").src = "{{ url_for('static', filename='') }}" + playcards.slot3
+  document.getElementById("slot4").src = "{{ url_for('static', filename='') }}" + playcards.slot4
+  document.getElementById("slotA").src = "{{ url_for('static', filename='') }}" + playcards.slotA
+  
+  
+  document.getElementById("pointshere").textContent = stuff.misc.points
+  document.querySelector(".playcontainer").style.display = "block"
+  document.getElementById("functionbutton1").style.visibility = "hidden"
+  document.getElementById("finaltexthere").style.visibility = "visible"
+  document.getElementById("finaltexthere").textContent = stuff.misc.text
+}
+
+//nextstep---(choose action)----------------------------------------------
+async function nextstep(slot){ 
+  let response = null
+  let results = null
+  console.log(slot)
+    try{
+      response = await fetch("/twist/fet/processor", {
+        method: 'POST',
+        headers: {'Content-Type': "text/plain"},
+        body: slot
+        })
+    } catch (error) {
+      console.error("Fetch error:", error);
+    };
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }else{
+      results = await response.json()
+    }
+    if (results.validity == 1){
+      let points = results.pointstotal
+      let round = stuff.misc.round
+      let progressvalue = points/(2.5*(2**round))
+      console.log(progressvalue)
+      
+
+      document.getElementById("pointsafterhere").textContent = results.pointsafter
+      updateProgress(progressvalue)
+
+      document.querySelector(".playcontainer").style.display = "none"
+      document.getElementById("pointsafterhere").style.visibility = "visible"
+      document.getElementById("functionbutton2").style.visibility = "visible"
+      console.log(results.gameover)
+    }
+    if(results.gameover == 1){
+      window.location.href = "/twist/twist_victory"
+    }else if(results.gameover == 2){
+      window.location.href = "/twist/twist_gameover"
+    }
+    else{}
+  }
+
+//backtostart-----------------------------------------------------------
+async function reset() {
+  await startup()
+  
+}
+//progressbar------------------------------------------------------------
+function updateProgress(progressvalue) {
+  console.log("updateProgress called with:", progressvalue);
+
+  if (isNaN(progressvalue) || progressvalue < 0) progressvalue = 0;
+  const progress = Math.min(progressvalue, 100);
+
+  const progressBar = document.getElementById("progressBar");
+
+  if (progressBar) {
+      console.log("Before update: ", progressBar.style.width);
+
+      progressBar.style.width = progress + "%";
+
+      console.log("After update: ", progressBar.style.width);
+  } else {
+      console.error("Progress bar element not found!");
+  }
+}
+    window.addEventListener('load', startup)
+    </script>
+</body>

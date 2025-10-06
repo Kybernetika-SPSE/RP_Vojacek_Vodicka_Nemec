@@ -1,0 +1,178 @@
+{
+    "Admin": {
+        "password": "scrypt:32768:8:1$Qx1EhDE6W3pnrxbl$1c370894035a58180dc1efb88334b84dacf2ebf77ed55aa42ab5abb11211c02af9f40c1e131125bc5a2ef2a443f6979ebe0d3a0edb98a6c62518eb57542bc95e",
+        "balance": 10000000029,
+        "admin": 2,
+        "ban": 0,
+        "inventory": {
+            "X2": {
+                "name": "X2",
+                "desc": "Doubles points gained",
+                "tier": 1,
+                "type": "boon"
+            },
+            "plus20": {
+                "name": "plus20",
+                "desc": "Points gained + 20",
+                "tier": 1,
+                "type": "boon"
+            },
+            "Flipper": {
+                "name": "Flipper",
+                "desc": "Flips 'polarity'",
+                "tier": 1,
+                "type": "boon"
+            },
+            "Stack5": {
+                "name": "Stack5",
+                "desc": "increases points by 5, increse by 5 for every turn this is in your hand",
+                "tier": 1,
+                "type": "boon"
+            },
+            "NullNext2": {
+                "name": "NullNext2",
+                "desc": "Points gained this round and the next are 0",
+                "tier": 1,
+                "type": "apex"
+            },
+            "add40": {
+                "name": "add40",
+                "price": 50,
+                "desc": "allan please add details",
+                "tier": 1,
+                "type": "boon"
+            },
+            "sub30": {
+                "name": "sub30",
+                "price": 50,
+                "desc": "allan please add details",
+                "tier": 1,
+                "type": "boon"
+            }
+        },
+        "deck": {
+            "deck1": {
+                "name": "deck1",
+                "slot1": "X2",
+                "slot2": "plus20",
+                "slot3": "Flipper",
+                "slot4": "add40",
+                "slotA": "NullNext2"
+            },
+            "deck2": {
+                "name": "deck2",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck3": {
+                "name": "deck3",
+                "slot1": "none",
+                "slot2": "plus20",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck4": {
+                "name": "deck4",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck5": {
+                "name": "deck5",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            }
+        },
+        "issues": []
+    },
+    "baba": {
+        "password": "scrypt:32768:8:1$CPqqd3wHlOXJpS8x$1234edf2d1aa732a64f05d37018a0949cff50dfa15cd3e7bb3b0a9cfd79f1c22298e57de87ff8ee50ae7dc5d90ba9ccb45786a2169070d07490dabce747ef9a1",
+        "balance": 0,
+        "admin": 0,
+        "ban": 0,
+        "issue": 1,
+        "inventory": {
+            "X2": {
+                "name": "X2",
+                "desc": "Doubles points",
+                "tier": 1,
+                "type": "boon"
+            },
+            "plus20": {
+                "name": "plus20",
+                "desc": "Points + 20",
+                "tier": 1,
+                "type": "boon"
+            },
+            "Flipper": {
+                "name": "Flipper",
+                "desc": "Flips 'polarity', cannot exceed 150pts",
+                "tier": 1,
+                "type": "boon"
+            },
+            "Stack5": {
+                "name": "Stack5",
+                "desc": "increases points by 5, increse by 5 for every turn this is in your hand",
+                "tier": 1,
+                "type": "boon"
+            },
+            "NullNext2": {
+                "name": "NullNext2",
+                "desc": "Points this turn and the next are 0",
+                "tier": 1,
+                "type": "apex"
+            }
+        },
+        "deck": {
+            "deck1": {
+                "name": "deck1",
+                "slot1": "X2",
+                "slot2": "plus20",
+                "slot3": "Flipper",
+                "slot4": "Stack5",
+                "slotA": "NullNext2"
+            },
+            "deck2": {
+                "name": "deck2",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck3": {
+                "name": "deck3",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck4": {
+                "name": "deck4",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck5": {
+                "name": "deck5",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            }
+        }
+    }
+}

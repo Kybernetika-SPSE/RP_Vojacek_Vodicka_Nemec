@@ -1,0 +1,101 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+  <style>
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+    </style>
+</head>
+<body>
+    <div id="inventory">
+        work
+    </div>
+
+    <p style="position: absolute;left: 10dvh;" id="deckname"></p>
+    <p style="position: absolute;left: 10dvh; visibility: hidden;" id="decknumber"></p><!--prozatimne-->
+    <div class="container-deck">
+        <img src="" alt="enterdatahere" class="gif" id="slot1" onclick="editdeckslot('slot1')">
+        <img src="" alt="enterdatahere" class="gif" id="slot2" onclick="editdeckslot('slot2')">
+        <img src="" alt="enterdatahere" class="gif" id="slot3" onclick="editdeckslot('slot3')">
+        <img src="" alt="enterdatahere" class="gif" id="slot4" onclick="editdeckslot('slot4')">
+        <img src="" alt="enterdatahere" class="gif" id="slotA" onclick="editdeckslot('slotA')">
+    </div>
+    <div class="Bcontainer">
+    <button class="button" onclick="showDeck('deck1')">1</button>
+    <button calss="button" onclick="showDeck('deck2')">2</button>
+    <button calss="button" onclick="showDeck('deck3')">3</button>
+    <button calss="button" onclick="showDeck('deck4')">4</button>
+    <button calss="button" onclick="showDeck('deck5')">5</button>
+    </div>
+
+<script src="{{ url_for('static', filename='twist/javas.js') }}"></script>
+<script>
+
+    let editslot = ""
+    let picked = ""
+    let whatdeck = ""
+
+    function editdeckslot(deckslot) {
+        const deckeditbuttons = document.getElementsByClassName("deckbuilder");
+        const deckeditbuttonsA = document.getElementsByClassName("deckbuilderA");
+        editslot = deckslot
+        whatdeck = document.getElementById("decknumber").textContent
+        if (editslot == "slotA") {
+            for (let i = 0; i < deckeditbuttonsA.length; i++) {
+        deckeditbuttonsA[i].style.display = "";
+        }
+        }else{
+            for (let i = 0; i < deckeditbuttons.length; i++) {
+            deckeditbuttons[i].style.display = "";
+        }}
+    }
+    function pickcard(card) {
+        picked = card
+        sendedits(picked,editslot,whatdeck)
+    }
+    async function sendedits(cardpicked,slotedit,deckedit) {
+        try {
+            const response = await fetch("/twist/fet/deckeditor", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify({ 
+                    "cardpicked": cardpicked,
+                    "slotedited": slotedit, 
+                    "deckedited": deckedit
+                })
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            const result = await response.text();
+                loaditemstable("inventory");
+                await deckshow()
+                await showDeck(deckedit)
+                if (result == "Karta již v decku") {
+                    alert(result)
+                }
+        } catch (error) {
+            console.error("Fetch error:", error);
+        }
+    }
+
+window.addEventListener('load', loaditemstable("inventory"));
+window.addEventListener('load', deckshow);
+</script>
+</body>

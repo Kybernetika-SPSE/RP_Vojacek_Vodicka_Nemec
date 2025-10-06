@@ -1,0 +1,47 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+  <style>
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+    </style>
+</head>
+<body>
+    <h1>TESTOVACÍ<br>SOFTWARE</h1>
+    <p style="position: absolute;top: 2dvh; left: 4dvh;">{{name}}</p>
+    <p style="position: absolute;top: 6dvh; left: 4dvh;">
+        balance: <span id="balance">...</span>
+    </p> <!--prozatimně-->
+    
+    <div class="containerR" style="display: flex; justify-content: center;">
+    <div class="game-block">
+      <a onclick="location.href='/twist/pregame'" class="button">HRA</a>
+    </div>
+    <div class="game-block">
+      <a onclick="location.href='/twist/shop'" class="button">SHOP</a>
+    </div>
+    <div class="game-block">
+      <a onclick="location.href='/twist/inventory'" class="button">INVENTÁŘ</a>
+    </div>
+    </div>
+
+
+<script src="{{ url_for('static', filename='twist/javas.js') }}"></script>
+<script>
+    window.addEventListener('load', balance);
+</script>
+</body>

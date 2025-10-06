@@ -1,0 +1,42 @@
+{
+    "deck1":{
+        "name": "deck1",
+        "card1": "X2",
+        "card2": "+20",
+        "card3": "none",
+        "card4": "none",
+        "apexcard": "NullNext2"
+    },
+    "deck2":{
+        "name": "deck2",
+        "card1": "none",
+        "card2": "none",
+        "card3": "none",
+        "card4": "none",
+        "apexcard": "none"
+    },
+    "deck3":{
+        "name": "deck3",
+        "card1": "none",
+        "card2": "none",
+        "card3": "none",
+        "card4": "none",
+        "apexcard": "none"
+    },
+    "deck4":{
+        "name": "deck4",
+        "card1": "none",
+        "card2": "none",
+        "card3": "none",
+        "card4": "none",
+        "apexcard": "none"
+    },
+    "deck5":{
+        "name": "deck5",
+        "card1": "none",
+        "card2": "none",
+        "card3": "none",
+        "card4": "none",
+        "apexcard": "none"
+    }
+}

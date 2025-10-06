@@ -1,0 +1,17 @@
+{
+    "shop": {
+        "add40":{
+            "name":"add40",
+            "price":50,
+            "desc":"allan please add details",
+            "tier":1,
+            "type":"boon"},
+        "sub30":{
+            "name":"sub30",
+            "price":50,
+            "desc":"allan please add details",
+            "tier":1,
+            "type":"boon"}
+        }   
+                
+}

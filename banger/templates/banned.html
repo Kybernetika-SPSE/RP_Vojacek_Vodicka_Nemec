@@ -1,0 +1,49 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+  <style>
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+    </style>
+</head>
+<body>
+    <h1>ÚČET ZABLOKOVÁN</h1>
+    <p>Požádejte admina</p>
+    <p style="scale: 0.5;">hezký den</p>
+    <button id="issueb" onclick="issue()">HELP!!!</button>
+</body>
+<script>
+async function issue() {
+      try{
+      response = await fetch("/twist/fet/issue", {
+        method: 'POST',
+        headers: {'Content-Type': "application/json"},
+        body: JSON.stringify({ 
+            "action": "issue" 
+            })
+        })
+    } catch (error) {
+      console.error("Fetch error:", error);
+    };
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }else{
+    }
+}
+
+
+</script>

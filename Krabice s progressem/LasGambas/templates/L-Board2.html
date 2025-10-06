@@ -1,172 +1,153 @@
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabulka</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tabulka</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <style>
+    th {
+      font-size: 4vh;
+      font-weight: bold;
+      text-align: center;
+      color: #000000;
+      animation: fadeInSlide 1.5s ease-in-out;
+      text-shadow: 3vh 3vh 8vh rgba(0, 0, 0, 0.5);
+      white-space: nowrap;
+    }
+
+    .sortable {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      justify-content: center;
+    }
+
+    td {
+      text-align: center;
+      padding: 1.2em 0.5em;
+    }
+
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+  </style>
 </head>
 <body>
-<style>
-    th {
-    font-size: 4vh;
-    font-weight: bold;
-    text-align: center;
-    color: #000000;
-    animation: fadeInSlide 1.5s ease-in-out;
-    text-shadow: 3vh 3vh 8vh rgba(0, 0, 0, 0.5);
-    }
-    /*------------------WIDE-----------------*/
-    @media screen and (max-aspect-ratio: 9/16) {
-        body * {
-            display: none !important;
-        }
-  
-        body::before {
-            content: "Otočte své zařízení na šířku";
-            display: block;
-            text-align: center;
-            font-size: 20px;
-            color: red;
-            margin-top: 50vh;
-        }
-    }
-  
-    /*------------------WIDE-----------------*/
-</style>
+
 <a class="buttonF" id="fulls">⛶</a>
 <div class="Bcontainer">
   <button class="button" onclick="location.href='/'">Zpět na hlavní stránku</button>
 </div>
 
 <div class="scrollable-container">
-<table id="leaderboard">
-  <thead>
+  <table id="leaderboard">
+    <thead>
       <tr>
-          <th onclick="sortTable(0, 'asc')">Pořadí</th>
-          <th>Jméno</th>
-          <th onclick="sortTable(2, 'desc')">Počet otoček</th>
-          <th onclick="sortTable(3, 'desc')">Výhra</th>
-          <th onclick="sortTable(4, 'desc')">Datum</th>
+        <th onclick="sortTable(0)">Pořadí</th>
+        <th>Jméno</th>
+        <th onclick="sortTable(2)">Počet otoček</th>
+        <th onclick="sortTable(3)">Výhra</th>
+        <th onclick="sortTable(4)">Datum</th>
       </tr>
-  </thead>
-  {{ board | safe }}
-</table>
+    </thead>
+    {{ board | safe }}
+  </table>
 </div>
+
 <script>
 let lastSortedColumn = -1;
 let lastSortDirection = 'asc';
 
-function sortTable(n, direction) {
-  let table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById("leaderboard");
-  switching = true;
+function sortTable(n) {
+  const table = document.getElementById("leaderboard");
+  const rows = Array.from(table.rows).slice(1);
+  let direction = 'asc';
 
-  // If we are sorting the same column again, just change direction
   if (lastSortedColumn === n) {
-      direction = (lastSortDirection === 'asc') ? 'desc' : 'asc';
+    direction = lastSortDirection === 'asc' ? 'desc' : 'asc';
   }
 
-  while (switching) {
-      switching = false;
-      rows = table.rows;
-      for (i = 1; i < (rows.length - 1); i++) {
-          shouldSwitch = false;
-          x = rows[i].getElementsByTagName("TD")[n];
-          y = rows[i + 1].getElementsByTagName("TD")[n];
+  rows.sort((a, b) => {
+    const x = a.cells[n].innerText.trim();
+    const y = b.cells[n].innerText.trim();
 
-          let xValue, yValue;
+    let xVal = x, yVal = y;
+    if (n === 3) {
+      xVal = x.toLowerCase() === "ano" ? 1 : 0;
+      yVal = y.toLowerCase() === "ano" ? 1 : 0;
+    } else if (!isNaN(x) && !isNaN(y)) {
+      xVal = parseFloat(x);
+      yVal = parseFloat(y);
+    }
 
-          if (n === 3) {
-              xValue = x.innerHTML.trim().toLowerCase() === "ano" ? 1 : 0;
-              yValue = y.innerHTML.trim().toLowerCase() === "ano" ? 1 : 0;
-          } else {
-              xValue = isNaN(x.innerHTML) ? x.innerHTML.toLowerCase() : Number(x.innerHTML);
-              yValue = isNaN(y.innerHTML) ? y.innerHTML.toLowerCase() : Number(y.innerHTML);
-          }
+    return (direction === 'asc' ? xVal > yVal : xVal < yVal) ? 1 : -1;
+  });
 
-          if ((direction === "asc" && xValue > yValue) || (direction === "desc" && xValue < yValue)) {
-              shouldSwitch = true;
-              break;
-          }
-      }
-      if (shouldSwitch) {
-          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-          switching = true;
-      }
-  }
-
-  // Update the sort direction and the symbol in the header
+  rows.forEach(row => table.tBodies[0].appendChild(row));
   updateHeaderSymbol(n, direction);
 
   lastSortedColumn = n;
   lastSortDirection = direction;
+
+  if (n !== 0) updatePoradi();
 }
 
 function updateHeaderSymbol(columnIndex, direction) {
-  let thElements = document.querySelectorAll("#leaderboard th");
+  const thElements = document.querySelectorAll("#leaderboard th");
   thElements.forEach((th, index) => {
-      // Remove previous symbols
-      th.innerHTML = th.innerHTML.replace(' ↑', '').replace(' ↓', '');
-      if (index === columnIndex) {
-          // Add the corresponding symbol
-          th.innerHTML += direction === 'asc' ? ' ↑' : ' ↓';
-      }
+    const baseText = th.innerText.replace(' ↑', '').replace(' ↓', '');
+    if (index === columnIndex) {
+      th.innerHTML = `<span class="sortable">${baseText} ${direction === 'asc' ? '↑' : '↓'}</span>`;
+    } else {
+      th.innerHTML = baseText;
+    }
   });
 }
 
 function updatePoradi() {
   const table = document.getElementById("leaderboard");
-  const rows = Array.from(table.rows).slice(1); // bez headeru
+  const rows = Array.from(table.rows).slice(1);
 
-  // Vytáhni data
-  let data = rows.map((row, index) => {
-      let cells = row.getElementsByTagName("TD");
-      let vyhra = cells[4].innerText.trim().toLowerCase() === "ano";
-      let otocky = parseInt(cells[3].innerText) || 9999;
-      return { row, vyhra, otocky };
+  let data = rows.map(row => {
+    const cells = row.cells;
+    const vyhra = cells[3].innerText.trim().toLowerCase() === "ano";
+    const otocky = parseInt(cells[2].innerText) || 9999;
+    return { row, vyhra, otocky };
   });
 
-  // Seřaď data podle pravidla pořadí
   data.sort((a, b) => {
-      if (a.vyhra && !b.vyhra) return -1;
-      if (!a.vyhra && b.vyhra) return 1;
-      if (a.vyhra && b.vyhra) return a.otocky - b.otocky;
-      return 0;
+    if (a.vyhra && !b.vyhra) return -1;
+    if (!a.vyhra && b.vyhra) return 1;
+    if (a.vyhra && b.vyhra) return a.otocky - b.otocky;
+    return 0;
   });
 
-  // Nastav pořadí zpátky do řádků
-  data.forEach((entry, index) => {
-      entry.row.getElementsByTagName("TD")[0].innerText = index + 1;
+  data.forEach((entry, i) => {
+    entry.row.cells[0].innerText = i + 1;
+    table.tBodies[0].appendChild(entry.row);
   });
 }
 
-// Spusť výpočet pořadí po načtení
-window.addEventListener('DOMContentLoaded', updatePoradi);
-</script>
-<script>
-    const button = document.getElementById('fulls');
+window.addEventListener("DOMContentLoaded", updatePoradi);
 
-    button.addEventListener('click', () => {
-      if (!document.fullscreenElement) {
-        // Enter fullscreen
-        const elem = document.documentElement;
-        if (elem.requestFullscreen) {
-          elem.requestFullscreen();
-        } else if (elem.webkitRequestFullscreen) {
-          elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) {
-          elem.msRequestFullscreen();
-        }
-      } else {
-        // Exit fullscreen
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-      }
-    });
-  </script>
+document.getElementById("fulls").addEventListener("click", () => {
+  const elem = document.documentElement;
+  if (!document.fullscreenElement) {
+    elem.requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+});
+</script>
 </body>
+</html>

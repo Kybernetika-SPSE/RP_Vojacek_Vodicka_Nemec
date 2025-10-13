@@ -381,6 +381,12 @@ def userscreen():
             listU += i + "<br>"
     
     return render_template("userscreen.html", listU = listU)
+
+@app.route("/twist/rules")
+@login_required
+def rules():
+
+    return render_template("rules.html")
 #--------------fet--------------------
 
 @app.route("/twist/fet/balance")

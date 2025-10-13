@@ -254,6 +254,9 @@
                 "slot4": "none",
                 "slotA": "none"
             }
-        }
+        },
+        "issues": [
+            "Pouze_Admin"
+        ]
     }
 }

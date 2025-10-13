@@ -271,6 +271,7 @@ def setup():
     session["cards"]["pack"] = []
     session["misc"] = {}
     session["misc"]["bank"] = 0
+    session["misc"]["round"] = 1
     session["prop"] = {}
     session.modified = True
     if dataBan == 1:
@@ -303,6 +304,8 @@ def houseadmin():
 @login_required
 def house():
     name = session["username"]
+    session["misc"]["round"] = 1
+    session.modified = True
     
     try:
         bal = openjson("users", "balance")

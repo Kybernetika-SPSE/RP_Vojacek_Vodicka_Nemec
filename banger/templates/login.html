@@ -1,10 +1,121 @@
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DefNotGamba</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
   <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #2b0000;
+      font-family: Arial, sans-serif;
+    }
+
+    /* FORM */
+    form {
+      background-color: #790808da;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      width: 340px;
+      text-align: left;
+      position: relative;
+    }
+
+    /* Nadpis Login */
+    form h2 {
+      font-size: 65px;
+      font-weight: bold;
+      text-align: center;
+      color: #FFD700;
+      margin-top: -20px;
+      margin-bottom: 24px;
+      line-height: 1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #FFD700;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 15px;
+      color: #111;
+    }
+
+    .password-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    /* oko */
+    .toggle-password {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: white;
+      position: absolute;
+      right: 10px;
+      top: -45%;
+      transform: translateY(-50%);
+      padding: 0;
+    }
+
+    .toggle-password svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+      pointer-events: none;
+    }
+
+    /* tlačítko Login */
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #ffd000d0;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-top: 6px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #ffd900f8;
+    }
+
+    p {
+      margin-top: 13px;
+      font-size: 17px;
+      text-align: center;
+      color: white;
+    }
+
+    p a {
+      color: #ffd000;
+      text-decoration: none;
+    }
+
+    p a:hover {
+      text-decoration: underline;
+    }
+
     @media screen and (max-aspect-ratio: 9/16) {
       body * {
         display: none !important;
@@ -18,28 +129,72 @@
         margin-top: 50vh;
       }
     }
-    </style>
+  </style>
 </head>
 <body>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+ 
+  <form method="POST" action="{{ url_for('log_in') }}">
     <h2>Login</h2>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-    <form method="POST" action="{{ url_for('log_in') }}">
-        <label for="username">Username:</label><br />
-        <input type="text" id="username" name="username" required /><br />
 
-        <label for="password">Password:</label><br />
-        <input type="password" id="password" name="password" required /><br /><br />
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required />
+<!--ŽADONÍM KOHOKOLIV KDO NA TOHLE NEŠAHAT TY KOKOT ANO A VIM ŽE TO VYPADÁ HROZNĚ ALE I COULDNT CARE LESS-->
+    <label for="password">Password</label>
+    <div class="password-container">
+      <input type="password" id="password" name="password" required autocomplete="current-password" />
+      <button
+        type="button"
+        class="toggle-password"
+        onclick="togglePassword()"
+        aria-pressed="false"
+        aria-label="Zobrazit / skrýt heslo"
+        title="Zobrazit / skrýt heslo"
+      >
+        <!--otevřené oko-->
+        <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M12 5C7 5 2.73 8.11 1 12c1.73 3.89 6 7 11 7s9.27-3.11 11-7c-1.73-3.89-6-7-11-7zm0 12a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z"/>
+        </svg>
 
-        <input type="submit" value="Login" />
-    </form>
-    <p>Don't have an account? <a href="{{ url_for('sign_in') }}">Register here</a>.</p>
+        <!--zavřené oko-->
+        <svg id="eye-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none;">
+          <path d="M12 5C7 5 2.73 8.11 1 12c1.73 3.89 6 7 11 7s9.27-3.11 11-7c-1.73-3.89-6-7-11-7zm0 12a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z"/>
+          <line x1="3" y1="3" x2="21" y2="21" stroke="white" stroke-width="2"/>
+        </svg>
+      </button>
+    </div>
+
+    <input type="submit" value="Login" />
+  </form>
+
+  <p>Don't have an account? <a href="{{ url_for('sign_in') }}">Register here</a>.</p>
+
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const eyeOpen = document.getElementById('eye-open');
+      const eyeClosed = document.getElementById('eye-closed');
+      const toggleButton = document.querySelector('.toggle-password');
+
+      const isHidden = passwordInput.type === 'password';
+      passwordInput.type = isHidden ? 'text' : 'password';
+
+      eyeOpen.style.display = isHidden ? 'none' : 'block';
+      eyeClosed.style.display = isHidden ? 'block' : 'none';
+
+      toggleButton.setAttribute('aria-pressed', isHidden ? 'true' : 'false');
+      toggleButton.title = isHidden ? 'Skrýt heslo' : 'Zobrazit heslo';
+    }
+  </script>
 </body>
 </html>

@@ -271,6 +271,7 @@ def setup():
     session["cards"]["pack"] = []
     session["misc"] = {}
     session["misc"]["bank"] = 0
+    session["misc"]["round"] = 1
     session["prop"] = {}
     session.modified = True
     if dataBan == 1:
@@ -303,6 +304,8 @@ def houseadmin():
 @login_required
 def house():
     name = session["username"]
+    session["misc"]["round"] = 1
+    session.modified = True
     
     try:
         bal = openjson("users", "balance")
@@ -378,6 +381,12 @@ def userscreen():
             listU += i + "<br>"
     
     return render_template("userscreen.html", listU = listU)
+
+@app.route("/twist/rules")
+@login_required
+def rules():
+
+    return render_template("rules.html")
 #--------------fet--------------------
 
 @app.route("/twist/fet/balance")

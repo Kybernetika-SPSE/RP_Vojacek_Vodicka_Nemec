@@ -21,6 +21,8 @@
     </style>
 </head>
 <body>
+  <a class="buttonF" id="fulls" onclick="fullscreen()">⛶</a>
+  <a class="buttonF" id="help" onclick="location.href='/twist/rules'" style="top: 12dvh;">?</a>
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
@@ -50,6 +52,7 @@
     <button class="functionbutton" id="functionbutton1" onclick="switchstuff()">ඞ</button>
     <button class="functionbutton" id="functionbutton2" onclick="reset()">sus</button>
 
+    <script src="{{ url_for('static', filename='twist/javas.js') }}"></script>
     <script>
       let array
       let slideshowImages

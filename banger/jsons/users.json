@@ -346,5 +346,86 @@
         "issues": [
             "Pouze_Admin"
         ]
+    },
+    "Sexyman": {
+        "password": "scrypt:32768:8:1$l6jqpBnQf4qImvzU$42a0649cfe628a08a6f023caeac9cba05fa6e9612ec64f900771ca67abcdb31506fc2e36c2cd99dd7d522b9e46f137330c03688476e596b0477c0b5f62c93567",
+        "balance": 0,
+        "admin": 0,
+        "ban": 0,
+        "issue": 0,
+        "inventory": {
+            "X2": {
+                "name": "X2",
+                "desc": "Doubles points",
+                "tier": 1,
+                "type": "boon"
+            },
+            "plus20": {
+                "name": "plus20",
+                "desc": "Points + 20",
+                "tier": 1,
+                "type": "boon"
+            },
+            "Flipper": {
+                "name": "Flipper",
+                "desc": "Flips 'polarity', cannot exceed 150pts",
+                "tier": 1,
+                "type": "boon"
+            },
+            "Stack5": {
+                "name": "Stack5",
+                "desc": "increases points by 5, increse by 5 for every turn this is in your hand",
+                "tier": 1,
+                "type": "boon"
+            },
+            "NullNext2": {
+                "name": "NullNext2",
+                "desc": "Points this turn and the next are 0",
+                "tier": 1,
+                "type": "apex"
+            }
+        },
+        "deck": {
+            "deck1": {
+                "name": "deck1",
+                "slot1": "X2",
+                "slot2": "plus20",
+                "slot3": "Flipper",
+                "slot4": "Stack5",
+                "slotA": "NullNext2"
+            },
+            "deck2": {
+                "name": "deck2",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck3": {
+                "name": "deck3",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck4": {
+                "name": "deck4",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck5": {
+                "name": "deck5",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            }
+        }
     }
 }

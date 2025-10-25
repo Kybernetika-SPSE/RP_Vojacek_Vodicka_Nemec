@@ -18,6 +18,137 @@
         margin-top: 50vh;
       }
     }
+      .containerR .game-block:nth-child(3) .button {
+          position: absolute;
+          top: -2dvh;
+          right: -1dvh;
+          width: 25dvh; 
+          height: 12dvh; 
+          background: #880808;
+          color: #FFD700;
+          font-size: 2.4dvh;
+          font-weight: bold;
+          border: 0.4dvh solid #dfbd00;
+          border-radius: 0 0 0 2dvh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: -0.5dvh 0.5dvh 1.2dvh rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .containerR .game-block:nth-child(3) .button:hover {
+          background: #a30000;
+          border-color: #FFD700;
+          color: white;
+          transform: scale(1);
+        }
+        .containerR .game-block:nth-child(2) .button {
+          position: absolute;
+          bottom: 5dvh;
+          right: 5dvh;
+          width: 4dvh;
+          height: 13vh;
+          background: #880808;
+          color: #FFD700;
+          font-size: 2.2dvh;
+          font-weight: bold;
+          border: 0.4dvh solid #dfbd00;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 0.5dvh 1.2dvh rgba(0, 0, 0, 0.35);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        /* Hover efekt – lehce zesvětlí pozadí */
+        .containerR .game-block:nth-child(2) .button:hover {
+          background: #a30000;
+          border-color: #FFD700;
+          color: white;
+          transform: scale(1);
+        }
+        .containerR .game-block:nth-child(1) .button {
+          position: absolute;
+          left: 49.5%;
+          transform: translateX(-49.5%);
+          bottom: 25dvh;
+          width: 20dvh;
+          height: 5dvh;
+          background: #880808;
+          color: #FFD700;
+          font-size: 2.2dvh;
+          font-weight: bold;
+          border: 0.4dvh solid #dfbd00;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 0.5dvh 1.2dvh rgba(0, 0, 0, 0.35);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .containerR .game-block:nth-child(1) .button:hover {
+          background: #a30000;
+          border-color: #FFD700;
+          color: white;
+          transform: scale(1);
+          left: 49.5%;
+          transform: translateX(-49.5%);
+        }
+        h1 {
+        position: absolute;
+        top: 33dvh;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        font-size: 10dvh;
+        color: #FFD700;
+        font-weight: 900;
+        letter-spacing: 0.5dvh;
+        text-shadow:
+          0 0.4dvh 0.8dvh rgba(0, 0, 0, 0.6),
+          0 0 2dvh rgba(255, 215, 0, 0.5);
+          animation: waveGlow 3.5s ease-in-out infinite;
+      }
+          @keyframes waveGlow {
+      0% {
+        transform: translateX(-50%) rotate(0deg) scale(1);
+        text-shadow:
+          0 0.4dvh 0.8dvh rgba(0, 0, 0, 0.6),
+          0 0 1dvh rgba(255, 215, 0, 0.3);
+        filter: brightness(1);
+      }
+      25% {
+        transform: translateX(-50%) rotate(2deg) scale(1.05);
+        text-shadow:
+          0 0.6dvh 1.2dvh rgba(0, 0, 0, 0.7),
+          0 0 2.5dvh rgba(255, 215, 0, 0.7);
+        filter: brightness(1.2);
+      }
+      50% {
+        transform: translateX(-50%) rotate(0deg) scale(1);
+        text-shadow:
+          0 0.4dvh 0.8dvh rgba(0, 0, 0, 0.6),
+          0 0 1.5dvh rgba(255, 215, 0, 0.5);
+        filter: brightness(1.05);
+      }
+      75% {
+        transform: translateX(-50%) rotate(-2deg) scale(1.05);
+        text-shadow:
+          0 0.6dvh 1.2dvh rgba(0, 0, 0, 0.7),
+          0 0 2.5dvh rgba(255, 215, 0, 0.7);
+        filter: brightness(1.2);
+      }
+      100% {
+        transform: translateX(-50%) rotate(0deg) scale(1);
+        text-shadow:
+          0 0.4dvh 0.8dvh rgba(0, 0, 0, 0.6),
+          0 0 1dvh rgba(255, 215, 0, 0.3);
+        filter: brightness(1);
+      }
+    }
     </style>
 </head>
 <body>

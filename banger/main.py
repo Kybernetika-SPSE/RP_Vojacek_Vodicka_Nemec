@@ -170,7 +170,7 @@ def sign_in():
             },
             "Stack5": {
                 "name": "Stack5",
-                "desc": "increases points by 5, increse by 5 for every turn this is in your hand",
+                "desc": "increases points by 5",
                 "tier": 1,
                 "type": "boon"   
             },
@@ -271,7 +271,6 @@ def setup():
     session["cards"]["pack"] = []
     session["misc"] = {}
     session["misc"]["bank"] = 0
-    session["misc"]["round"] = 1
     session["prop"] = {}
     session.modified = True
     if dataBan == 1:
@@ -304,8 +303,6 @@ def houseadmin():
 @login_required
 def house():
     name = session["username"]
-    session["misc"]["round"] = 1
-    session.modified = True
     
     try:
         bal = openjson("users", "balance")
@@ -381,12 +378,6 @@ def userscreen():
             listU += i + "<br>"
     
     return render_template("userscreen.html", listU = listU)
-
-@app.route("/twist/rules")
-@login_required
-def rules():
-
-    return render_template("rules.html")
 #--------------fet--------------------
 
 @app.route("/twist/fet/balance")
@@ -625,7 +616,10 @@ def set_defaults():
 def draw_phase():
     
     check = sum(1 for v in session["deck"].values() if v == "0")
-    if check == 5:
+    if check == 5 or session["prop"]["reproc"] == 69:
+        if session["prop"]["reproc"] == 69:
+           session["prop"]["reproc"] = 0
+           session.modified = True 
         D = openjson("users", "deck")
         C = openjson("curses", "curses")
         deckdefault = D[session["misc"]["decknumber"]]
@@ -820,7 +814,17 @@ def processor():
     propscale3 = session["prop"]["propscale3"]
     propscale4 = session["prop"]["propscale4"]
     propscale5 = session["prop"]["propscale5"]
+#-------------------------kdyztak predelat---------------------
+    cards = session["cards"].values()
 
+    if "Hope" in cards and "Dreams" in cards:
+        propscale5 = 1
+    propscale4 = session["misc"]["pointstotal"]
+
+    propscale3 = session["prop"]["propscale"]
+    session["prop"]["propscale"] = action
+    session.modified = True
+#---------------------------------------------------------------
     if verdict == 1:
         resultdict = getattr(Actions, action)(reproc,pts,propscale1,propscale2,propscale3,propscale4,propscale5,)
         
@@ -829,6 +833,9 @@ def processor():
         
         if session["prop"]["reproc"] == 1:
             session["prop"]["reprocer"] = action
+        elif session["prop"]["reproc"] == 69:
+            session["misc"]["turn"] =session["misc"]["turn"] + 5
+        session.modified = True
 
         pointstotal = session["misc"]["pointstotal"]
         pointstotal += pointsafter
@@ -877,6 +884,7 @@ def processor():
         "validity": verdict,
         "gameover": gameover
     }
+
     return results
 
 

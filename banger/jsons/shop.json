@@ -3,15 +3,76 @@
         "add40":{
             "name":"add40",
             "price":50,
-            "desc":"allan please add details",
+            "desc":"increases value by 40",
             "tier":1,
             "type":"boon"},
         "sub30":{
             "name":"sub30",
             "price":50,
-            "desc":"allan please add details",
+            "desc":"decreses by 30",
             "tier":1,
-            "type":"boon"}
+            "type":"boon"},
+        "X3":{
+            "name":"X3",
+            "price":120,
+            "desc":"triple the value",
+            "tier":2,
+            "type":"boon"},
+        "Hope":{
+            "name":"Hope",
+            "price":120,
+            "desc":"points gained +5, if Dreams is in hand, make a wish come true.",
+            "tier":2,
+            "type":"boon"},
+        "Dreams":{
+            "name":"Hope",
+            "price":120,
+            "desc":"points gained +5, if Hope is in hand, make a wish come true.",
+            "tier":2,
+            "type":"boon"},
+        "Postmrtem":{
+            "name":"Postmortem",
+            "price":120,
+            "desc":"if negative, make it zero, if positive, make it negative",
+            "tier":2,
+            "type":"boon"},
+        "Kebab":{
+            "name":"Kebab",
+            "price":120,
+            "desc":"Buys us a kebab",
+            "tier":2,
+            "type":"Apex"},
+        "Red":{
+            "name":"Red",
+            "price":500,
+            "desc":"if points are less than -200: zero it and add 300",
+            "tier":3,
+            "type":"boon"},
+        "Blue":{
+            "name":"Blue",
+            "price":500,
+            "desc":"if points are negative: half them and flip them(Play before red to anihilate Toji!)",
+            "tier":3,
+            "type":"boon"},
+        "Violent_Hunger":{
+            "name":"Violent_Hunger",
+            "price":500,
+            "desc":"if positive value: triple and flip it, if negative: zero it and add 100(multiply for every -200 points)",
+            "tier":3,
+            "type":"boon"},
+        "Hex":{
+            "name":"Hex",
+            "price":500,
+            "desc":"Next value will be doubled and negated",
+            "tier":3,
+            "type":"boon"},
+        "White_Monster":{
+            "name":"White_Monster",
+            "price":500,
+            "desc":"Skip ahed to next hand",
+            "tier":2,
+            "type":"Apex"}
+        
         }   
                 
 }

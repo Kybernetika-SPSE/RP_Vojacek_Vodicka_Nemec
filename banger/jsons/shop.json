@@ -41,7 +41,7 @@
             "price":120,
             "desc":"Buys us a kebab",
             "tier":2,
-            "type":"Apex"},
+            "type":"apex"},
         "Red":{
             "name":"Red",
             "price":500,
@@ -70,8 +70,8 @@
             "name":"White_Monster",
             "price":500,
             "desc":"Skip ahed to next hand",
-            "tier":2,
-            "type":"Apex"}
+            "tier":3,
+            "type":"apex"}
         
         }   
                 

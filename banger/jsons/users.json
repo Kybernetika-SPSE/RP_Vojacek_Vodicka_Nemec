@@ -1,7 +1,7 @@
 {
     "Admin": {
         "password": "scrypt:32768:8:1$Qx1EhDE6W3pnrxbl$1c370894035a58180dc1efb88334b84dacf2ebf77ed55aa42ab5abb11211c02af9f40c1e131125bc5a2ef2a443f6979ebe0d3a0edb98a6c62518eb57542bc95e",
-        "balance": 10000000029,
+        "balance": 9999999909,
         "admin": 2,
         "ban": 0,
         "inventory": {
@@ -48,6 +48,13 @@
                 "desc": "allan please add details",
                 "tier": 1,
                 "type": "boon"
+            },
+            "Kebab": {
+                "name": "Kebab",
+                "price": 120,
+                "desc": "Buys us a kebab",
+                "tier": 2,
+                "type": "apex"
             }
         },
         "deck": {
@@ -79,9 +86,9 @@
                 "name": "deck4",
                 "slot1": "none",
                 "slot2": "none",
-                "slot3": "none",
+                "slot3": "Flipper",
                 "slot4": "none",
-                "slotA": "none"
+                "slotA": "Kebab"
             },
             "deck5": {
                 "name": "deck5",

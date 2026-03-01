@@ -62,17 +62,21 @@ def sorter(pack,loc):
     if loc == "inv":
             for x in pack:
                 button_class = "deckbuilderA" if x[2] == "apex" else "deckbuilder"
-                item = f"<tr><td>{x[0]},{x[1]}</td><td><button class='{button_class}' id={x[0]} onclick='pickcard(\"{x[0]}\")'></button></td></tr>"
+                item = f"""<tr><td>{x[0]},{x[1]}</td><td><button class='{button_class}' id={x[0]} onclick='pickcard(\"{x[0]}\")'></button></td></tr>
+"""
                 template += item
 
     elif loc == "shop":
         for x in pack:
             if x[0] == "0":
-                item = f"<tr><td>{x[0]},{x[1]},{x[2]}</td></tr>"
+                item = f"""<tr><td>{x[0]},{x[1]},{x[2]}</td></tr>
+"""
             else:
                 item = (
-                    f"<tr><td>{x[0]},{x[1]},{x[2]}</td>"
-                    f"<td><button onclick='buy(\"{x[0]}\")'>buy</button></td></tr>"
+                    f"""<tr><td>{x[0]},{x[1]},{x[2]}</td>                  
+"""
+                    f"""<td><button onclick='buy(\"{x[0]}\")'>buy</button></td></tr>
+"""
                 )
             print(item)
             template += item
@@ -80,25 +84,25 @@ def sorter(pack,loc):
     return template
 
 def tabularInv(tier,boons,apex,curses):
-    invtab = f"\
-            <table>\
-            <tr>\
-            <th>Tier{tier}</th>\
-            </tr>\
-            <tr>\
-            <th>boony</th>\
-            </tr>\
-            {boons}\
-            <tr>\
-            <th>apexy</th>\
-            </tr>\
-            {apex}\
-            <tr>\
-            <th>kletby</th>\
-            </tr>\
-            {curses}\
-            </table>\
-            "
+    invtab = f"""
+<table>
+<tr>
+<th>Tier{tier}</th>
+</tr>
+<tr>
+<th>boony</th>
+</tr>
+{boons}
+<tr>
+<th>apexy</th>
+</tr>
+{apex}
+<tr>
+<th>kletby</th>
+</tr>
+{curses}
+</table>
+"""
     return invtab
 
 def shopavail(shop,inv):
@@ -479,6 +483,9 @@ def shopfet():
     tab+= tabularInv(2,boons2,apex2,curses2)
     tab+= tabularInv(3,boons3,apex3,curses3)
 
+    #tomasi tohle pak smaz
+    print(tab)
+
     return tab
 
 @app.route("/twist/fet/inventory")
@@ -502,12 +509,14 @@ def inventoryfet():
     apex3 = sorter(pack3["a"],"inv")
     curses3 = sorter(pack3["c"],"inv")
 
-    invtab = ""
-    invtab+= tabularInv(1,boons1,apex1,curses1)
-    invtab+= tabularInv(2,boons2,apex2,curses2)
-    invtab+= tabularInv(3,boons3,apex3,curses3)
+    invt = ""
+    invt+= tabularInv(1,boons1,apex1,curses1)
+    invt+= tabularInv(2,boons2,apex2,curses2)
+    invt+= tabularInv(3,boons3,apex3,curses3)
+    #tomasi tohle pak smaz
+    print(invt)
 
-    return invtab
+    return invt
 
 @app.route("/twist/fet/deckeditor", methods=['GET', 'POST'])
 @login_required

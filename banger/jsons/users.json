@@ -403,15 +403,15 @@
             },
             "deck2": {
                 "name": "deck2",
-                "slot1": "none",
-                "slot2": "none",
-                "slot3": "none",
+                "slot1": "X2",
+                "slot2": "plus20",
+                "slot3": "Flipper",
                 "slot4": "none",
                 "slotA": "none"
             },
             "deck3": {
                 "name": "deck3",
-                "slot1": "none",
+                "slot1": "plus20",
                 "slot2": "none",
                 "slot3": "none",
                 "slot4": "none",
@@ -419,9 +419,9 @@
             },
             "deck4": {
                 "name": "deck4",
-                "slot1": "none",
+                "slot1": "plus20",
                 "slot2": "none",
-                "slot3": "none",
+                "slot3": "Flipper",
                 "slot4": "none",
                 "slotA": "none"
             },

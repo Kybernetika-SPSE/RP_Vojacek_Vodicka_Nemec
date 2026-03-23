@@ -69,11 +69,11 @@ def sorter(pack,loc):
     elif loc == "shop":
         for x in pack:
             if x[0] == "0":
-                item = f"""<tr><td>{x[0]},{x[1]},{x[2]}</td></tr>
+                item = f"""<tr><td><span class="item-name">{x[0]}</span><span class="price">{x[1]}</span>{x[2]}</td></tr>
 """
             else:
                 item = (
-                    f"""<tr><td>{x[0]},{x[1]},{x[2]}</td>                  
+                    f"""<tr><td><span class="item-name">{x[0]}</span><span class="price">{x[1]}</span>{x[2]}</td>                  
 """
                     f"""<td><button onclick='buy(\"{x[0]}\")'>buy</button></td></tr>
 """
@@ -86,20 +86,12 @@ def sorter(pack,loc):
 def tabularInv(tier,boons,apex,curses):
     invtab = f"""
 <table>
-<tr>
-<th>Tier{tier}</th>
-</tr>
-<tr>
-<th>boony</th>
-</tr>
+<tr><th colspan="2">Tier{tier}</th></tr>
+<tr><th colspan="2">boony</th></tr>
 {boons}
-<tr>
-<th>apexy</th>
-</tr>
+<tr><th colspan="2">apexy</th></tr>
 {apex}
-<tr>
-<th>kletby</th>
-</tr>
+<tr><th colspan="2">kletby</th></tr>
 {curses}
 </table>
 """

@@ -193,31 +193,8 @@ table::-webkit-scrollbar-thumb:hover {
 
 <div class="tiers">
 
-<table>
-<tr><th>Tier1</th></tr>
-<tr><th>boony</th></tr>
-<tr><td>X2,Doubles points</td><td><button class='deckbuilder' id=X2 onclick='pickcard("X2")'></button></td></tr>
-<tr><td>plus20,Points + 20</td><td><button class='deckbuilder' id=plus20 onclick='pickcard("plus20")'></button></td></tr>
-<tr><td>Flipper,Flips 'polarity', cannot exceed 150pts</td><td><button class='deckbuilder' id=Flipper onclick='pickcard("Flipper")'></button></td></tr>
-<tr><td>Stack5,increases points by 5, increse by 5 for every turn this is in your hand</td><td><button class='deckbuilder' id=Stack5 onclick='pickcard("Stack5")'></button></td></tr>
-<tr><th>apexy</th></tr>
-<tr><td>NullNext2,Points this turn and the next are 0</td><td><button class='deckbuilderA' id=NullNext2 onclick='pickcard("NullNext2")'></button></td></tr>
-<tr><th>kletby</th></tr>
-</table>
-
-<table>
-<tr><th>Tier2</th></tr>
-<tr><th>boony</th></tr>
-<tr><th>apexy</th></tr>
-<tr><th>kletby</th></tr>
-</table>
-
-<table>
-<tr><th>Tier3</th></tr>
-<tr><th>boony</th></tr>
-<tr><th>apexy</th></tr>
-<tr><th>kletby</th></tr>
-</table>
+<div id="inventory">
+        work</div>
 
 </div>
 
@@ -289,6 +266,7 @@ console.error("Fetch error:", error);
 }
 
 window.addEventListener('load', deckshow);
+window.addEventListener('load', loaditemstable("inventory"));
 
 function goBack() {
     window.history.back();

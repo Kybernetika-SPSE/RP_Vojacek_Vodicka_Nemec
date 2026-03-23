@@ -25,7 +25,7 @@
             "tier":2,
             "type":"boon"},
         "Dreams":{
-            "name":"Hope",
+            "name":"Dreams",
             "price":120,
             "desc":"points gained +5, if Hope is in hand, make a wish come true.",
             "tier":2,

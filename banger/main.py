@@ -822,8 +822,8 @@ def processor():
         propscale5 = 1
     propscale4 = session["misc"]["pointstotal"]
 
-    propscale3 = session["prop"]["propscale"]
-    session["prop"]["propscale"] = action
+    propscale3 = session["prop"]["propscale3"]
+    session["prop"]["propscale3"] = action
     session.modified = True
 #---------------------------------------------------------------
     if verdict == 1:

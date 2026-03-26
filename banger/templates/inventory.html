@@ -19,6 +19,16 @@
       }
     }
 
+#inventory {
+    display: flex;
+    gap: 5vh;
+    align-items: flex-start;
+}
+
+#inventory table {
+    width: 30%;
+}
+
 .tiers {
     display: flex;
     justify-content: flex-start;
@@ -112,7 +122,6 @@ table {
     margin: 1vh;
     font-size: 2vh;
 
-    display: block;
     max-height: 60dvh;
     overflow-y: auto;
 
@@ -181,6 +190,42 @@ table::-webkit-scrollbar-thumb:hover {
     text-shadow: 
         0 0 1vh rgba(231, 183, 8, 0.8),
         0 0 2vh rgba(255, 100, 0, 0.6);
+}
+
+
+
+.container-deck {
+    display: absolute;
+    position: absolute;
+    top: 5dvh;
+    left: -10%;
+    gap: 6vh;
+}
+
+
+.container-deck img {
+
+    appearance: none;
+
+    width: 35vh;
+    height: 21vh;
+
+    
+    content: "";
+
+    /*background: rgba(161, 11, 11, 0.555);*/
+    background: linear-gradient(100deg,rgba(161, 11, 11, 0.555),rgb(194, 23, 0));
+    border: 0.3vh solid gold;
+    border-radius: 1vh;
+
+    
+    font-size: 6vh;
+    font-weight: bold;
+    color: gold;
+
+    text-align: center;
+    line-height: 18vh;
+
 }
 
 

@@ -92,7 +92,7 @@
             "deck4": {
                 "name": "deck4",
                 "slot1": "none",
-                "slot2": "none",
+                "slot2": "plus20",
                 "slot3": "Flipper",
                 "slot4": "none",
                 "slotA": "Kebab"
@@ -436,6 +436,87 @@
                 "slot1": "plus20",
                 "slot2": "none",
                 "slot3": "Flipper",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck5": {
+                "name": "deck5",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            }
+        }
+    },
+    "gaga": {
+        "password": "scrypt:32768:8:1$KPwuhufdNsvA3LOs$7b574394883e10386b3045d1ddb6adf088e9899bfcef0a71bcec681c146ef52d20723ac6149857411a831e4f20005ac1f2af6c6a14920b981c4e2d4c6982ff83",
+        "balance": 0,
+        "admin": 0,
+        "ban": 0,
+        "issue": 0,
+        "inventory": {
+            "X2": {
+                "name": "X2",
+                "desc": "Doubles points",
+                "tier": 1,
+                "type": "boon"
+            },
+            "plus20": {
+                "name": "plus20",
+                "desc": "Points + 20",
+                "tier": 1,
+                "type": "boon"
+            },
+            "Flipper": {
+                "name": "Flipper",
+                "desc": "Flips 'polarity', cannot exceed 150pts",
+                "tier": 1,
+                "type": "boon"
+            },
+            "Stack5": {
+                "name": "Stack5",
+                "desc": "increases points by 5",
+                "tier": 1,
+                "type": "boon"
+            },
+            "NullNext2": {
+                "name": "NullNext2",
+                "desc": "Points this turn and the next are 0",
+                "tier": 1,
+                "type": "apex"
+            }
+        },
+        "deck": {
+            "deck1": {
+                "name": "deck1",
+                "slot1": "X2",
+                "slot2": "plus20",
+                "slot3": "Flipper",
+                "slot4": "Stack5",
+                "slotA": "NullNext2"
+            },
+            "deck2": {
+                "name": "deck2",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck3": {
+                "name": "deck3",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck4": {
+                "name": "deck4",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
                 "slot4": "none",
                 "slotA": "none"
             },

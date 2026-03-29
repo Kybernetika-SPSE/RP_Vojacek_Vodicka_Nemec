@@ -40,6 +40,7 @@
 }
 
 .tiers table {
+    display: block;
     width: 40%;
     background: rgba(139, 11, 11, 0.5);
     border-radius: 1vh;
@@ -58,6 +59,11 @@ td {
 tr:hover td {
     background: rgba(255,255,255,0.05);
     border-radius: 0.5vh;
+}
+
+td:last-child {
+    width: 5dvh;
+    height: 6.1dvh;
 }
 .deckbuilder,
 .deckbuilderA {
@@ -195,11 +201,12 @@ table::-webkit-scrollbar-thumb:hover {
 
 
 .container-deck {
-    display: absolute;
-    position: absolute;
-    top: 5dvh;
-    left: -10%;
-    gap: 6vh;
+    left:-10%;
+    justify-content: center;
+    align-items: center;
+    gap: 10vh;
+    flex-wrap: nowrap;
+    margin-top: -10dvh;
 }
 
 
@@ -207,8 +214,8 @@ table::-webkit-scrollbar-thumb:hover {
 
     appearance: none;
 
-    width: 35vh;
-    height: 21vh;
+    width: 52dvh;
+    height: 30dvh;
 
     
     content: "";
@@ -219,12 +226,12 @@ table::-webkit-scrollbar-thumb:hover {
     border-radius: 1vh;
 
     
-    font-size: 6vh;
+    font-size: 10dvh;
     font-weight: bold;
     color: gold;
 
     text-align: center;
-    line-height: 18vh;
+    line-height: 27dvh;
 
 }
 

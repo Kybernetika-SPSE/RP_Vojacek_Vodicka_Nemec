@@ -20,10 +20,13 @@
     margin-top: 50dvh;
   }
 }
+html,body {
+  overflow: hidden;
+}
 
 /* název decku */
 #deckname{
-position:absolute;
+position:fixed;
 top:3dvh;
 left:50%;
 transform:translateX(-50%);
@@ -32,6 +35,7 @@ font-weight:bold;
 color:#FFD700;
 text-shadow:0 0 1.5dvh gold;
 letter-spacing:0.5dvh;
+z-index: 9999;
 }
 
 .container-deck{
@@ -44,6 +48,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 gap:6dvh;
+z-index: 1;
 }
 
 .gif{
@@ -57,30 +62,40 @@ transform:scale(1.12);
 }
 
 .Bcontainer{
+z-index: 2;
 position:absolute;
 bottom:4dvh;
 left:50%;
 transform:translateX(-50%);
 display:flex;
-gap:2dvh;
+gap:3dvh;
 }
 
 .button{
-padding:1.6dvh 3dvh;
+margin-bottom: -6dvh;
+padding:8dvh 8vh;
 font-size:2.4dvh;
 background:#8a0909;
 border:0.3dvh solid #FFD700;
 color:#FFD700;
-border-radius:1dvh;
+border-radius: 2dvh  2dvh 0 0;
 cursor:pointer;
-transition:0.2s;
+border-bottom: none;
+transition: all 0.25s ease;
 }
 
-.button:hover{
-transform:scale(1.1);
-box-shadow:0 0 1.2dvh gold;
+/*  fucking zatim zakomentuju to mrdá mě ta funkce mi to rozjebává dal jsem zatim ten js pryč ale tohle necham na horší časy :D 
+.button.active {
+  transform: translateY(-4dvh) scale(1.15);
+  box-shadow: 0 0 2dvh gold;
+  background: #c40000;
+  z-index: 5;
 }
 
+.button.inactive {
+  opacity: 0.6;
+}
+*/
 
 .start-button{
 position:absolute;

@@ -40,6 +40,8 @@
 }
 
 .tiers table {
+    flex: 1;
+    min-width: 0;
     display: block;
     width: 40%;
     background: rgba(139, 11, 11, 0.5);
@@ -54,7 +56,12 @@ th {
     text-align: left;
 }
 td {
-    padding: 0.8vh;
+    max-width: 45dvh;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
 }
 tr:hover td {
     background: rgba(255,255,255,0.05);
@@ -127,12 +134,15 @@ table {
     width: 40%;
     margin: 1vh;
     font-size: 2vh;
+    table-layout: fixed;
 
     max-height: 60dvh;
     overflow-y: auto;
 
     border-collapse: separate;
     border-spacing: 0 1.2vh;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
     
 }
 table::-webkit-scrollbar {

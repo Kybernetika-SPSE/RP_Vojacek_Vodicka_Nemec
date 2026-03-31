@@ -142,7 +142,7 @@ def Blue(reproc,pts,ph1,ph2,ph3,ph4,ph5):
     
     return result
 
-def Violent_Hunger(reproc,pts,ph1,ph2,ph3,ph4,ph5):
+def Hunger(reproc,pts,ph1,ph2,ph3,ph4,ph5):
     result = resulttemplate.copy()
 
     if pts > 0:
@@ -165,7 +165,7 @@ def Hex(reproc,pts,ph1,ph2,ph3,ph4,ph5):
     
     return result
 
-def White_Monster(reproc,pts,ph1,ph2,ph3,ph4,ph5):
+def Monster(reproc,pts,ph1,ph2,ph3,ph4,ph5):
     result = resulttemplate.copy()
 
     result["pointsafter"] = pts

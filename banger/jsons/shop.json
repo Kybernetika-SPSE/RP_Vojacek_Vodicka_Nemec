@@ -54,8 +54,8 @@
             "desc":"if points are negative: half them and flip them(Play before red to anihilate Toji!)",
             "tier":3,
             "type":"boon"},
-        "Violent_Hunger":{
-            "name":"Violent_Hunger",
+        "Hunger":{
+            "name":"Hunger",
             "price":500,
             "desc":"if positive value: triple and flip it, if negative: zero it and add 100(multiply for every -200 points)",
             "tier":3,
@@ -66,8 +66,8 @@
             "desc":"Next value will be doubled and negated",
             "tier":3,
             "type":"boon"},
-        "White_Monster":{
-            "name":"White_Monster",
+        "Monster":{
+            "name":"Monster",
             "price":500,
             "desc":"Skip ahed to next hand",
             "tier":3,

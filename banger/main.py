@@ -634,7 +634,7 @@ def draw_phase():
         if session["prop"]["reproc"] == 69:
            session["prop"]["reproc"] = 0
            session.modified = True 
-           session["deck"]["slotA"] = "0.png"
+           session["deck"]["slotA"] = "0"
         else:
             session["deck"]["slotA"] = deckdefault["slotA"]
 

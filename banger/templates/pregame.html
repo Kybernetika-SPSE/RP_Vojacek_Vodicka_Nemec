@@ -157,20 +157,20 @@ box-shadow:0 0 2dvh gold;
 <p id="deckname"></p>
 <p style="position: absolute;left: 10dvh; visibility: hidden;" id="decknumber"></p>
 
-<div class="container-deck">
-<img src="" alt="enterdatahere" class="gif" id="slot1" onclick="editdeckslot('slot1')">
-<img src="" alt="enterdatahere" class="gif" id="slot2" onclick="editdeckslot('slot2')">
-<img src="" alt="enterdatahere" class="gif" id="slot3" onclick="editdeckslot('slot3')">
-<img src="" alt="enterdatahere" class="gif" id="slot4" onclick="editdeckslot('slot4')">
-<img src="" alt="enterdatahere" class="gif" id="slotA" onclick="editdeckslot('slotA')">
+<div class="playcontainer">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot1" class="slots" id="slot1">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot2" class="slots" id="slot2">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slotA" class="slots" id="slotA">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot3" class="slots" id="slot3">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot4" class="slots" id="slot4">
 </div>
 
 <div class="Bcontainer">
-<button class="button" onclick="showDeck('deck1')">1</button>
-<button class="button" onclick="showDeck('deck2')">2</button>
-<button class="button" onclick="showDeck('deck3')">3</button>
-<button class="button" onclick="showDeck('deck4')">4</button>
-<button class="button" onclick="showDeck('deck5')">5</button>
+<button class="button" onclick="showDeckO('deck1')">1</button>
+<button class="button" onclick="showDeckO('deck2')">2</button>
+<button class="button" onclick="showDeckO('deck3')">3</button>
+<button class="button" onclick="showDeckO('deck4')">4</button>
+<button class="button" onclick="showDeckO('deck5')">5</button>
 </div>
 
 <button class="start-button" onclick="setdeck()">START</button>
@@ -224,17 +224,31 @@ console.error("Fetch error:",error);
 }
 
 async function loadup(deck){
-await deckshow()
-showDeck(deck)
-}
+    await deckshow()
+    showDeck(deck)
 
-window.addEventListener('load',()=>loadup("{{ deckNo }}"))
+        document.getElementById("slot1").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot1 + ".png"
+        document.getElementById("slot2").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot2 + ".png"
+        document.getElementById("slot3").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot3 + ".png"
+        document.getElementById("slot4").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot4 + ".png"
+        document.getElementById("slotA").src = "{{ url_for('static', filename='') }}" + globalData[deck].slotA + ".png"
+    }
+async function showDeckO(deck){
+  showDeck(deck)
+  document.getElementById("slot1").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot1 + ".png"
+  document.getElementById("slot2").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot2 + ".png"
+  document.getElementById("slot3").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot3 + ".png"
+  document.getElementById("slot4").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot4 + ".png"
+  document.getElementById("slotA").src = "{{ url_for('static', filename='') }}" + globalData[deck].slotA + ".png"
+}
+window.addEventListener('load', () => loadup("{{ deckNo }}"))
 
 function goBack() {
     window.history.back();
 }
 
 </script>
+
 
 </body>
 </html>

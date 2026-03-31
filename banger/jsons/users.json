@@ -124,26 +124,26 @@
             },
             "deck2": {
                 "name": "deck2",
-                "slot1": "none",
-                "slot2": "none",
-                "slot3": "none",
-                "slot4": "none",
-                "slotA": "none"
+                "slot1": "0",
+                "slot2": "0",
+                "slot3": "0",
+                "slot4": "0",
+                "slotA": "0"
             },
             "deck3": {
                 "name": "deck3",
-                "slot1": "none",
+                "slot1": "0",
                 "slot2": "plus20",
-                "slot3": "none",
-                "slot4": "none",
-                "slotA": "none"
+                "slot3": "0",
+                "slot4": "0",
+                "slotA": "0"
             },
             "deck4": {
                 "name": "deck4",
-                "slot1": "none",
+                "slot1": "0",
                 "slot2": "plus20",
                 "slot3": "Flipper",
-                "slot4": "none",
+                "slot4": "0",
                 "slotA": "Kebab"
             },
             "deck5": {

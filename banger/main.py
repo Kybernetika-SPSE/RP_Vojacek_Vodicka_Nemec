@@ -188,35 +188,35 @@ def sign_in():
             },
             "deck2": {
                 "name": "deck2",
-                "slot1": "none",
-                "slot2": "none",
-                "slot3": "none",
-                "slot4": "none",
-                "slotA": "none"
+                "slot1": "0",
+                "slot2": "0",
+                "slot3": "0",
+                "slot4": "0",
+                "slotA": "0"
             },
             "deck3": {
                 "name": "deck3",
-                "slot1": "none",
-                "slot2": "none",
-                "slot3": "none",
-                "slot4": "none",
-                "slotA": "none"
+                "slot1": "0",
+                "slot2": "0",
+                "slot3": "0",
+                "slot4": "0",
+                "slotA": "0"
             },
             "deck4": {
                 "name": "deck4",
-                "slot1": "none",
-                "slot2": "none",
-                "slot3": "none",
-                "slot4": "none",
-                "slotA": "none"
+                "slot1": "0",
+                "slot2": "0",
+                "slot3": "0",
+                "slot4": "0",
+                "slotA": "0"
             },
             "deck5": {
                 "name": "deck5",
-                "slot1": "none",
-                "slot2": "none",
-                "slot3": "none",
-                "slot4": "none",
-                "slotA": "none"
+                "slot1": "0",
+                "slot2": "0",
+                "slot3": "0",
+                "slot4": "0",
+                "slotA": "0"
             }
         }
     }
@@ -256,11 +256,11 @@ def setup():
     dataBan = openjson("users", "ban")
     session["deck"] = {
             "deckNo": "",
-            "slot1": "none",
-            "slot2": "none",
-            "slot3": "none",
-            "slot4": "none",
-            "slotA": "none",
+            "slot1": "0",
+            "slot2": "0",
+            "slot3": "0",
+            "slot4": "0",
+            "slotA": "0",
             "valid": 0
         }
     session["cards"] = {}
@@ -544,7 +544,7 @@ def pregamedeck():
 
     for i in deckdata:
         session["deck"][i] = deckdata[i]
-        if session["deck"][i] == "none":
+        if session["deck"][i] == "0":
             session["deck"]["valid"] = 0
     session.modified = True
 

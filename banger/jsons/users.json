@@ -1,7 +1,7 @@
 {
     "Admin": {
         "password": "scrypt:32768:8:1$Qx1EhDE6W3pnrxbl$1c370894035a58180dc1efb88334b84dacf2ebf77ed55aa42ab5abb11211c02af9f40c1e131125bc5a2ef2a443f6979ebe0d3a0edb98a6c62518eb57542bc95e",
-        "balance": 9999999789,
+        "balance": 9999997049,
         "admin": 2,
         "ban": 0,
         "inventory": {
@@ -62,6 +62,55 @@
                 "desc": "triple the value",
                 "tier": 2,
                 "type": "boon"
+            },
+            "Hope": {
+                "name": "Hope",
+                "price": 120,
+                "desc": "points gained +5, if Dreams is in hand, make a wish come true.",
+                "tier": 2,
+                "type": "boon"
+            },
+            "Dreams": {
+                "name": "Dreams",
+                "price": 120,
+                "desc": "points gained +5, if Hope is in hand, make a wish come true.",
+                "tier": 2,
+                "type": "boon"
+            },
+            "Red": {
+                "name": "Red",
+                "price": 500,
+                "desc": "if points are less than -200: zero it and add 300",
+                "tier": 3,
+                "type": "boon"
+            },
+            "Blue": {
+                "name": "Blue",
+                "price": 500,
+                "desc": "if points are negative: half them and flip them(Play before red to anihilate Toji!)",
+                "tier": 3,
+                "type": "boon"
+            },
+            "Violent_Hunger": {
+                "name": "Violent_Hunger",
+                "price": 500,
+                "desc": "if positive value: triple and flip it, if negative: zero it and add 100(multiply for every -200 points)",
+                "tier": 3,
+                "type": "boon"
+            },
+            "Hex": {
+                "name": "Hex",
+                "price": 500,
+                "desc": "Next value will be doubled and negated",
+                "tier": 3,
+                "type": "boon"
+            },
+            "White_Monster": {
+                "name": "White_Monster",
+                "price": 500,
+                "desc": "Skip ahed to next hand",
+                "tier": 3,
+                "type": "apex"
             }
         },
         "deck": {
@@ -554,6 +603,87 @@
     "nigger": {
         "password": "scrypt:32768:8:1$kA7NVPBhlwAMsz49$0961a5232dddbc4c99c61f656442a5290967edad6e1f2d46a0ae77779c7d114f9a6be94f56cbb9c7ef84cf0d616ffc014d48bcd50f0b8fa0e77765484cbaab62",
         "balance": 10,
+        "admin": 0,
+        "ban": 0,
+        "issue": 0,
+        "inventory": {
+            "X2": {
+                "name": "X2",
+                "desc": "Doubles points",
+                "tier": 1,
+                "type": "boon"
+            },
+            "plus20": {
+                "name": "plus20",
+                "desc": "Points + 20",
+                "tier": 1,
+                "type": "boon"
+            },
+            "Flipper": {
+                "name": "Flipper",
+                "desc": "Flips 'polarity', cannot exceed 150pts",
+                "tier": 1,
+                "type": "boon"
+            },
+            "Stack5": {
+                "name": "Stack5",
+                "desc": "increases points by 5",
+                "tier": 1,
+                "type": "boon"
+            },
+            "NullNext2": {
+                "name": "NullNext2",
+                "desc": "Points this turn and the next are 0",
+                "tier": 1,
+                "type": "apex"
+            }
+        },
+        "deck": {
+            "deck1": {
+                "name": "deck1",
+                "slot1": "X2",
+                "slot2": "plus20",
+                "slot3": "Flipper",
+                "slot4": "Stack5",
+                "slotA": "NullNext2"
+            },
+            "deck2": {
+                "name": "deck2",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck3": {
+                "name": "deck3",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck4": {
+                "name": "deck4",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            },
+            "deck5": {
+                "name": "deck5",
+                "slot1": "none",
+                "slot2": "none",
+                "slot3": "none",
+                "slot4": "none",
+                "slotA": "none"
+            }
+        }
+    },
+    "matej": {
+        "password": "scrypt:32768:8:1$Rte7HVdActtoXina$db85a870dc4a347c67890aa824a1eff5c5df31e7171801616eef5fb21b5d4acf97d3c0e43055742588587c609b8f73e7d0cb2e17e10d9d2e6529ddad03a57c91",
+        "balance": 0,
         "admin": 0,
         "ban": 0,
         "issue": 0,

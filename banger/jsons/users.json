@@ -240,7 +240,7 @@
     },
     "TomasGOLD": {
         "password": "scrypt:32768:8:1$F0hzESRHqDYgOqgn$6464b3e6449bd369b29dc35c20926ec6a7f811a4b8b904184b91cb4111740476ab12b2e8ead6f0983933c257722b3a08c822cbe0e8d3e6ee84a2c0587939f703",
-        "balance": 99999999929,
+        "balance": 99999998809,
         "admin": 2,
         "ban": 0,
         "issue": 0,
@@ -287,6 +287,27 @@
                 "price": 50,
                 "desc": "decreses by 30",
                 "tier": 1,
+                "type": "boon"
+            },
+            "Blue": {
+                "name": "Blue",
+                "price": 500,
+                "desc": "if points are negative: half them and flip them(Play before red to anihilate Toji!)",
+                "tier": 3,
+                "type": "boon"
+            },
+            "Violent_Hunger": {
+                "name": "Violent_Hunger",
+                "price": 500,
+                "desc": "if positive value: triple and flip it, if negative: zero it and add 100(multiply for every -200 points)",
+                "tier": 3,
+                "type": "boon"
+            },
+            "Dreams": {
+                "name": "Dreams",
+                "price": 120,
+                "desc": "points gained +5, if Hope is in hand, make a wish come true.",
+                "tier": 2,
                 "type": "boon"
             }
         },

@@ -18,6 +18,33 @@
         margin-top: 50vh;
       }
     }
+
+    button {
+    padding: 2.5vh 7vh;
+    text-decoration: none;
+    color: #FFD700;
+    background-color: #880808;
+    border: none;
+    border-radius: 30vh;
+    text-align: center;
+    font-size: 3vh;
+    margin-left: 1dvh;
+    margin-right: 1dvh;
+    margin-top: 2dvh;
+    box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    }
+    button:hover {
+        background-color: #8a1111;
+        color: #fdda10;
+        scale: 1.2;
+    }
+    .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40vh;
+  }
     </style>
 </head>
 <body>
@@ -26,9 +53,11 @@
     <h1>Victory!</h1>
     <p1> {{bank}}</p1>
 
+  <div class="buttons">
+    <button onclick="window.location.href = '/twist/twist_game'">another one</button>  
     <button onclick="window.location.href = '/twist/house'"> cash it </button>
-    <button onclick="window.location.href = '/twist/twist_game'">another one</button>
 
+  </div>
 
 </body>
 </html>

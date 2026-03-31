@@ -323,10 +323,10 @@
             "deck2": {
                 "name": "deck2",
                 "slot1": "X2",
-                "slot2": "none",
-                "slot3": "none",
-                "slot4": "none",
-                "slotA": "none"
+                "slot2": "Dreams",
+                "slot3": "Violent_Hunger",
+                "slot4": "Blue",
+                "slotA": "NullNext2"
             },
             "deck3": {
                 "name": "deck3",
@@ -440,7 +440,7 @@
     },
     "Sexyman": {
         "password": "scrypt:32768:8:1$l6jqpBnQf4qImvzU$42a0649cfe628a08a6f023caeac9cba05fa6e9612ec64f900771ca67abcdb31506fc2e36c2cd99dd7d522b9e46f137330c03688476e596b0477c0b5f62c93567",
-        "balance": 0,
+        "balance": 327670,
         "admin": 0,
         "ban": 0,
         "issue": 0,

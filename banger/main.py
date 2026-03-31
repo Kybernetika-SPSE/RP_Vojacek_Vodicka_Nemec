@@ -618,9 +618,6 @@ def draw_phase():
     
     check = sum(1 for v in session["deck"].values() if v == "0")
     if check == 5 or session["prop"]["reproc"] == 69:
-        if session["prop"]["reproc"] == 69:
-           session["prop"]["reproc"] = 0
-           session.modified = True 
         D = openjson("users", "deck")
         C = openjson("curses", "curses")
         deckdefault = D[session["misc"]["decknumber"]]
@@ -634,7 +631,13 @@ def draw_phase():
         session["deck"]["slot1"] = random.choice(C)
         session["deck"]["slot4"] = random.choice(C)
 
-        session["deck"]["slotA"] = deckdefault["slotA"]
+        if session["prop"]["reproc"] == 69:
+           session["prop"]["reproc"] = 0
+           session.modified = True 
+           session["deck"]["slotA"] = "0.png"
+        else:
+            session["deck"]["slotA"] = deckdefault["slotA"]
+
         session.modified = True
     
 

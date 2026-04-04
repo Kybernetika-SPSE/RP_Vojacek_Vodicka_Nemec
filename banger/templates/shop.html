@@ -96,10 +96,17 @@ th {
 
     text-shadow: 0 0 6px rgba(255,215,0,0.4);
 }
+.shop-tier table tr:first-child th {
+    font-size: 28px;
+    text-shadow: 0 0 6px gold;
+}
+
 
 td {
-    padding: 12px 10px;
+    padding: 18px 10px;
     border-bottom: 1px solid #FFD70055;
+
+    justify-content: space-between;
 }
 
 tr:hover {
@@ -116,8 +123,11 @@ tr:hover {
 .price {
     color: #ffcc33;
     font-weight: bold;
-    margin-left: 10px;
+    margin-left: 18px;
     font-size: 17px;
+}
+.price::after {
+    content: " - ";
 }
 /*buy*/
 button {

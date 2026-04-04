@@ -18,6 +18,31 @@
         margin-top: 50vh;
       }
     }
+      button {
+
+          padding: 3vh 7.5vh;
+          font-size: 3vh;
+          font-weight: bold;
+
+          color: #FFD700;
+          background: linear-gradient(135deg,#a30000,#7a0000);
+
+          border: 0.3vh solid #ffd900;
+          border-radius: 2vh;
+
+          cursor: pointer;
+          z-index: 1000;
+
+          box-shadow: 0 0.5vh 1.5vh rgba(0,0,0,0.3);
+          transition: all 0.15s ease;
+      }
+
+      button:hover {
+          background: linear-gradient(135deg,#c40000,#880808);
+          border-color: #FFD700;
+          transform: scale(1.1);
+          box-shadow: 0 0 4px rgba(255,215,0,0.5);
+      }
     </style>
 </head>
 <body>
@@ -25,7 +50,7 @@
     <h2>Round</h2>
     <h1>Defeat!</h1>
 
-    <button onclick="window.location.href = '/twist/house'"> that sucks! </button>
+    <button onclick="window.location.href = '/twist/house'"> Back to the lobby kid! </button>
 
 
 </body>

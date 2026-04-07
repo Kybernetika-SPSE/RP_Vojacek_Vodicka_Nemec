@@ -36,9 +36,12 @@
     cursor: pointer;
     }
     button:hover {
-        background-color: #8a1111;
-        color: #fdda10;
-        scale: 1.2;
+          background: #a30000;
+          border-color: #FFD700;
+          color: white;
+          left: 49.5%;
+          transform: scale(1.2);
+          transition: all 0.2s ease;
     }
     .buttons {
     display: flex;
@@ -54,8 +57,8 @@
     <p1> {{bank}}</p1>
 
   <div class="buttons">
-    <button onclick="window.location.href = '/twist/twist_game'">another one</button>  
-    <button onclick="window.location.href = '/twist/house'"> cash it </button>
+    <button onclick="window.location.href = '/twist/twist_game'">Keep going?</button>  
+    <button onclick="window.location.href = '/twist/house'"> Cash it! </button>
 
   </div>
 

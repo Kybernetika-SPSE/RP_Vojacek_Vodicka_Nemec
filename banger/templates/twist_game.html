@@ -22,13 +22,17 @@
         overflow: hidden;
     }
       button {
-        height: 11dvh;
-        width: 17dvh;        
+        font-size: 19dvh;
+        height: 13dvh;
+        width: 19dvh;
+        justify-content: center;
+        align-items: center;
       }
       .slots{
         top:0dvh;
         height: 50dvh; 
         width: auto;
+        text-align: center;
       }
       
     </style>
@@ -63,7 +67,7 @@
         <img src="{{ url_for('static', filename=slots) }}" alt="slot4" class="slots" id="slot4" onclick="nextstep('slot4')">
     </div>
     <button class="functionbutton" id="functionbutton1" onclick="switchstuff()">▶</button>
-    <button class="functionbutton" id="functionbutton2" onclick="reset()">next</button>
+    <button class="functionbutton" id="functionbutton2" onclick="reset()">Next</button>
 
     <script src="{{ url_for('static', filename='twist/javas.js') }}"></script>
     <script>

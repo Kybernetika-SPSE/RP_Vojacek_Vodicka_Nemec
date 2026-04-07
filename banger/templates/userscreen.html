@@ -18,9 +18,56 @@
         margin-top: 50vh;
       }
     }
+      .smallbutton {
+    font-size: 2.2dvh;
+    padding: 1.4dvh 2.4dvh;
+    margin: 1dvh;
+
+    border-radius: 2dvh;
+
+    color: #FFD700;
+    background: rgba(255, 0, 0, 0.4);
+    border: 0.3dvh solid #ffd900;
+    cursor: pointer;
+  }
+  .smallbutton:hover {
+    color:white;
+  }
+    .back-button {
+    position: fixed;
+    top: 6dvh;
+    left: 6dvh;
+
+    width: 20dvh;
+    height: 8dvh;
+
+    padding: 1.5dvh 3dvh;
+    font-size: 2.2dvh;
+    font-weight: bold;
+
+    color: #FFD700;
+    background: rgba(255, 0, 0, 0.4);
+
+    border: 0.3dvh solid #ffd900;
+    border-radius: 2dvh ;
+
+    cursor: pointer;
+    z-index: 1000;
+
+    box-shadow: 0 0.5dvh 1.5dvh rgba(0,0,0,0.3);
+    transition: all 0.15s ease;
+}
+
+.back-button:hover {
+    background: rgba(255, 21, 21, 0.6);
+    border-color: #FFD700;
+    color: white;
+    transform: scale(1.1);
+}
     </style>
 </head>
 <body>
+    <button class="back-button" onclick="goBack()">← Back</button>
     <div style="position: absolute;left: 5dvh;">
         {{listU | safe}}
     </div>
@@ -86,4 +133,9 @@
 
 
     window.addEventListener('load', startup)
+
+  
+ function goBack() {
+    window.history.back();
+}
 </script>

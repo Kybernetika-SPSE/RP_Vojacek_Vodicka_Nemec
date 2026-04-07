@@ -159,7 +159,7 @@
     },
     "Sexyman": {
         "password": "scrypt:32768:8:1$sNS9zPAS8GqMhBsR$45e24dcac9430aed5b28190fe991e0de22133fd07bc1094e150ca55a90ca79cbbfd9a1347cf91f53f96386dc5a7d899000bbd3a8dfc6cac26a41480f57e91123",
-        "balance": 500,
+        "balance": 450,
         "admin": 0,
         "ban": 0,
         "issue": 1,
@@ -200,6 +200,13 @@
                 "desc": "triple the value",
                 "tier": 2,
                 "type": "boon"
+            },
+            "add40": {
+                "name": "add40",
+                "price": 50,
+                "desc": "increases value by 40",
+                "tier": 1,
+                "type": "boon"
             }
         },
         "deck": {
@@ -208,7 +215,7 @@
                 "slot1": "X2",
                 "slot2": "X3",
                 "slot3": "Flipper",
-                "slot4": "Stack5",
+                "slot4": "add40",
                 "slotA": "NullNext2"
             },
             "deck2": {

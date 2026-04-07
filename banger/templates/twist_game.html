@@ -90,8 +90,8 @@
       }
       async function update() {
         await getstuff()
-        document.getElementById("turnhere").textContent = stuff.misc.turn
-        document.getElementById("roundhere").textContent = stuff.misc.round
+        document.getElementById("turnhere").textContent = "tah: " + stuff.misc.turn
+        document.getElementById("roundhere").textContent = "kolo: " + stuff.misc.round
 
       }
       async function getstuff() {

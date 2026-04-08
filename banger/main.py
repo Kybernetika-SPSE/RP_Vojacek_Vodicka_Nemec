@@ -824,12 +824,12 @@ def processor():
     if "Hope" in cards and "Dreams" in cards:
         propscale5 = 1
     propscale4 = session["misc"]["pointstotal"]
-
     propscale3 = session["prop"]["propscale3"]
     session["prop"]["propscale3"] = action
     session.modified = True
 #---------------------------------------------------------------
     if verdict == 1:
+        print(action)
         resultdict = getattr(Actions, action)(reproc,pts,propscale1,propscale2,propscale3,propscale4,propscale5,)
         
         pointsafter = resultdict["pointsafter"]

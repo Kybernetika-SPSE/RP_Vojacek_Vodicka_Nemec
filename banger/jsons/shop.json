@@ -30,12 +30,6 @@
             "desc":"points gained +5, if Hope is in hand, make a wish come true.",
             "tier":2,
             "type":"boon"},
-        "Postmrtem":{
-            "name":"Postmortem",
-            "price":120,
-            "desc":"if negative, make it zero, if positive, make it negative",
-            "tier":2,
-            "type":"boon"},
         "Kebab":{
             "name":"Kebab",
             "price":120,

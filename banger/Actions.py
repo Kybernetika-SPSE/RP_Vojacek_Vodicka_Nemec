@@ -91,6 +91,8 @@ def Dreams(reproc,pts,ph1,ph2,ph3,ph4,ph5):
         result["pointsafter"] = ph4*1.2 
     result["reproc"] = 0
 
+    return result
+
 def Postmortem(reproc,pts,ph1,ph2,ph3,ph4,ph5):
     result = resulttemplate.copy()
     

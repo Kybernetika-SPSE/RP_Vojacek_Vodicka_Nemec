@@ -213,7 +213,7 @@
             "deck1": {
                 "name": "deck1",
                 "slot1": "X2",
-                "slot2": "X3",
+                "slot2": "Stack5",
                 "slot3": "Flipper",
                 "slot4": "add40",
                 "slotA": "NullNext2"

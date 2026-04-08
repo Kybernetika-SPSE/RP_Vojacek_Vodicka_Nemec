@@ -1,0 +1,263 @@
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DefNotGamba</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+
+<style>
+
+@media screen and (max-aspect-ratio: 9/16) {
+  body * {
+    display: none !important;
+  }
+  body::before {
+    content: "Otočte své zařízení na šířku";
+    display: block;
+    text-align: center;
+    font-size: 3dvh;
+    color: red;
+    margin-top: 50dvh;
+  }
+}
+html,body {
+  overflow: hidden;
+}
+
+/* název decku */
+#deckname{
+position:fixed;
+top:3dvh;
+left:50%;
+transform:translateX(-50%);
+font-size:5dvh;
+font-weight:bold;
+color:#FFD700;
+text-shadow:0 0 1.5dvh gold;
+letter-spacing:0.5dvh;
+z-index: 9999;
+}
+
+.container-deck{
+position:absolute;
+top:50%;
+left:0;
+width:100%;
+transform:translateY(-50%);
+display:flex;
+justify-content:center;
+align-items:center;
+gap:6vh;
+z-index: 1;
+}
+/*
+.gif{
+height:32dvh;
+cursor:pointer;
+transition:0.25s;
+}
+
+.gif:hover{
+transform:scale(1.12);
+}
+*/
+.Bcontainer{
+z-index: 2;
+position:absolute;
+bottom:4dvh;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:5dvh;
+}
+
+.button{
+margin-bottom: -6dvh;
+padding:9dvh 9vh;
+font-size:2.8dvh;
+background:#8a0909;
+border:0.3dvh solid #FFD700;
+color:#FFD700;
+border-radius: 2dvh  2dvh 0 0;
+cursor:pointer;
+border-bottom: none;
+transition: all 0.25s ease;
+}
+
+/*  fucking zatim zakomentuju to mrdá mě ta funkce mi to rozjebává dal jsem zatim ten js pryč ale tohle necham na horší časy :D 
+.button.active {
+  transform: translateY(-4dvh) scale(1.15);
+  box-shadow: 0 0 2dvh gold;
+  background: #c40000;
+  z-index: 5;
+}
+
+.button.inactive {
+  opacity: 0.6;
+}
+*/
+
+.start-button{
+position:absolute;
+right:4dvh;
+top:50%;
+transform:translateY(-50%);
+padding:2.6dvh 6dvh;
+font-size:3.2dvh;
+background:#a30000;
+border:0.4dvh solid #FFD700;
+color:#FFD700;
+border-radius:1.2dvh;
+cursor:pointer;
+transition:0.2s;
+font-weight:bold;
+}
+
+.start-button:hover{
+transform:translateY(-50%) scale(1.1);
+box-shadow:0 0 2dvh gold;
+}
+
+.back-button {
+    position: fixed;
+    top: 2vh;
+    left: 2vh;
+
+    padding: 1.5vh 3vh;
+    font-size: 2.2vh;
+    font-weight: bold;
+
+    color: #FFD700;
+    background: linear-gradient(135deg,#a30000,#7a0000);
+
+    border: 0.3vh solid #ffd900;
+    border-radius: 2vh;
+
+    cursor: pointer;
+    z-index: 1000;
+
+    box-shadow: 0 0.5vh 1.5vh rgba(0,0,0,0.3);
+    transition: all 0.15s ease;
+}
+
+.back-button:hover {
+    background: linear-gradient(135deg,#c40000,#880808);
+    border-color: #FFD700;
+    transform: scale(1.1);
+    box-shadow: 0 0 4px rgba(255,215,0,0.5);
+    color: white;
+}
+  .playcontainer{
+  top:0vh;
+  }
+
+  .slots{
+  height: 60dvh; 
+  width: auto;
+}
+
+</style>
+</head>
+
+<body>
+
+<button class="back-button" onclick="goBack()">← Back</button>
+
+<p id="deckname"></p>
+<p style="position: absolute;left: 10dvh; visibility: hidden;" id="decknumber"></p>
+
+<div class="playcontainer">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot1" class="slots" id="slot1">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot2" class="slots" id="slot2">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slotA" class="slots" id="slotA">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot3" class="slots" id="slot3">
+        <img src="{{ url_for('static', filename=slots) }}" alt="slot4" class="slots" id="slot4">
+</div>
+
+<div class="Bcontainer">
+<button class="button" onclick="showDeckO('deck1')">1</button>
+<button class="button" onclick="showDeckO('deck2')">2</button>
+<button class="button" onclick="showDeckO('deck3')">3</button>
+<button class="button" onclick="showDeckO('deck4')">4</button>
+<button class="button" onclick="showDeckO('deck5')">5</button>
+</div>
+
+<button class="start-button" onclick="setdeck()">START</button>
+
+<script src="{{ url_for('static', filename='twist/javas.js') }}"></script>
+
+<script>
+
+async function setdeck() {
+
+const s1 = document.getElementById("slot1").alt
+const s2 = document.getElementById("slot2").alt
+const s3 = document.getElementById("slot3").alt
+const s4 = document.getElementById("slot4").alt
+const sA = document.getElementById("slotA").alt
+const deck = document.getElementById("decknumber").textContent
+
+try {
+
+const response = await fetch("/twist/fet/pregame",{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify({
+"deckNo":deck,
+"slot1":s1,
+"slot2":s2,
+"slot3":s3,
+"slot4":s4,
+"slotA":sA
+})
+});
+
+if(!response.ok){
+throw new Error(`HTTP error: ${response.status}`);
+}
+
+const result = await response.text();
+
+if(result==="ok"){
+window.location.href="/twist/twist_game";
+}else{
+alert(result);
+}
+
+}catch(error){
+console.error("Fetch error:",error);
+}
+
+}
+
+async function loadup(deck){
+    await deckshow()
+    showDeck(deck)
+
+        document.getElementById("slot1").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot1 + ".png"
+        document.getElementById("slot2").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot2 + ".png"
+        document.getElementById("slot3").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot3 + ".png"
+        document.getElementById("slot4").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot4 + ".png"
+        document.getElementById("slotA").src = "{{ url_for('static', filename='') }}" + globalData[deck].slotA + ".png"
+    }
+async function showDeckO(deck){
+  showDeck(deck)
+  document.getElementById("slot1").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot1 + ".png"
+  document.getElementById("slot2").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot2 + ".png"
+  document.getElementById("slot3").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot3 + ".png"
+  document.getElementById("slot4").src = "{{ url_for('static', filename='') }}" + globalData[deck].slot4 + ".png"
+  document.getElementById("slotA").src = "{{ url_for('static', filename='') }}" + globalData[deck].slotA + ".png"
+}
+window.addEventListener('load', () => loadup("{{ deckNo }}"))
+
+function goBack() {
+    window.history.back();
+}
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+  <style>
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+    
+      .containerR .game-block:nth-child(3) .button {
+          position: absolute;
+          top: 1dvh;
+          right: -1dvh;
+          width: 25dvh; 
+          height: 12dvh; 
+          background: #880808;
+          color: #FFD700;
+          font-size: 2.4dvh;
+          font-weight: bold;
+          border: 0.4dvh solid #dfbd00;
+          border-radius: 2dvh 0 0 2dvh;
+          border-right: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: -0.5dvh 0.5dvh 1.2dvh rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .containerR .game-block:nth-child(3) .button:hover {
+          background: #a30000;
+          border-color: #FFD700;
+          color: white;
+          transform: scale(1);
+        }
+        .containerR .game-block:nth-child(2) .button {
+          position: absolute;
+          top: 21dvh;
+          right: -1dvh;
+          width: 18dvh; 
+          height: 8dvh; 
+          background: #880808;
+          color: #FFD700;
+          font-size: 2.4dvh;
+          font-weight: bold;
+          border: 0.4dvh solid #dfbd00;
+          border-right: none;
+          border-radius: 2dvh 0 0 2dvh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: -0.5dvh 0.5dvh 1.2dvh rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        /* Hover efekt – lehce zesvětlí pozadí */
+        .containerR .game-block:nth-child(2) .button:hover {
+          background: #a30000;
+          border-color: #FFD700;
+          color: white;
+          transform: scale(1);
+        }
+        .containerR .game-block:nth-child(1) .button {
+          position: absolute;
+          left: 49.5%;
+          transform: translateX(-49.5%);
+          bottom: 25dvh;
+          width: 20dvh;
+          height: 5dvh;
+          background: #880808;
+          color: #FFD700;
+          font-size: 2.2dvh;
+          font-weight: bold;
+          border: 0.4dvh solid #dfbd00;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 0.5dvh 1.2dvh rgba(0, 0, 0, 0.35);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .containerR .game-block:nth-child(1) .button:hover {
+          background: #a30000;
+          border-color: #FFD700;
+          color: white;
+          left: 49.5%;
+          transform: translateX(-49.5%) scale(1.2);
+          transition: all 0.2s ease;
+        }
+        h1 {
+          position: absolute;
+          top: 26dvh;
+          left: 50%;
+          transform: translateX(-50%);
+          text-align: center;
+          font-size: 10dvh;
+          font-weight: 900;
+          letter-spacing: 0.5dvh;
+          color: transparent;
+          
+          background-image: linear-gradient(
+            120deg,
+            #ffd700 0%,
+            #ffd700 40%,
+            #fff9c4 49.5%,
+            #fff9c4 50.5%,
+            #ffd700 60%,
+            #ffd700 100%
+          );
+          background-size: 250% auto;
+          background-clip: text;
+          -webkit-background-clip: text;
+          text-shadow:
+            0 0.4dvh 0.8dvh rgba(0, 0, 0, 0.3),
+            0 0 1dvh rgba(255, 217, 0, 0.212);
+          animation: shimmerWave 10s linear infinite;
+
+        }
+
+        
+        @keyframes shimmerWave {
+          
+          0% {
+            background-position: 250% center;
+          }
+
+          
+          100% {
+            background-position: -250% center;
+          }
+        }
+
+        h2 {
+          position: absolute;
+          top: 3dvh;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 12dvh;
+          font-weight: bold;
+          color: gold;
+        }
+
+        .users-btn {
+          position: fixed;
+          bottom: 12dvh;
+          left: 15dvh;
+
+          width: 25dvh;
+          height: 10dvh;
+
+          background: #880808;
+          color: #FFD700;
+          font-size: 3dvh;
+          font-weight: bold;
+
+          border: 0.4dvh solid #dfbd00;
+          border-radius: 2dvh;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          box-shadow: 0 0.5dvh 1.2dvh rgba(0, 0, 0, 0.35);
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .users-btn:hover {
+          background: #a30000;
+          border-color: #FFD700;
+          color: white;
+          transform: scale(1.1);
+        }
+
+          .twist {
+          display: inline-block;
+          transform: scale(0.45);
+
+          background-image: inherit;
+          background-size: inherit;
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+
+          animation: shimmerWave 10s linear infinite;
+          }
+    </style>
+</head>
+<body>
+    <h2>Admin style</h2>
+    <h1>
+    LAS<br>
+    GAMBAS<br>
+    <span class="twist">TWIST</span>
+    </h1>
+    <p style="position: absolute;top: 2dvh; left: 4dvh;">{{name}}</p>
+    <p style="position: absolute;top: 6dvh; left: 4dvh;">
+        balance: <span id="balance">...</span>
+    </p> <!--prozatimně-->
+    
+    <div class="containerR" style="display: flex; justify-content: center;">
+    <div class="game-block">
+      <a onclick="location.href='/twist/pregame'" class="button">HRA</a>
+    </div>
+    <div class="game-block">
+      <a onclick="location.href='/twist/shop'" class="button">SHOP</a>
+    </div>
+    <div class="game-block">
+      <a onclick="location.href='/twist/inventory'" class="button">INVENTÁŘ</a>
+    </div>
+    </div>
+    <button class="users-btn" onclick="location.href='/twist/userscreen'">Users</button>
+
+
+<script src="{{ url_for('static', filename='twist/javas.js') }}"></script>
+<script>
+    window.addEventListener('load', balance);
+</script>
+</body>

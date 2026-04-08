@@ -1,0 +1,237 @@
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DefNotGamba</title>
+
+<style>
+
+    @media screen and (max-aspect-ratio: 9/16) {
+  body * {
+    display: none !important;
+  }
+  body::before {
+    content: "Otočte své zařízení na šířku";
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    color: red;
+    margin-top: 50vh;
+  }
+}
+
+body {
+    background-color: #380303;
+    color: #FFD700;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 40px;
+}
+
+body::-webkit-scrollbar {
+    width: 1vh;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.3);
+    border-radius: 1vh;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, gold, crimson);
+    border-radius: 1vh;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, orange, red);
+}
+
+#balance {
+    color: #ffcc33;
+    font-weight: bold;
+    text-shadow: 0 0 6px gold;
+}
+
+.balance-box {
+    position: fixed;
+    top: 2vh;
+    right: 2vh;
+    background: #af0404;
+    padding: 18px 28px;
+    border-radius: 8px;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+}
+
+.shop-tier {
+    margin-bottom: 40px;
+    background:  rgba(161, 11, 11, 0.555);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #FFD700;
+    box-shadow: 0 0 25px rgba(0,0,0,0.8);
+}
+/* hmmmmmmmmmm
+#shop {
+    font-size: 100px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 0 0 5px rgba(255,215,0,0.6),
+                 0 0 10px rgba(255,215,0,0.4);
+}
+*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Názvy kategorií  */
+th {
+    text-align: left;
+    padding: 14px 0;
+    color: #FFD700;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+
+    text-shadow: 0 0 6px rgba(255,215,0,0.4);
+}
+.shop-tier table tr:first-child th {
+    font-size: 28px;
+    text-shadow: 0 0 6px gold;
+}
+
+
+td {
+    padding: 18px 10px;
+    border-bottom: 1px solid #FFD70055;
+
+    justify-content: space-between;
+}
+
+tr:hover {
+    background-color: #6e0505;
+    transition: 0.2s;
+}
+
+.item-name {
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 0 0 5px rgba(255,215,0,0.4);
+}
+
+.price {
+    color: #ffcc33;
+    font-weight: bold;
+    margin-left: 18px;
+    font-size: 17px;
+}
+.price::after {
+    content: " - ";
+}
+/*buy*/
+button {
+    background: linear-gradient(135deg,#bd0000,#9c0000);
+    border: 2px solid #FFD700;
+    padding: 12px 28px;
+    min-width: 90px;
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 17px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: linear-gradient(135deg,#c40000,#880808);
+    transform: scale(1.08);
+    box-shadow: 0 0 5px rgba(255, 217, 0, 0.603);
+}
+
+.back-button {
+    position: fixed;
+    top: 2vh;
+    left: 2vh;
+
+    padding: 1.5vh 3vh;
+    font-size: 2.2vh;
+    font-weight: bold;
+
+    color: #FFD700;
+    background: linear-gradient(135deg,#a30000,#7a0000);
+
+    border: 0.3vh solid #ffd900;
+    border-radius: 2vh;
+
+    cursor: pointer;
+    z-index: 1000;
+
+    box-shadow: 0 0.5vh 1.5vh rgba(0,0,0,0.3);
+    transition: all 0.15s ease;
+}
+
+.back-button:hover {
+    background: linear-gradient(135deg,#c40000,#880808);
+    border-color: #FFD700;
+    transform: scale(1.1);
+    box-shadow: 0 0 4px rgba(255,215,0,0.5);
+    color: white;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<button class="back-button" onclick="goBack()">← Back</button>
+
+<div class="balance-box">
+    Balance: <span id="balance">...</span>
+</div>
+
+<div class="shop-tier">
+<div id="shop">
+        plswork </div>
+</div>
+
+<script src="{{ url_for('static', filename='twist/javas.js') }}"></script>
+<script>
+
+async function buy(item) {
+
+    try {
+
+        const response = await fetch("/twist/fet/transaction", {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: item
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error: ${response.status}`);
+        }
+
+        const result = await response.text();
+        alert(result);
+        balance();
+        loaditemstable("shop")
+
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+
+}
+
+window.addEventListener('load', balance);
+window.addEventListener('load', loaditemstable("shop"));
+
+function goBack() {
+    window.history.back();
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+  <style>
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+
+    button {
+    padding: 2.5vh 7vh;
+    text-decoration: none;
+    color: #FFD700;
+    background-color: #880808;
+    border: none;
+    border-radius: 30vh;
+    text-align: center;
+    font-size: 3vh;
+    margin-left: 1dvh;
+    margin-right: 1dvh;
+    margin-top: 2dvh;
+    box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    }
+    button:hover {
+          background: #a30000;
+          border-color: #FFD700;
+          color: white;
+          left: 49.5%;
+          transform: scale(1.2);
+          transition: all 0.2s ease;
+    }
+    .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40vh;
+  }
+    </style>
+</head>
+<body>
+
+    <h2>Round</h2>
+    <h1>Victory!</h1>
+    <p1> {{bank}}</p1>
+
+  <div class="buttons">
+    <button onclick="window.location.href = '/twist/twist_game'">Keep going?</button>  
+    <button onclick="window.location.href = '/twist/house'"> Cash it! </button>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DefNotGamba</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles-twist.css') }}">
+  <style>
+    @media screen and (max-aspect-ratio: 9/16) {
+      body * {
+        display: none !important;
+      }
+      body::before {
+        content: "Otočte své zařízení na šířku";
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        margin-top: 50vh;
+      }
+    }
+    </style>
+</head>
+<body>
+    <h1>---------</h1>
+    <h1>Pravidla</h1>
+    <a class="buttonF" id="back" onclick="history.back()" style="top: 5dvh;">←</a>
+    <p style="line-height: 4dvh; text-align: left;">
+každý tah:<br>
+-vylosujete 5 karet<br>
+-dostanete body(záleží na parvě a na hodnotě)<br>
+-musíte zahrát akci:<br>
+    -k dispozici je pět akcí<br>
+    -každá jinak ovlivní získané body<br>
+-výsledek se přičte k celkový bodům<br>
+(příklad: červená 3,5,7 = 15*3 => akce "x2" => 90 bodů)<br>
+<br>
+akce:<br>
+-hráč si vytváří deck o pěti akcích před začátkem hry<br>
+-z těchto karet se vylosují tři a k nim se přidají 2 náhodné negativní(/2, -20%)<br>
+-vždy musíte zahrát všech pět akcí<br>
+-po zahrátí všech akcí se znovu vylosují další<br>
+<br>
+konec hry:<br>
+-výhra = dosažení maximálních bodů<br>
+    -hráč může buď pokračovat nebo odejít s penězi dosaženými, nebo pokračovat<br>
+    pro větší obnos<br>
+    -pokud se rozhodne pokračovat, hraje znovu s větším maximem a "zlejšími" negativními akcemi<br>
+<br>
+-prohra = dosažení 0 bodů Poté, co hráč dosáhl 1/2 maxima<br>
+    -hráč ztratí všechny dosažené peníze a hra končí<br>
+    </p>
+</body>

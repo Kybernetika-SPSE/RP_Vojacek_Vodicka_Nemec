@@ -159,7 +159,7 @@
     },
     "Sexyman": {
         "password": "scrypt:32768:8:1$sNS9zPAS8GqMhBsR$45e24dcac9430aed5b28190fe991e0de22133fd07bc1094e150ca55a90ca79cbbfd9a1347cf91f53f96386dc5a7d899000bbd3a8dfc6cac26a41480f57e91123",
-        "balance": 450,
+        "balance": 220,
         "admin": 0,
         "ban": 0,
         "issue": 1,
@@ -207,13 +207,27 @@
                 "desc": "increases value by 40",
                 "tier": 1,
                 "type": "boon"
+            },
+            "Hope": {
+                "name": "Hope",
+                "price": 120,
+                "desc": "points gained +5, if Dreams is in hand, make a wish come true.",
+                "tier": 2,
+                "type": "boon"
+            },
+            "Dreams": {
+                "name": "Dreams",
+                "price": 120,
+                "desc": "points gained +5, if Hope is in hand, make a wish come true.",
+                "tier": 2,
+                "type": "boon"
             }
         },
         "deck": {
             "deck1": {
                 "name": "deck1",
-                "slot1": "X2",
-                "slot2": "Stack5",
+                "slot1": "Dreams",
+                "slot2": "Hope",
                 "slot3": "Flipper",
                 "slot4": "add40",
                 "slotA": "NullNext2"
